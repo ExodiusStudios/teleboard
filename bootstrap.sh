@@ -9,9 +9,6 @@ if [ ! -f "$CONFIG_FILE" ]; then
     exit 0
 fi
 
-echo "Waiting for database to start"
-wait-on tcp:database:3306
-
 echo "Applying oustanding migrations"
 node vindigo migrate:apply --all
 
