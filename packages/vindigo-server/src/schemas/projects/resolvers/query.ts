@@ -2,11 +2,12 @@ import { MissingSessionError, NotImplementedError } from "../../../util/errors";
 
 import { FindConditions } from "typeorm";
 import { GraphQLResolvers } from "../../../http";
+import { Like } from "typeorm";
 import { Project } from "../../../models/project";
-import { parseTakeSize } from "../../../util/http";
+import { Task } from "../../../models/task";
 import { Team } from "../../../models/team";
 import { User } from "../../../models/user";
-import { Like } from "typeorm";
+import { parseTakeSize } from "../../../util/http";
 
 export default {
 	projects: async (_, { mode, skip, take }, ctx) => {
@@ -44,6 +45,12 @@ export default {
 			take: parseTakeSize(take, 50)
 		});
 	},
+	project: async (_, { id }) => {
+		return Project.findOne(id);
+	},
+	task: async (_, { id }) => {
+		return Task.findOne(id);
+	}, 
 	search: async(_, { query }) => {
 
 		const search = { 

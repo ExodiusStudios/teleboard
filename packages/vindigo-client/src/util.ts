@@ -4,6 +4,8 @@ import { Route } from "vue-router";
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../tailwind.config.js';
 
+// TODO Move everything to helpers.ts, maybe?
+
 /**
  * Create a logger instance that prepends all messages
  * with the specified label.
@@ -82,4 +84,17 @@ export function buildThemeConfig(): Dictionary<string> {
 	});
 
 	return colors;
+}
+
+/**
+ * Parse the given slug string into a numeric id.
+ * 
+ * Slugs follow the format of a hyphen separated string of
+ * words, with the first segment being a number.
+ * 
+ * @param slug The slug string
+ * @returns decoded id
+ */
+export function parseSlug(slug: string): number|undefined {
+	return parseInt(slug.split('-')[0]) || undefined;
 }

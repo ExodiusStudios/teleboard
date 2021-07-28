@@ -73,7 +73,7 @@ function fetchPersonalProjects() {
 				projectUrl
 			}
 		}
-	`);
+	`).then(res => res.projects);
 }
 
 export default Vue.extend({
@@ -91,23 +91,20 @@ export default Vue.extend({
 		]);
 
 		next((vm: any) => {
-			vm.projects = projects.projects;
+			vm.projects = projects;
+			vm.starred = [];
 		});
 	},
 
 	data: () => ({
 		starred: [],
-		projects: [],
+		projects: []
 	}),
 
 	computed: {
 		firstName(): Optional<string> {
 			return this.$vuex.state.profile?.firstName;
 		}
-	},
-
-	created() {
-		console.log('projects = ', this.projects);
 	},
 
 	methods: {

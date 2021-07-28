@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 /**
- * Represents a team within vindigo
+ * Represents a team of members within vindigo
  */
 @Entity('teams')
 export class Team extends BaseEntity {

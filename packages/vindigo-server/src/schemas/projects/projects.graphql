@@ -7,6 +7,12 @@ extend type Query {
 		take: Int
 	): [Project!]!
 
+	"Obtain a project by its unique id"
+	project(id: Int): Project
+
+	"Obtain a task by its unique id"
+	task(id: Int): Task
+
 	"Perform a search query"
     search(query: String!): SearchResult!
 }
@@ -99,7 +105,8 @@ type ProjectTeam {
 }
 
 """
-
+A collection of search results gathered by
+searching a given query string.
 """
 type SearchResult {
 	projects: [Project!]!

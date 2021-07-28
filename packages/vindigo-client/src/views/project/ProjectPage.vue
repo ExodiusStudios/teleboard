@@ -1,9 +1,6 @@
 <template>
 	<section class="project-page flex h-screen">
-		<sidebar
-			class="bg-[#2f3a41]"
-			:open.sync="open"
-		/>
+		<sidebar class="bg-[#2f3a41]" />
 		<section class="flex flex-col flex-grow">
 			<toolbar class="project-toolbar pl-0">
 				<w-button
@@ -15,7 +12,7 @@
 				/>
 				<div class="flex flex-col">
 					<h1 class="font-bold">
-						Vindigo Example Board
+						{{ project.name }}
 						<i class="mdi mdi-star" />
 					</h1>
 					<small class="font-thin -mt-1">
@@ -51,7 +48,24 @@
 <script lang="ts">
 import Sidebar from './Sidebar.vue';
 import Vue from "vue";
-import { updateTitle } from '../../util';
+import { parseSlug, updateTitle } from '../../util';
+import { api } from '../..';
+import gql from 'graphql-tag';
+
+async function fetchProjectData(id: number) {
+	const res = await api.query(gql`
+		query ($pid: Int!) {
+			project(id: $pid) {
+				id
+				name
+				coverImage
+				projectUrl
+			}
+		}
+	`, { pid: id });
+
+	return res.project;
+}
 
 export default Vue.extend({
 	name: 'ProjectPage',
@@ -59,13 +73,31 @@ export default Vue.extend({
 		Sidebar
 	},
 
+	async beforeRouteEnter(to, _from, next) {
+		const pid = parseSlug(to.params.project);
+
+		if(pid === undefined) {
+			next('/'); // TODO Redirect to error page
+			return;
+		}
+
+		const project = await fetchProjectData(pid);
+
+		next((vm: any) => {
+			updateTitle(project.name);
+
+			vm.project = project;
+		});
+	},
+
 	data: () => ({
-		open: false
+		project: {} as any
 	}),
 
-	created() {
-		// TODO Use real project title
-		updateTitle('Example Project');
+	mounted() {
+		if(!this.project.id) {
+			this.$router.go(0);
+		}
 	},
 
 	methods: {

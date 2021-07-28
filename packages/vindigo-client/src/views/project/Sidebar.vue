@@ -30,16 +30,12 @@ import _ from "lodash";
 
 export default Vue.extend({
 	name: 'Sidebar',
-	props: {
-		open: {
-			required: true,
-			type: Boolean,
-		}
-	},
+
 	data: () => ({
 		listItems: [] as any[],
 		currentIndex: 0
 	}),
+
 	computed: {
 		offsetActiveRoute(): any {
 			return {
@@ -47,10 +43,9 @@ export default Vue.extend({
 			};
 		}
 	},
+	
 	mounted() {
 		const route = routing.getRoute('Project Container')!;
-
-		console.log(route);
 
 		// initializing list items
 		this.listItems = _.chain(route.children)
