@@ -52,7 +52,7 @@ export default Vue.extend({
 		},
 		borderStyle(): any {
 			return {
-				padding: Math.ceil(cleanInt(this.size) / 24) + 'px'
+				padding: Math.max(2, Math.ceil(cleanInt(this.size) / 24)) + 'px'
 			};
 		},
 		nameAbbr(): string {

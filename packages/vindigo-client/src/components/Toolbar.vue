@@ -67,18 +67,20 @@
 					<section-title icon="mdi mdi-folder-open">
 						Users
 					</section-title>
-					<div 
+					<router-link
 						v-for="(user, index) in searchResults.users"
 						:key="index"
+						:to="`/profile/${user.id}`"
 						class="flex items-center mt-2"
+						tag="dev"
 					>
 						<avatar
 							:profile="user"
-							:size="25"
+							:size="22"
 							class="mr-3"
 						/>
 						{{ user.fullName }}
-					</div>
+					</router-link>
 				</div>
 				<div v-if="searchResults.teams.length > 0">
 					<section-title icon="mdi mdi-folder-open">
@@ -515,9 +517,12 @@ export default Vue.extend({
 				query ($sq: String!) {
 					search(query: $sq) {
 						projects {
+							id
 							name
 						}
 						users {
+							id
+							avatar
 							fullName
 						}
 						teams {
@@ -625,9 +630,5 @@ export default Vue.extend({
 		@apply bg-indigo-600 w-12 h-12 m-1 rounded-full ring-4 ring-indigo-600 ring-opacity-40
 		flex justify-center items-center text-white cursor-pointer;
 	}
-}
-
-.search-panel {
-	@apply bg-white;
 }
 </style>
