@@ -37,7 +37,7 @@
 					<project-list :projects="projects" :rows="2">
 						<template #empty>
 							<div class="bg-white p-3">
-								You have not joined any projects yet!
+								{{ $t('HOMEPAGE_NO_PROJECTS') }}
 							</div>
 						</template>
 					</project-list>

@@ -7,6 +7,9 @@
 	"TOOLBAR_CREATE_TASK": "Taak aanmaken",
 	"TOOLBAR_CREATE_TASK_DESC": "Taken kunnen toegevoegd worden aan je huidige project en worden gebruikt om een enkele doelstelling bij te houden.",
 	"TOOLBAR_SEARCH": "Doorzoek alles...",
+	"TOOLBAR_SEARCH_LENGTH": "Zoekopdracht te klein",
+	"TOOLBAR_SEARCH_NO_RESULTS": "Geen resultaten gevonden",
+	"TOOLBAR_SEARCH_SEARCHING": "Zoeken...",
 	
 	"YOUR_ACCOUNT": "Jouw Account",
 	"YOUR_ACCOUNT_PROFILE": "Jouw Profile",
@@ -23,6 +26,9 @@
 	"HOMEPAGE_SECTION_TEAMS": "Jouw organisaties",
 	"HOMEPAGE_SECTION_ACTIVITY": "Activiteit",
 	"HOMEPAGE_SECTION_FOCUS": "Aanbevolen taak",
+	"HOMEPAGE_SECTION_TEAMS_MEMBER": "Deelnemer",
+	"HOMEPAGE_SECTION_TEAMS_VISIT": "Bezoek team",
+	"HOMEPAGE_NO_PROJECTS": "Je bent nog geen lid van een project",
 
 	"VIEW_HOME": "Project overzicht",
 	"VIEW_TASKS": "Takenlijst",

@@ -7,6 +7,9 @@
 	"TOOLBAR_CREATE_TASK": "Create task",
 	"TOOLBAR_CREATE_TASK_DESC": "Tasks can be created in your current project and are used to track a single objective.",
 	"TOOLBAR_SEARCH": "Search anything...",
+	"TOOLBAR_SEARCH_LENGTH": "Search query too short",
+	"TOOLBAR_SEARCH_NO_RESULTS": "No results found",
+	"TOOLBAR_SEARCH_SEARCHING": "Searching...",
 
 	"YOUR_ACCOUNT": "Your Account",
 	"YOUR_ACCOUNT_PROFILE": "Your Profile",
@@ -23,6 +26,9 @@
 	"HOMEPAGE_SECTION_TEAMS": "Your teams",
 	"HOMEPAGE_SECTION_ACTIVITY": "Activity",
 	"HOMEPAGE_SECTION_FOCUS": "Focus task",
+	"HOMEPAGE_SECTION_TEAMS_MEMBER": "Member",
+	"HOMEPAGE_SECTION_TEAMS_VISIT": "Visit team",
+	"HOMEPAGE_NO_PROJECTS": "You have not joined any projects yet!",
 
 	"VIEW_HOME": "Project overview",
 	"VIEW_TASKS": "Tasks",

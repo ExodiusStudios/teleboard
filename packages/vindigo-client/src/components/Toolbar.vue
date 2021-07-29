@@ -52,13 +52,13 @@
 			min-width="100%"
 		>
 			<div v-if="search.length < 3">
-				Keep typing...
+				{{ $t('TOOLBAR_SEARCH_LENGTH') }}
 			</div>
 			<div v-else-if="searchResults.total == 0">
-				Geen resultaten gevonden
+				{{ $t('TOOLBAR_SEARCH_NO_RESULTS') }}
 			</div>
 			<div v-else-if="!searchResults.present">
-				Zoeken...
+				{{ $t('TOOLBAR_SEARCH_SEARCHING') }}
 			</div>
 			<template v-else>
 				<div v-if="searchResults.users.length > 0">

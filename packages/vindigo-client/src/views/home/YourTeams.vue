@@ -32,7 +32,7 @@
 						{{ team.name }}
 					</span>
 					<span class="text-sm">
-						Member
+						{{ $t('HOMEPAGE_SECTION_TEAMS_MEMBER') }}
 					</span>
 				</div>
 				<spacer />
@@ -40,7 +40,7 @@
 					outline
 					color="indigo-600"
 				>
-					Visit team
+					{{ $t('HOMEPAGE_SECTION_TEAMS_VISIT') }}
 					<w-icon>
 						mdi mdi-arrow-right
 					</w-icon>
