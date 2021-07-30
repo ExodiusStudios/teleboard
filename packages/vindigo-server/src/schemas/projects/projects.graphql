@@ -61,6 +61,7 @@ represent a single task witin a project.
 """
 type Task {
 	id: Int!
+	slug: String!
 	summary: String!
 	description: String
 	createdAt: String!

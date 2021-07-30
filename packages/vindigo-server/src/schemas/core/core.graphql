@@ -76,6 +76,9 @@ type Profile {
     "The unique user id"
     id: Int!
 
+    "The slug used to refer to this profile"
+    slug: String!
+
     "The user avatar path, may be null"
     avatar: String
 
@@ -90,6 +93,9 @@ type Profile {
 
     "The username of the user"
     username: String!
+
+    "The full URL of the users profile"
+    profileUrl: String!
 }
 
 """
