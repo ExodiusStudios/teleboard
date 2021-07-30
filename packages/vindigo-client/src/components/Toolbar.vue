@@ -26,7 +26,7 @@
 
 		<spacer />
 
-		<!-- The search container -->
+		<!-- ANCHOR Search container -->
 		<div class="toolbar__search">
 			<div class="relative">
 				<w-input
@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		
-		<!-- Search results menu -->
+		<!-- ANCHOR Search results menu -->
 		<w-menu
 			:value="isSearching && search.length"
 			content-class="search-panel"
@@ -103,7 +103,7 @@
 			</template>
 		</w-menu>
 
-		<!-- Create new button -->
+		<!-- ANCHOR Create new button -->
 		<w-menu
 			hide-on-menu-click
 			align-center
@@ -156,7 +156,7 @@
 
 		<div class="toolbar__divider mr-4" />
 
-		<!-- Account menu -->
+		<!-- ANCHOR Account menu -->
 		<w-menu
 			align-right
 			custom
@@ -332,6 +332,82 @@
 				</div>
 			</div>
 		</w-dialog>
+
+		<!-- ANCHOR Project creation dialog -->
+		<w-dialog
+			v-model="newTeamDialog"
+			dialog-class="rounded-xl"
+			width="600"
+		>
+			<section-title icon="mdi mdi-account-multiple-plus">
+				Create new team
+			</section-title>
+			
+			<div class="p-2">
+				<label class="text-gray-500 mb-1 mt-3 block text-sm">
+					Team name
+				</label>
+				<w-input
+					v-model="newTeamName"
+					class="rounded-lg overflow-hidden"
+					bg-color="gray-200"
+					color="gray-700"
+				/>
+
+				<label class="text-gray-500 mb-1 mt-3 block text-sm">
+					Description <small>(optional)</small>
+				</label>
+				<w-textarea
+					v-model="newTeamDesc"
+					class="rounded-lg overflow-hidden"
+					bg-color="gray-200"
+					color="gray-700"
+					rows="3"
+				/>
+
+				<label class="text-gray-500 mb-1 mt-3 block text-sm">
+					Invite members <small>(optional)</small>
+				</label>
+
+				<div class="addition-list">
+					<!-- TODO Implement member addition -->
+					<avatar
+						v-for="i in tempMemberCount"
+						:key="i"
+						class="-mr-2 mb-1 block"
+						:profile="$vuex.state.profile"
+						:open-profile="false"
+						:size="46"
+					/>
+					<div
+						v-if="tempMemberCount < 12"
+						class="addition-list"
+						@click="tempMemberCount++"
+					>
+						<w-icon class="addition-list__add-btn">
+							mdi mdi-plus
+						</w-icon>
+					</div>
+				</div>
+
+				<div class="flex mt-5">
+					<spacer />
+					<w-button
+						v-wave
+						color="white"
+						bg-color="indigo-600"
+						:loading="newTeamLoading"
+						:disabled="!newTeamName"
+						@click="createTeam"
+					>
+						<w-icon class="mr-2">
+							mdi mdi-plus
+						</w-icon>
+						Create team
+					</w-button>
+				</div>
+			</div>
+		</w-dialog>
 	</header>
 </template>
 
@@ -370,8 +446,10 @@ export default Vue.extend({
 		tempMemberCount: 1,
 
 		// Team creation
-		createTeamDialog: false,
-		createTeamName: "",
+		newTeamDialog: false,
+		newTeamName: "",
+		newTeamDesc: "",
+		newTeamLoading: false,
 
 		// Search field
 		isSearching: false,
@@ -485,10 +563,12 @@ export default Vue.extend({
 		openProjectCreation() {
 			this.newProjectDialog = true;
 			this.newProjectName = "";
+			this.newProjectDesc = "";
 		},
 		openTeamCreation() {
-			this.createTeamDialog = true;
-			this.createTeamName = "";
+			this.newTeamDialog = true;
+			this.newTeamName = "";
+			this.newTeamDesc = "";
 		},
 		async createProject() {
 			this.newProjectLoading = true;
@@ -509,6 +589,25 @@ export default Vue.extend({
 
 			this.newProjectLoading = false;
 			this.newProjectDialog = false;
+		},
+		async createTeam() {
+			this.newTeamLoading = true;
+
+			await api.query(gql`
+				mutation ($data: TeamCreationInput!) {
+					createTeam(details: $data) {
+						id
+					}
+				}
+			`, {
+				data: {
+					name: this.newTeamName,
+					description: this.newTeamDesc
+				}
+			});
+
+			this.newTeamLoading = false;
+			this.newTeamDialog = false;
 		},
 		async executeSearch() {
 			const res = await api.query(gql`
