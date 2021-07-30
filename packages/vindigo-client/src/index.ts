@@ -43,7 +43,11 @@ registerState();
 // Load wave ui
 const waveui = new WaveUI({
 	disableColorShades: true,
-	colors: buildThemeConfig()
+	colors: buildThemeConfig(),
+	notificationManager: {
+		align: 'right', // Or 'left'.
+		transition: 'default' // Sliding from the side by default.
+	}
 });
 
 // Instantiate the application

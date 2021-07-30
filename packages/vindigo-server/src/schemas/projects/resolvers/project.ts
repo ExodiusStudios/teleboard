@@ -1,9 +1,6 @@
 import { GraphQLResolvers } from "../../../http";
 import { Project } from "../../../models/project";
-
-function composeSlug(project: Project): string {
-	return [project.id, ...project.name.toLowerCase().split(' ')].join('-');
-}
+import { composeSlug } from "../../../util/helpers";
 
 export default {
 	slug: async (project) => {

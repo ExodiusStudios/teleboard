@@ -25,11 +25,14 @@ Represents a team of members within vindigo
 """
 type Team {
 	id: Int!
+	slug: String!
 	name: String!
 	description: String!
 	createdAt: String!
 	logoImage: String
 	members: [Profile!]!
+	projects: [Project!]!
+	teamUrl: String!
 }
 
 extend type SearchResult {

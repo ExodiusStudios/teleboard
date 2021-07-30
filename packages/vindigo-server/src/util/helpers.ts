@@ -27,6 +27,17 @@ export function isProduction(): boolean {
 }
 
 /**
+ * Compose a slug string given the unique id and display name. The slug is
+ * used to encode a unique id and human readable name into a URL path.
+ * 
+ * @param info Slug information
+ * @returns Slug string
+ */
+export function composeSlug(info: {id: number, name: string}): string {
+	return [info.id, ...info.name.toLowerCase().split(' ')].join('-');
+}
+
+/**
  * Await a connection to the database or exit with a user error
  * 
  * @param logger The logger instance
