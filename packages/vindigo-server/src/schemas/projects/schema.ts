@@ -2,6 +2,7 @@ import { ISchemaProvider } from '../../http';
 import Mutation from './resolvers/mutation';
 import Project from './resolvers/project';
 import Query from './resolvers/query';
+import SearchResult from './resolvers/searchResult';
 import { join } from "path";
 
 /**
@@ -17,7 +18,8 @@ export class ProjectsSchema implements ISchemaProvider {
 	public resolvers = {
 		Query,
 		Mutation,
-		Project
+		Project,
+		SearchResult
 	}
 
 }

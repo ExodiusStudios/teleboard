@@ -5,6 +5,21 @@ extend type Query {
 
 }
 
+extend type Mutation {
+
+	"Create a new team with given details"
+	createTeam(details: TeamCreationInput!): Team!
+	
+}
+
+"""
+Creation details used to instance a new team
+"""
+input TeamCreationInput {
+	name: String!
+	description: String
+}
+
 """
 Represents a team of members within vindigo
 """
@@ -15,4 +30,8 @@ type Team {
 	createdAt: String!
 	logoImage: String
 	members: [Profile!]!
+}
+
+extend type SearchResult {
+	teams: [Team!]!
 }

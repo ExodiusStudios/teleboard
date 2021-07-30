@@ -1,6 +1,12 @@
+import { ApiError, InvalidArgumentError } from "../../../util/errors";
+
 import { GraphQLResolvers } from "../../../http";
 import { User } from "../../../models/user";
 import { config } from "../../..";
+
+export interface SearchRequest {
+	query: string;
+}
 
 export default {
 	config: async (_, _args) => {
@@ -32,5 +38,12 @@ export default {
 				username: username
 			}
 		});
+	},
+	search: async (_, args) => {
+		if(args.query.length < 3) {
+			throw new InvalidArgumentError('Search query must be at least 3 characters');
+		}
+
+		return args;
 	}
 } as GraphQLResolvers;

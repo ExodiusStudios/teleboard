@@ -13,8 +13,6 @@ extend type Query {
 	"Obtain a task by its unique id"
 	task(id: Int): Task
 
-	"Perform a search query"
-    search(query: String!): SearchResult!
 }
 
 extend type Mutation {
@@ -104,14 +102,8 @@ type ProjectTeam {
 	accessLevel: String!
 }
 
-"""
-A collection of search results gathered by
-searching a given query string.
-"""
-type SearchResult {
+extend type SearchResult {
 	projects: [Project!]!
-	users: [Profile!]!
-	teams: [Team!]!
 }
 
 enum ProjectListMode {

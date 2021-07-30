@@ -11,6 +11,9 @@ type Query {
 
     "Fetch a user by their username"
     profileByName(username: String): Profile
+
+    "Perform a search query"
+    search(query: String!): SearchResult!
 }
 
 type Mutation {
@@ -87,4 +90,13 @@ type Profile {
 
     "The username of the user"
     username: String!
+}
+
+"""
+A collection of search results gathered by
+searching a given query string. Other schemas
+can provide additional searchable models.
+"""
+type SearchResult {
+	users: [Profile!]!
 }

@@ -1,6 +1,7 @@
 import { ISchemaProvider } from '../../http';
 import Mutation from './resolvers/mutation';
 import Query from './resolvers/query';
+import SearchResult from './resolvers/searchResult';
 import { join } from "path";
 
 /**
@@ -15,7 +16,8 @@ export class TeamsSchema implements ISchemaProvider {
 
 	public resolvers = {
 		Query,
-		Mutation
+		Mutation,
+		SearchResult
 	}
 
 }
