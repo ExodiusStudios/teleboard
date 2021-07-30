@@ -1,7 +1,37 @@
 <style lang="postcss">
 
 .w-notification-manager {
-	@apply overflow-x-hidden;
+	@apply overflow-x-hidden p-4 pt-16 w-96;
+
+	.w-alert {
+		@apply border-0 border-l-4 bg-white p-3 rounded-md;
+
+		box-shadow: 0 2px 18px rgba(64, 64, 64, 0.3);
+
+		&__icon {
+			@apply text-2xl;
+		}
+
+		&__content {
+			@apply text-gray-700;
+		}
+
+		&__dismiss {
+			@apply text-gray-700;
+
+			.w-icon {
+				@apply text-2xl;
+			}
+		}
+
+		& > * {
+			align-self: initial;
+		}
+	
+		&::after {
+			@apply bg-transparent;
+		}
+	}
 }
 
 /* Input fields */
@@ -49,6 +79,10 @@
 /* Buttons */
 .w-button {
 	@apply leading-none px-4 py-4 rounded-lg ml-2 font-semibold;
+
+	&__loader {
+		@apply rounded-lg;
+	}
 
 	&:not(&--outline) {
 		@apply border-none;
