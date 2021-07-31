@@ -1,9 +1,9 @@
 import { Connection, createConnection } from "typeorm";
+import { isProduction, pollDatabase } from "./util/helpers";
 
 import { IServerConfig } from "./util/config";
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { logger } from ".";
-import { pollDatabase } from "./util/helpers";
 
 /**
  * The service used to connect to the database
@@ -41,6 +41,7 @@ export class DatabaseService {
 				database: options.database,
 				namingStrategy: new SnakeNamingStrategy(),
 				entities: this.models,
+				logging: !isProduction()
 			});
 		} catch (err) {
 			logger.error('Error instantiating database connection: ' + err.message);

@@ -1,8 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-/**
- * Represents a project within vindigo
- */
+import { ProjectMember } from "./projectMember";
+
 @Entity('projects')
 export class Project extends BaseEntity {
 
@@ -38,5 +37,8 @@ export class Project extends BaseEntity {
 
 	@Column()
 	public isPublic: boolean;
+
+	@OneToMany(() => ProjectMember, member => member.project)
+	public members: ProjectMember[];
 
 }

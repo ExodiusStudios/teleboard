@@ -66,7 +66,7 @@ import gql from 'graphql-tag';
 function fetchPersonalProjects() {
 	return api.query(gql`
 		query {
-			projects(mode: PERSONAL) {
+			projects(mode: ACCESS) {
 				id
 				name
 				coverImage
