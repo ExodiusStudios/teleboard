@@ -60,14 +60,11 @@ export default {
 			throw new NoPermissionError();
 		}
 
-		logger.info(project);
-
-		// Perform the deletion and rely on
-		// cascading to delete all relations.
 		await Project.remove(project);
 
-		logger.info(project);
-
+		// See https://github.com/typeorm/typeorm/issues/4058
+		project.id = id;
+		
 		return project;
 	}
 } as GraphQLResolvers;
