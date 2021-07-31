@@ -1,14 +1,20 @@
 extend type Query {
 
+	"List out all teams the user is in"
+	teams(skip: Int, take: Int): [Team!]!
+
 	"Obtain a team by its unique id"
 	team(id: Int): Team
-
+	
 }
 
 extend type Mutation {
 
 	"Create a new team with given details"
 	createTeam(details: TeamCreationInput!): Team!
+
+	"Delete the team with the given id"
+	deleteTeam(id: Int): Team!
 	
 }
 

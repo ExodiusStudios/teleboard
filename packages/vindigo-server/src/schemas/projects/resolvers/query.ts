@@ -11,7 +11,18 @@ export default {
 		let filter: FindConditions<Project>;
 
 		switch(mode) {
-			case 'PERSONAL': {
+			case 'OWNING': {
+				if(!ctx.user) {
+					throw new MissingSessionError();
+				}
+
+				filter = {
+					creatorId: ctx.user.id
+				};
+
+				break;
+			}
+			case 'ACCESS': {
 				if(!ctx.user) {
 					throw new MissingSessionError();
 				}

@@ -19,6 +19,9 @@ extend type Mutation {
 
 	"Create a new project with given details"
 	createProject(details: ProjectCreationInput!): Project!
+
+	"Delete the project with the given id"
+	deleteProject(id: Int): Project!
 	
 }
 
@@ -110,7 +113,10 @@ extend type SearchResult {
 enum ProjectListMode {
 
 	"Projects owned by the user"
-	PERSONAL,
+	OWNING,
+
+	"Projects the user has access to"
+	ACCESS,
 
 	"Any project starred by the user"
 	STARRED,

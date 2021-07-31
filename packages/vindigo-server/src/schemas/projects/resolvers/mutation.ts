@@ -1,7 +1,9 @@
-import { InvalidArgumentError, MissingSessionError } from "../../../util/errors";
+import { InvalidArgumentError, MissingSessionError, NoPermissionError } from "../../../util/errors";
 
 import { GraphQLResolvers } from "../../../http";
 import { Project } from "../../../models/project";
+import { ProjectMember } from "../../../models/projectMember";
+import { logger } from "../../..";
 
 export default {
 	createProject: async (_, { details }, ctx) => {
@@ -18,7 +20,9 @@ export default {
 		}
 
 		const project = new Project();
+		const member = new ProjectMember();
 
+		// Save project details
 		project.name = name;
 		project.isPublic = isPublic;
 		project.createdAt = new Date();
@@ -28,7 +32,42 @@ export default {
 		project.isVisible = true;
 		project.isClosed = false;
 		project.isPublic = isPublic;
+		
+		const created = await project.save();
 
-		return await project.save();
+		// Save owner member details
+		member.project = created;
+		member.user = ctx.user;
+		member.accessLevel = 'manager';
+
+		await member.save();
+		
+		return created;
+	},
+	deleteProject: async (_, { id }, ctx) => {
+		if(!ctx.user) {
+			throw new MissingSessionError();
+		}
+
+		const project = await Project.findOne({
+			where: {
+				id: id,
+				creatorId: ctx.user.id
+			}
+		});
+
+		if(!project) {
+			throw new NoPermissionError();
+		}
+
+		logger.info(project);
+
+		// Perform the deletion and rely on
+		// cascading to delete all relations.
+		await Project.remove(project);
+
+		logger.info(project);
+
+		return project;
 	}
 } as GraphQLResolvers;
