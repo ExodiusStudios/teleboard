@@ -68,8 +68,7 @@ export class HTTPService {
 		// Configure the session store
 		const sessionStore = new TypeormStore({
 			cleanupLimit: 2,
-			limitSubquery: false,
-			ttl: 86400
+			limitSubquery: false
 		}).connect(sessionRepo);
 
 		// Apply security middleware
@@ -88,7 +87,8 @@ export class HTTPService {
 			cookie: {
 				httpOnly: true,
 				secure: production,
-				sameSite: production
+				sameSite: production,
+				maxAge: 2419200
 			}
 		}));
 
