@@ -30,6 +30,12 @@ exports.up = async function({schema}: Knex) {
 			table.text('description');
 			table.text('logo_image');
 			table.timestamp('created_at');
+
+			table.integer('creator_id')
+				.unsigned()
+				.notNullable()
+				.references('users.id')
+				.onDelete('CASCADE');
 		})
 
 		// ANCHOR Tasks table
@@ -112,11 +118,11 @@ exports.up = async function({schema}: Knex) {
 
 exports.down = async function({schema}: Knex) {
 	return schema
-		.dropTable('projects')
-		.dropTable('teams')
-		.dropTable('tasks')
-		.dropTable('child_tasks')
+		.dropTable('team_members')
 		.dropTable('project_members')
 		.dropTable('project_teams')
-		.dropTable('team_members');
+		.dropTable('child_tasks')
+		.dropTable('teams')
+		.dropTable('tasks')
+		.dropTable('projects');
 };
