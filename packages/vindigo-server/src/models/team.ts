@@ -28,7 +28,11 @@ export class Team extends BaseEntity {
 	public creatorId: number;
 
 	@ManyToMany(() => User, user => user.teams)
-	@JoinTable({name: 'team_members'})
+	@JoinTable({
+		name: 'team_members',
+		joinColumn: { name: 'member_id', referencedColumnName: 'id' },
+		inverseJoinColumn: { name: 'team_id', referencedColumnName: 'id' }
+	})
 	public members: User[];
 
 	@OneToMany(() => ProjectTeam, project => project.team)
