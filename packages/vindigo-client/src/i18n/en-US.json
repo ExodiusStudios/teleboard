@@ -1,4 +1,7 @@
 {
+	"TIME_FORMAT": "h:mm A",
+	"DATE_FORMAT": "dddd, MMMM D",
+	
 	"TOOLBAR_CREATE": "Create New...",
 	"TOOLBAR_CREATE_PROJECT": "Create project",
 	"TOOLBAR_CREATE_PROJECT_DESC": "All tasks are scoped to a single project",
