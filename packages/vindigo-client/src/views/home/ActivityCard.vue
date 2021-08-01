@@ -76,8 +76,8 @@ export default Vue.extend({
 
 	methods: {
 		updateTime() {
-			this.timeStr = dayjs().format('h:mm A');
-			this.dateStr = dayjs().format('dddd, MMMM D');
+			this.timeStr = dayjs().format(this.$t('TIME_FORMAT') as string);
+			this.dateStr = dayjs().format(this.$t('DATE_FORMAT') as string);
 		}
 	}
 });

@@ -1,4 +1,7 @@
 {
+	"TIME_FORMAT": "H:mm",
+	"DATE_FORMAT": "dddd, D MMMM",
+
 	"TOOLBAR_CREATE": "Nieuwe aanmaken...",
 	"TOOLBAR_CREATE_PROJECT": "Project aanmaken",
 	"TOOLBAR_CREATE_PROJECT_DESC": "Alle taken zijn onderdeel van een project.",
