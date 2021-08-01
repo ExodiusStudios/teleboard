@@ -1,11 +1,11 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 import { ProjectMember } from "./projectMember";
 
 @Entity('projects')
 export class Project extends BaseEntity {
 
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	public id: number;
 
 	@Column()

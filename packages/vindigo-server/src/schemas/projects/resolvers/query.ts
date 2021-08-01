@@ -4,10 +4,11 @@ import { FindConditions } from "typeorm";
 import { GraphQLResolvers } from "../../../http";
 import { Project } from "../../../models/project";
 import { Task } from "../../../models/task";
+import { getProjectRelations } from "../fetchers/project";
 import { parseTakeSize } from "../../../util/http";
 
 export default {
-	projects: async (_, { mode, skip, take }, ctx) => {
+	projects: async (_, { mode, skip, take }, ctx, info) => {
 		let filter: FindConditions<Project>;
 
 		switch(mode) {
@@ -50,11 +51,16 @@ export default {
 		return await Project.find({
 			where: filter,
 			skip: skip,
-			take: parseTakeSize(take, 50)
+			take: parseTakeSize(take, 50),
+			relations: getProjectRelations(info)
 		});
 	},
-	project: async (_, { id }) => {
-		return Project.findOne(id);
+	project: async (_, { id }, _ctx, info) => {
+		const ret = await Project.findOne(id, {
+			relations: getProjectRelations(info)
+		});
+
+		return ret;
 	},
 	task: async (_, { id }) => {
 		return Task.findOne(id);

@@ -70,7 +70,7 @@ exports.up = async function({schema}: Knex) {
 		.createTable('project_members', (table) => {
 			table.increments();
 			
-			table.integer('user_id')
+			table.integer('member_id')
 				.unsigned()
 				.notNullable()
 				.references('users.id')
@@ -102,7 +102,7 @@ exports.up = async function({schema}: Knex) {
 
 		// ANCHOR Team member join table
 		.createTable('team_members', (table) => {
-			table.integer('user_id')
+			table.integer('member_id')
 				.unsigned()
 				.notNullable()
 				.references('users.id')

@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 /**
  * Tasks are the most important concept in Vindigo and
@@ -7,7 +7,7 @@ import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 @Entity('tasks')
 export class Task extends BaseEntity {
 
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	public id: number;
 
 	@Column()

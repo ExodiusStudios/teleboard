@@ -24,6 +24,9 @@ export class Team extends BaseEntity {
 	@Column()
 	public logoImage: string;
 
+	@Column()
+	public creatorId: number;
+
 	@ManyToMany(() => User, user => user.teams)
 	@JoinTable({name: 'team_members'})
 	public members: User[];

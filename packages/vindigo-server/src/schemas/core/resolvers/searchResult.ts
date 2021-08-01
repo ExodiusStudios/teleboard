@@ -5,8 +5,6 @@ import { User } from "../../../models/user";
 
 export default {
 	users: async (request) => {
-		console.log('request', request);
-
 		return await User.find({
 			where: { 
 				name: Like(`%${request.query}%`) 

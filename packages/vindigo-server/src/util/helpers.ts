@@ -1,4 +1,6 @@
 import { Consola } from "consola";
+import { GraphQLResolveInfo } from "graphql";
+import getFieldNames from 'graphql-list-fields';
 import waitOn from "wait-on";
 
 const awaitableDatabases: string[] = [
@@ -59,4 +61,16 @@ export async function pollDatabase(logger: Consola, options: {driver: string, ho
 			process.exit(0);
 		}
 	}
+}
+
+/**
+ * Returns whether the current resolver has the given
+ * field in its sub query.
+ * 
+ * @param info The resolver info
+ * @param field The sub field
+ * @returns Result
+ */
+export function hasField(info: GraphQLResolveInfo, field: string): boolean {
+	return getFieldNames(info).some(f => f.startsWith(field));
 }

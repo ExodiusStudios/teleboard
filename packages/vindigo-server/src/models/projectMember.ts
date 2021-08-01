@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 import { Project } from "./project";
 import { User } from "./user";
@@ -9,14 +9,14 @@ import { User } from "./user";
 @Entity('project_members')
 export class ProjectMember extends BaseEntity {
 
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	public id: number;
 
 	@ManyToOne(() => Project, project => project.members)
 	public project: Project;
 
-	@ManyToOne(() => User, user => user.projects)
-	public user: User;
+	@ManyToOne(() => User, user => user.projects, { eager: true })
+	public member: User;
 
 	@Column()
 	public accessLevel: string;

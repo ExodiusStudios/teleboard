@@ -41,7 +41,7 @@ export class DatabaseService {
 				database: options.database,
 				namingStrategy: new SnakeNamingStrategy(),
 				entities: this.models,
-				logging: !isProduction()
+				logging: !isProduction() && false
 			});
 		} catch (err) {
 			logger.error('Error instantiating database connection: ' + err.message);

@@ -3,7 +3,6 @@ import { InvalidArgumentError, MissingSessionError, NoPermissionError } from "..
 import { GraphQLResolvers } from "../../../http";
 import { Project } from "../../../models/project";
 import { ProjectMember } from "../../../models/projectMember";
-import { logger } from "../../..";
 
 export default {
 	createProject: async (_, { details }, ctx) => {
@@ -37,7 +36,7 @@ export default {
 
 		// Save owner member details
 		member.project = created;
-		member.user = ctx.user;
+		member.member = ctx.user;
 		member.accessLevel = 'manager';
 
 		await member.save();

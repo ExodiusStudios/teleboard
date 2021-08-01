@@ -4660,6 +4660,11 @@ graphql-depth-limit@^1.1.0:
   dependencies:
     arrify "^1.0.1"
 
+graphql-list-fields@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/graphql-list-fields/-/graphql-list-fields-2.0.2.tgz#a4ade3cfa2028a2ac32d3f2870f5f8c5b5d5b466"
+  integrity sha512-9TSAwcVA3KWw7JWYep5NCk2aw3wl1ayLtbMpmG7l26vh1FZ+gZexNPP+XJfUFyJa71UU0zcKSgtgpsrsA3Xv9Q==
+
 graphql-tag@^2.12.0, graphql-tag@^2.12.4:
   version "2.12.5"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.12.5.tgz#5cff974a67b417747d05c8d9f5f3cb4495d0db8f"

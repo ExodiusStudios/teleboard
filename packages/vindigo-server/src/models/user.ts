@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 import { ProjectMember } from "./projectMember";
 import { Team } from "./team";
@@ -9,7 +9,7 @@ import { Team } from "./team";
 @Entity('users')
 export class User extends BaseEntity {
 
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	public id: number;
 
 	@Column()
@@ -45,7 +45,7 @@ export class User extends BaseEntity {
 	@Column()
 	public language: string;
 
-	@OneToMany(() => ProjectMember, member => member.user)
+	@OneToMany(() => ProjectMember, member => member.member)
 	public projects: ProjectMember[];
 
 	@ManyToMany(() => Team, team => team.members)
