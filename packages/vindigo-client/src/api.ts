@@ -12,6 +12,7 @@ type Headers = Dictionary<string>;
 export class APIService {
 
 	private logger = logger('API', true);
+	private uploadPath = 'http://localhost:8085/upload';
 	private endpoint = '/graphql';
 	private client?: Client;
 
@@ -25,6 +26,34 @@ export class APIService {
 	public get isConnected(): boolean {
 		return !!this.client;
 	
+	}
+
+	/**
+	 * Upload the given file to the server as the
+	 * specified type.
+	 * 
+	 * @param type The type of the file
+	 * @param file The file binary data
+	 * @param config Further upload configuration
+	 * @returns The response
+	 */
+	public async upload(type: string, file: File, config?: QueryConfig): Promise<Response> {
+		const endpoint = config?.endpoint ?? this.uploadPath;
+		const formData = new FormData();
+
+		formData.append('file', file);
+
+		const response = await fetch(endpoint + '/' + type, {
+			signal: config?.abort?.signal,
+			method: 'POST',
+			body: formData
+		});
+
+		if(response.status != 200) {
+			throw new Error('Upload failure: ' + (response.statusText));
+		}
+
+		return response;
 	}
 
 	/**

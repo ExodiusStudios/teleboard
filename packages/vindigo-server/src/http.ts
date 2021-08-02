@@ -10,11 +10,13 @@ import { IServerConfig } from "./util/config";
 import { Server } from "http";
 import { Session } from "./models/session";
 import { TypeormStore } from "connect-typeorm";
+import UploadAvatarController from "./routes/upload/avatar";
 import { User } from "./models/user";
 import WebSocket from 'ws';
 import cors from "cors";
 import depthLimit from "graphql-depth-limit";
 import { existsSync } from "fs";
+import fileUpload from "express-fileupload";
 import { graphqlHTTP } from "express-graphql";
 import helmet from "helmet";
 import { isProduction } from "./util/helpers";
@@ -95,6 +97,7 @@ export class HTTPService {
 		// Hook in core endpoints
 		this.registerApi();
 		this.registerStatic();
+		this.registerUploads();
 
 		this.server.listen(port, () => {
 			logger.success('Vindigo Server running on port ' + port);
@@ -224,6 +227,13 @@ export class HTTPService {
 		this.express.get('*', (_, res) => {
 			res.sendFile(indexPath);
 		});
+	}
+
+	/**
+	 * Register the file upload endpoints
+	 */
+	private registerUploads() {
+		this.express.post('/upload/avatar', fileUpload(), new UploadAvatarController().build());
 	}
 }
 

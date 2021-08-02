@@ -1,5 +1,6 @@
 import Avatar from '../components/Avatar.vue';
 import Draggable from 'vuedraggable';
+import FileUpload from '../components/FileUpload.vue';
 import LanguagePicker from '../components/LanguagePicker.vue';
 import LoadingSpinner from '../components/LoadingSpinner.vue';
 import Pagination from '../components/Pagination.vue';
@@ -15,10 +16,11 @@ import Vue from 'vue';
 export function registerComponents() {
 	Vue.component('LanguagePicker', LanguagePicker);
 	Vue.component('LoadingSpinner', LoadingSpinner);
-	Vue.component('Draggable', Draggable);
 	Vue.component('SectionTitle', SectionTitle);
 	Vue.component('ProjectList', ProjectList);
 	Vue.component('Pagination', Pagination);
+	Vue.component('FileUpload', FileUpload);
+	Vue.component('Draggable', Draggable);
 	Vue.component('Toolbar', Toolbar);
 	Vue.component('Spacer', Spacer);
 	Vue.component('Avatar', Avatar);
