@@ -180,7 +180,7 @@
 				<w-divider />
 				<div class="toolbar-menu__list">
 					<router-link
-						to="/profile/10"
+						:to="`/profile/${userID}`"
 						class="toolbar-menu__item"
 						tag="div"
 					>
@@ -456,6 +456,9 @@ export default Vue.extend({
 			return this.$store.state.isDark
 				? require("/src/assets/vindigo-white.svg")
 				: require("/src/assets/vindigo-black.svg");
+		},
+		userID(): Optional<Number> {
+			return this.$vuex.state.profile?.id;
 		},
 		userName(): Optional<string> {
 			return this.$vuex.state.profile?.fullName;
