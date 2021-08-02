@@ -1,5 +1,7 @@
-import { Request, RequestHandler, Response } from "express";
 import { ApiError, NoPermissionError } from "../util/errors";
+import { Request, RequestHandler, Response } from "express";
+
+import { User } from "../models/user";
 
 /**
  * Contains logic for an individual API endpoint.
@@ -12,12 +14,17 @@ export abstract class Controller {
 	/**
 	 * The Express Request object to be used throughout the controller
 	 */
-	protected req: Request;
+	protected req!: Request;
 
 	/**
 	 * The Express response object to be used throughout the controller
 	 */
-	protected res: Response;
+	protected res!: Response;
+
+	/**
+	 * The user that called this endpoint
+	 */
+	protected user: User;
 
 	/**
 	 * TODO Schema required for the use of this endpoint
@@ -29,7 +36,7 @@ export abstract class Controller {
 	 * 
 	 * @returns boolean depicting if authorization was successful
 	 */
-	protected abstract authorize() : boolean | Promise<boolean>
+	protected abstract authorize(user: User|undefined) : boolean | Promise<boolean>
 
 	/**
 	 * Code that executes main route functions
@@ -44,22 +51,28 @@ export abstract class Controller {
 	 * @returns RequestHandler
 	 */
 	public build() : RequestHandler {
-
 		return async (req: Request, res: Response) => {
-
-			// assign request and response so authorize and handle can access them
 			this.req = req;
 			this.res = res;
 
+			const user = await User.findOne(req.session.userId);
+
+			// The user must be authenticated
+			if(!user) {
+				return this.respond(new NoPermissionError());
+			}
+
+			this.user = user;
+
 			// authorize the call
-			const authorized = await this.authorize();
+			const authorized = await this.authorize(user);
 
-			if(!authorized) return this.respond(new NoPermissionError());
+			if(!authorized) {
+				return this.respond(new NoPermissionError());
+			}
 
-			// handle call and respond with the appropriate value
 			this.respond(await this.handle());
-		}
-
+		};
 	}
 
 	/**
@@ -68,7 +81,7 @@ export abstract class Controller {
 	 */
 	private respond(value: any) {
 
-		var response: {
+		const response: {
 			success?: boolean,
 			code?: string,
 			data?: any,
@@ -79,9 +92,9 @@ export abstract class Controller {
 
 		// add error information if something went wrong
 		if(value instanceof ApiError) {
-			response.code = value.code
-			response.success = false
-			response.data = null
+			response.code = value.code;
+			response.success = false;
+			response.data = null;
 		}
 
 		this.res.json(response);

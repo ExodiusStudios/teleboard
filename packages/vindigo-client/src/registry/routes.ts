@@ -1,10 +1,11 @@
+import ExplorerPage from '../views/explorer/ExplorerPage.vue';
 import HomePage from '../views/home/HomePage.vue';
 import KanbanPage from '../views/project/kanban/KanbanOverview.vue';
+import ProfilePage from '../views/profile/ProfilePage.vue';
 import ProjectHome from '../views/project/ProjectHome.vue';
 import ProjectPage from '../views/project/ProjectPage.vue';
 import SettingsPage from '../views/settings/Settings.vue';
 import TasksPage from '../views/project/tasks/TasksOverview.vue';
-import ExplorerPage from '../views/explorer/ExplorerPage.vue';
 import { routing } from "..";
 
 /**
@@ -33,7 +34,7 @@ export function registerRoutes() {
 	routing.defineRoute({
 		path: '/profile/:user',
 		name: 'Profile',
-		component: undefined
+		component: ProfilePage
 	});
 	
 	routing.defineRoute({

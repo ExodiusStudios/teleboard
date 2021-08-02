@@ -1,52 +1,40 @@
-import { UploadedFile } from "express-fileupload";
 import { existsSync, mkdirSync } from "fs";
-import { last } from "lodash";
-import { join } from "path";
-import { User } from "../../models/user";
+
 import { ApiError } from "../../util/errors";
 import { Controller } from "../controller";
+import { UploadedFile } from "express-fileupload";
+import { join } from "path";
+import { last } from "lodash";
 
 export default class UploadAvatarController extends Controller {
 
-	private uploadPath = '/avatar';
-
-	authorize() {
+	public authorize() {
 		return true;
 	}
 
-	async handle() {
-
-		/**
-		 * TODO
-		 * verify + sanitize file inputs
-		 * authorize user
-		 * verify existence of target user
-		 * 
-		 * basically clean this up - very initial version
-		 */
-		
-
+	public async handle() {
 		if(!this.req.files) {
 			return new ApiError('invalid-request', 'Invalid avatar');
 		}
 
-		const userID = this.req.params['id'];
-		const user = await User.findOne(userID);
-		const file = this.req.files.avatar as UploadedFile
+		const file = this.req.files.file as UploadedFile;
 		const md5 = file.md5;
-		const filename = `${md5}.${last(file.name.split(/\./g))}`;
-		const path = this.uploadPath.concat(`/${md5.substr(0, 2)}/`);
-		const dest = join('./data/public', path, filename);
 
-		if(!existsSync(path)) {
-			mkdirSync(path, { recursive: true });
+		const bucket = md5.substr(0, 2);
+		const extension = last(file.name.split(/\./g));
+		const fileName = `${md5}.${extension}`;
+
+		const bucketLocation = join('data/public/avatar', bucket);
+		const fileLocation = join(bucketLocation, fileName);
+
+		if(!existsSync(bucketLocation)) {
+			mkdirSync(bucketLocation, { recursive: true });
 		}
-
-		await file.mv(dest);
-
-		user!.avatar = dest;
-		await user?.save();
 		
+		this.user.avatar = join('/data/avatar', bucket, fileName);
+
+		await file.mv(fileLocation);
+		await this.user.save();
 
 		return Promise.resolve('handling avatar');
 	}
