@@ -12,7 +12,7 @@ type Headers = Dictionary<string>;
 export class APIService {
 
 	private logger = logger('API', true);
-	private uploadPath = 'http://localhost:8085/upload';
+	private uploadPath = '/upload';
 	private endpoint = '/graphql';
 	private client?: Client;
 
