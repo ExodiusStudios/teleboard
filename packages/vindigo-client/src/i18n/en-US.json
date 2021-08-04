@@ -55,6 +55,8 @@
 	"SETTINGS_ACCOUNT": "Account",
 	"SETTINGS_LANGUAGE": "Language",
 	"SETTINGS_DARK_MODE": "Dark Mode",
+	"SETTINGS_PROFILE_DESCRIPTION": "Your personal account",
+	"SETTINGS_PROFILE_WATCH_PROFILE": "Watch profile",
 
 	"SIGNIN_WELCOME": "Welcome",
 	"SIGNIN_USERNAME": "Email or Username",
