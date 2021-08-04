@@ -55,7 +55,9 @@
 	"SETTINGS_ACCOUNT": "Account",
 	"SETTINGS_LANGUAGE": "Taal",
 	"SETTINGS_DARK_MODE": "Donkere Modus",
-
+	"SETTINGS_PROFILE_DESCRIPTION": "Jouw persoonlijk account",
+	"SETTINGS_PROFILE_WATCH_PROFILE": "Bekijk profiel",
+	
 	"SIGNIN_WELCOME": "Welkom",
 	"SIGNIN_USERNAME": "Email of Gebruikernaam",
 	"SIGNIN_PASSWORD": "Wachtwoord",
