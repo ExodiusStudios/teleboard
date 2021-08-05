@@ -11,54 +11,56 @@
 		>
 			{{ $t("SIGNIN_SIGNIN") }}
 		</h1>
-		<form>
-			<w-input
-				v-model="email"
-				class="auth-box__input my-5 text-center"
-				:placeholder="$t('SIGNIN_EMAIL')"
-				autocomplete="sign-up email"
-				name="email"
+		<w-form class="flex flex-col h-full">
+			<section>
+				<w-input
+					v-model="email"
+					class="auth-box__input my-5 text-center"
+					:placeholder="$t('SIGNIN_EMAIL')"
+					autocomplete="sign-up email"
+					name="email"
+					round
+				/>
+				<w-input
+					v-model="fullname"
+					class="auth-box__input my-5 text-center"
+					:placeholder="$t('SIGNIN_FULL_NAME')"
+					autocomplete="sign-up name"
+					name="name"
+					round
+				/>
+				<w-input
+					v-model="password"
+					class="auth-box__input my-5"
+					:placeholder="$t('SIGNIN_PASSWORD')"
+					password-reveal
+					autocomplete="sign-up password"
+					type="password"
+					name="password"
+					round
+				/>
+			</section>
+			<div class="flex text-white">
+				<w-checkbox v-model="remember" round>
+					{{ $t("SIGNIN_REMEMBER_ME") }}
+				</w-checkbox>
+			</div>
+			<spacer />
+			<w-button
 				round
-			/>
-			<w-input
-				v-model="fullname"
-				class="auth-box__input my-5 text-center"
-				:placeholder="$t('SIGNIN_FULL_NAME')"
-				autocomplete="sign-up name"
-				name="name"
-				round
-			/>
-			<w-input
-				v-model="password"
-				class="auth-box__input my-5"
-				:placeholder="$t('SIGNIN_PASSWORD')"
-				password-reveal
-				autocomplete="sign-up password"
-				type="password"
-				name="password"
-				round
-			/>
-		</form>
-		<div class="flex text-white">
-			<w-checkbox v-model="remember" round>
-				{{ $t("SIGNIN_REMEMBER_ME") }}
-			</w-checkbox>
-		</div>
-		<spacer />
-		<w-button
-			round
-			class="w-full h-9 auth-box__button"
-			color="white"
-			bg-color="indigo-700"
-			:loading="loading"
-			@click="register"
-		>
-			{{ $t("SIGNIN_REGISTER_ACCOUNT") }}
-			<w-icon>
-				mdi mdi-chevron-right
-			</w-icon>
-		</w-button>
-
+				class="w-full h-9 auth-box__button"
+				color="white"
+				bg-color="indigo-700"
+				type="submit"
+				:loading="loading"
+				@click="register"
+			>
+				{{ $t("SIGNIN_REGISTER_ACCOUNT") }}
+				<w-icon>
+					mdi mdi-chevron-right
+				</w-icon>
+			</w-button>
+		</w-form>
 		<div class="auth-box__toggle" @click="$emit('toggle')">
 			<div v-html="$t('SIGNIN_HAVE_ACCOUNT')" />
 		</div>
