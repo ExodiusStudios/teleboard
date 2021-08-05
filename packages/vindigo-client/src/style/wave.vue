@@ -36,17 +36,23 @@
 }
 
 /* Input fields */
-.w-input {
+.w-input, .w-select {
 	&:not(&--outline) {
 		@apply border-none;
+	}
+
+	.dark & input,
+	.dark & .w-input__icon,
+	.dark & .w-select__icon {
+		@apply text-light;
 	}
 }
 
 /* Input fields */
-.w-input__input-wrap {
-	@apply border-none ring-4 ring-white bg-white ring-opacity-30 text-sm h-9;
+.w-input__input-wrap, .w-select__selection-wrap {
+	@apply border-none bg-white text-sm h-9 rounded-lg;
 
-	&--round input {
+	&--round, &--round input {
 		@apply rounded-full;
 	}
 
