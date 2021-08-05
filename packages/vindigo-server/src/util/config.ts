@@ -23,11 +23,12 @@ export interface IServerConfig {
 	},
 	smtp: {
 		enabled: boolean,
-		address: string,
 		domain: string,
-		user_name: string,
+		port: number,
+		email: string,
 		password: string,
-		port: number
+		sender_name: string
+		
 	},
 	database: {
 		driver: string,
@@ -60,11 +61,11 @@ const defaultConfig: IServerConfig = {
 	},
 	smtp: {
 		enabled: false,
-		address: '',
 		domain: '',
-		user_name: '',
+		port: 25,
+		email: '',
 		password: '',
-		port: 25
+		sender_name: ''
 	},
 	database: {
 		driver: 'mysql',
