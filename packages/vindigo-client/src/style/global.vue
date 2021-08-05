@@ -33,6 +33,13 @@
 	background-color: rgba(0, 0, 0, 0.13);
 }
 
+.dark ::-webkit-scrollbar {
+	width: 11px;
+	height: 11px;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.065);
+}
+
 ::-webkit-scrollbar-thumb {
 	background-color: #788592;
 	overflow: hidden;

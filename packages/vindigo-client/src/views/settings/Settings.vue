@@ -18,8 +18,15 @@
 				</div>
 				<spacer />
 				<div>
-					<w-button :route="profileUrl">
-						{{ $t('SETTINGS_PROFILE_WATCH_PROFILE' ) }}
+					<w-button
+						color="white"
+						bg-color="accent-1"
+						:route="profileUrl"
+					>
+						{{ $t('SETTINGS_PROFILE_VIEW_PROFILE' ) }}
+						<w-icon class="pl-3">
+							mdi mdi-arrow-right
+						</w-icon>
 					</w-button>
 				</div>
 			</div>
@@ -30,6 +37,8 @@
 					:items="settingTabs"
 					:transition="false"
 					:fill-bar="true"
+					active-class="accent-1"
+					slider-color="accent-1"
 					class="overflow-visible"
 				>
 					<template #item-content="{ item }">
