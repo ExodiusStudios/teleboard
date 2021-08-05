@@ -85,16 +85,20 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss">
-.project-list__tabs {
-	@apply border-none;
+.project-list {
 
-	.w-tabs__bar {
-		@apply hidden;
-	}
+	&__tabs {
+		@apply border-none;
 
-	.w-tabs__content {
-		@apply p-0;
+		.w-tabs__bar {
+			@apply hidden;
+		}
+
+		.w-tabs__content {
+			@apply p-0;
+		}
 	}
+	
 }
 
 .project-tile {

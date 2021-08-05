@@ -76,8 +76,8 @@ export default Vue.extend({
 	async beforeRouteEnter(to, _from, next) {
 		const pid = parseSlug(to.params.project);
 
-		if(pid === undefined) {
-			next('/'); // TODO Redirect to error page
+		if(pid == undefined) {
+			next('/');
 			return;
 		}
 
