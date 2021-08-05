@@ -22,10 +22,10 @@
 			</small>
 			<w-select
 				v-model="language" 
-				class="mt-2"
+				class="language-picker mt-2"
 				item-label-key="name"
 				item-value-key="id"
-				:inner-icon-left="`flag-icon flag-icon-${languageFlag} lang-icon`"
+				inner-icon-left="mdi mdi-earth text-gray-500"
 				:bg-color="$isDark ? 'dark-3' : 'light-3'"
 				:items="languages"
 				color="gray-700"
@@ -38,8 +38,6 @@
 import Vue from 'vue';
 import languages from '../../../registry/languages';
 import { i18n } from '../../..';
-import { Language } from '../../../i18n';
-import { find } from 'lodash';
 
 export default Vue.extend({
 	name: 'AppearenceTab',
@@ -54,9 +52,6 @@ export default Vue.extend({
 			set(value: boolean) {
 				this.$vuex.commit('setDarkMode', value);
 			}
-		},
-		languageFlag(): string {
-			return find(this.languages, (lang: Language) => lang.id == this.language)?.icon || '';
 		},
 		language: {
 			get(): string|undefined {
