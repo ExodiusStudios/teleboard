@@ -26,7 +26,7 @@
 				<spacer />
 				<w-button
 					outline
-					color="accent-2"
+					color="accent-1"
 					:route="team.teamUrl"
 				>
 					{{ $t('HOMEPAGE_SECTION_TEAMS_VISIT') }}
