@@ -131,10 +131,6 @@ export default Vue.extend({
 		}
 	}
 
-	&__button i {
-		transform: translateY(1px);
-	}
-
 	/* Dark mode emission overrrides */
 
 	.dark &__left {

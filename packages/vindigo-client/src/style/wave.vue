@@ -1,5 +1,6 @@
 <style lang="postcss">
 
+/* Notification center */
 .w-notification-manager {
 	@apply overflow-x-hidden p-4 pt-16 w-96;
 
@@ -94,6 +95,11 @@
 
 	&--icon {
 		@apply bg-transparent border-none !important;
+	}
+
+	/* Slightly nudges button icons down by one pixel */
+	& > .w-icon {
+		@apply leading-normal;
 	}
 }
 

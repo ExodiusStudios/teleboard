@@ -40,12 +40,14 @@
 			round
 			class="w-full h-9 auth-box__button"
 			color="white"
-			bg-color="indigo-600"
+			bg-color="indigo-700"
 			:loading="loading"
 			@click="authenticate"
 		>
 			{{ $t("SIGNIN_SIGNIN") }}
-			<w-icon> mdi mdi-chevron-right </w-icon>
+			<w-icon>
+				mdi mdi-chevron-right
+			</w-icon>
 		</w-button>
 
 		<div
@@ -53,7 +55,7 @@
 			class="auth-box__toggle"
 			@click="$emit('toggle')"
 		>
-			<div v-html="$t('SIGNIN_NO_ACCOUNT')"></div>
+			<div v-html="$t('SIGNIN_NO_ACCOUNT')" />
 		</div>
 	</section>
 </template>
