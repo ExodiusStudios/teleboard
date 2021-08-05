@@ -2,8 +2,8 @@
 	<section class="settings-page">
 		<toolbar class="pl-0" />
 		<section class="bg-white pb-10 dark:bg-gray-800">
-			<div class="container flex items-center">
-				<section class="flex items-center py-10">
+			<div class="container container--thin flex items-center">
+				<div class="flex items-center py-10">
 					<avatar
 						class="mr-4"
 						:profile="$vuex.state.profile"
@@ -15,24 +15,25 @@
 						</h1>
 						<p>{{ $t('SETTINGS_PROFILE_DESCRIPTION') }} </p>
 					</div>
-				</section>
+				</div>
 				<spacer />
-				<section>
-					<w-button>
+				<div>
+					<w-button :route="profileUrl">
 						{{ $t('SETTINGS_PROFILE_WATCH_PROFILE' ) }}
 					</w-button>
-				</section>
+				</div>
 			</div>
 		</section>
-		<main class="mt-[-58px]" role="main">
-			<section class="container">
+		<main class="mt-[-60px]" role="main">
+			<section class="container container--thin">
 				<w-tabs
 					:items="settingTabs"
 					:transition="false"
 					:fill-bar="true"
+					class="overflow-visible"
 				>
 					<template #item-content="{ item }">
-						<section class="rounded-md mt-5 p-8 bg-white dark:bg-gray-800">
+						<section class="mt-5 p-6 bg-white rounded-xl shadow-lg dark:bg-gray-800">
 							<component
 								:is="item.content"
 							/>
@@ -70,6 +71,9 @@ export default Vue.extend({
 				{ title: this.$t("SETTINGS_ACCOUNT"), content: AccountTab },
 			];
 		},
+		profileUrl(): string {
+			return `/profile/${this.$vuex.state.profile!.id}`;
+		}
 	},
 });
 </script>

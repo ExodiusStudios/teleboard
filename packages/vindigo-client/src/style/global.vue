@@ -7,6 +7,10 @@
 
 .sortable-drag { opacity: 0; }
 
+.container--thin {
+	max-width: 1000px;
+}
+
 /* Custom utilities */
 @layer utilities {
 	@variants responsive {
