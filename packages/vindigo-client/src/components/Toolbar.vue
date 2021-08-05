@@ -220,15 +220,19 @@
 						{{ $t("YOUR_ACCOUNT_ACTIVITY") }}
 					</router-link>
 					<w-divider />
-					<router-link
-						to="" class="toolbar-menu__item"
-						tag="div"
+					<a
+						href="https://github.com/ExodiusStudios/vindigo"
+						class="toolbar-menu__item block"
+						target="_blank"
 					>
 						<w-icon size="1.1rem">
 							mdi mdi-help-circle-outline
 						</w-icon>
 						{{ $t("YOUR_ACCOUNT_HELP") }}
-					</router-link>
+						<w-icon size="0.8rem" class="translate-y-0.5">
+							mdi mdi-open-in-new
+						</w-icon>
+					</a>
 					<router-link
 						to="/settings"
 						class="toolbar-menu__item"
