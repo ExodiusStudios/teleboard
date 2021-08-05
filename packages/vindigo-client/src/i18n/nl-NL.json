@@ -50,12 +50,12 @@
 	"VIEW_CALENDAR": "Kalender",
 	"VIEW_WHITEBOARD": "Witbord",
 
-	"SETTINGS_GENERAL": "Algemeen",
-	"SETTINGS_APPEARANCE": "Uiterlijk",
-	"SETTINGS_PRIVACY": "Privacy",
-	"SETTINGS_ACCOUNT": "Account",
-	"SETTINGS_LANGUAGE": "Taal",
-	"SETTINGS_DARK_MODE": "Donkere Modus",
+	"SETTINGS_TAB_PROFILE": "Profiel",
+	"SETTINGS_TAB_APPEARANCE": "Uiterlijk",
+	"SETTINGS_APPEARANCE_DARK_MODE": "Donkere Modus",
+	"SETTINGS_APPEARANCE_LANGUAGE": "Taal",
+	"SETTINGS_TAB_PRIVACY": "Privacy",
+	"SETTINGS_TAB_NOTIFICATION": "Notificatie",
 	"SETTINGS_PROFILE_DESCRIPTION": "Jouw persoonlijk account",
 	"SETTINGS_PROFILE_VIEW_PROFILE": "Bekijk profiel",
 	

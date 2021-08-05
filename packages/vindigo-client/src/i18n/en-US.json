@@ -50,12 +50,12 @@
 	"VIEW_CALENDAR": "Calendar",
 	"VIEW_WHITEBOARD": "Whiteboard",
 
-	"SETTINGS_GENERAL": "General",
-	"SETTINGS_APPEARANCE": "Appearance",
-	"SETTINGS_PRIVACY": "Privacy",
-	"SETTINGS_ACCOUNT": "Account",
-	"SETTINGS_LANGUAGE": "Language",
-	"SETTINGS_DARK_MODE": "Dark Mode",
+	"SETTINGS_TAB_PROFILE": "Profile",
+	"SETTINGS_TAB_APPEARANCE": "Appearance",
+	"SETTINGS_APPEARANCE_DARK_MODE": "Dark Mode",
+	"SETTINGS_APPEARANCE_LANGUAGE": "Language",
+	"SETTINGS_TAB_PRIVACY": "Privacy",
+	"SETTINGS_TAB_NOTIFICATION": "Notification",
 	"SETTINGS_PROFILE_DESCRIPTION": "Your personal account",
 	"SETTINGS_PROFILE_VIEW_PROFILE": "View profile",
 
