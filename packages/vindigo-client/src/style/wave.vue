@@ -48,6 +48,11 @@
 	}
 }
 
+/* Add padding for inner icons */
+.w-select--inner-icon-left input {
+	@apply pl-8 !important;
+}
+
 /* Input fields */
 .w-input__input-wrap, .w-select__selection-wrap {
 	@apply border-none bg-white text-sm h-9 rounded-lg;
