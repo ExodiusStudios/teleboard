@@ -103,6 +103,10 @@ export default Vue.extend({
 	width: 100%;
 	max-width: 735px;
 
+	.w-input__input-wrap, .w-select__selection-wrap {
+		@apply ring-4 ring-white ring-opacity-40;
+	}
+
 	&__left {
 		@apply rounded-2xl laptop:rounded-tr-none laptop:rounded-br-none flex-1 px-8 py-4 text-center dark:z-10;
 		@mixin emissive theme("colors.blue.500"), 0.75;

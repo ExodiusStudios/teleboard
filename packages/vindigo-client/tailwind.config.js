@@ -21,7 +21,7 @@ module.exports = {
 				'dark': '#0f0f0f',
 				'dark-1': '#171717',
 				'dark-2': '#262626',
-				'dark-3': "#2e2e2f",
+				'dark-3': "#35353a",
 
 				'accent-1': '#8b5cf6',
 				'accent-2': '#6159eb',
