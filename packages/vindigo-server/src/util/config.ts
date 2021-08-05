@@ -2,6 +2,8 @@ import { merge } from 'lodash';
 import { parse } from 'toml';
 import { readFileSync } from 'fs';
 
+let parsedConfig: IServerConfig|undefined;
+
 /**
  * The Vindigo Server configuration
  */
@@ -98,8 +100,14 @@ function validateConfig(config: IServerConfig): IServerConfig {
  * @returns The config
  */
 export function readConfig(): IServerConfig {
-	const config = parse(readFileSync('data/config.toml', 'utf-8'));
-	const final: IServerConfig = merge(defaultConfig, config);
+	if(parsedConfig) {
+		return parsedConfig;
+	}
 
-	return validateConfig(final);
+	const config = parse(readFileSync('data/config.toml', 'utf-8'));
+	const filled: IServerConfig = merge(defaultConfig, config);
+	const validated = validateConfig(filled);
+
+	parsedConfig = validated;
+	return validated;
 }

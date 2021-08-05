@@ -9,6 +9,7 @@ import { handleStart } from './handler/start';
 import { handleStatus } from './handler/status';
 import { handleStop } from './handler/stop';
 import { handleUpdate } from './handler/update';
+import { handleVersion } from './handler/version';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import yargs from 'yargs';
 
@@ -54,6 +55,11 @@ yargs
 			describe: 'Use default values without prompt'
 		}),
 		handler: handleInit
+	})
+	.command({
+		command: 'check-version',
+		describe: 'Query the latest version',
+		handler: handleVersion
 	})
 	.command({
 		command: 'update',
