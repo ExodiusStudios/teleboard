@@ -8,10 +8,10 @@ import { IServerConfig } from './util/config';
  */
 export class MailingService {
 	
-	private transpoter: Transporter;
+	private transporter: Transporter;
 
 	public constructor(config: IServerConfig) {
-		this.transpoter = nodemailer.createTransport({
+		this.transporter = nodemailer.createTransport({
 			host: config.smtp.domain,
 			port: config.smtp.port,
 			auth: {
@@ -24,7 +24,7 @@ export class MailingService {
 	}
 
 	public async sendPlainTextEmail(target: string, subject: string, body: string) {
-		await this.transpoter.sendMail({
+		await this.transporter.sendMail({
 			from: `"${config.smtp.sender_name}" <${config.smtp.email}>`,
 			to: target,
 			subject: subject,
@@ -35,7 +35,7 @@ export class MailingService {
 	}
 	
 	public async sendHTMLEmail(target: string, subject: string, html: string) {
-		await this.transpoter.sendMail({
+		await this.transporter.sendMail({
 			from: `"${config.smtp.sender_name}" <${config.smtp.email}>`,
 			to: target,
 			subject: subject,
