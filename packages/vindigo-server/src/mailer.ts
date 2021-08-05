@@ -11,16 +11,26 @@ export class MailingService {
 	private transporter: Transporter;
 
 	public constructor(config: IServerConfig) {
-		this.transporter = nodemailer.createTransport({
-			host: config.smtp.domain,
-			port: config.smtp.port,
-			auth: {
-				user: config.smtp.email,
-				pass: config.smtp.password
-			},
-		});
+		const smtp = config.smtp;
 
-		logger.info(`Setup transporter`);
+		if(smtp.enabled) {
+			logger.info(`Using SMTP emailer for ${smtp.domain}`);
+
+			this.transporter = nodemailer.createTransport({
+				host: smtp.domain,
+				port: smtp.port,
+				auth: {
+					user: smtp.email,
+					pass: smtp.password
+				},
+			});
+		} else {
+			logger.info(`Using fallback emailer`);
+
+			this.transporter = nodemailer.createTransport({
+				sendmail: true
+			});
+		}
 	}
 
 	public async sendPlainTextEmail(target: string, subject: string, body: string) {
