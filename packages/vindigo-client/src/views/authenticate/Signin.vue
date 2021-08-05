@@ -11,45 +11,47 @@
 		>
 			{{ $t("SIGNIN_WELCOME") }}
 		</h1>
-		<form>
-			<w-input
-				v-model="identity"
-				class="auth-box__input my-5"
-				:placeholder="$t('SIGNIN_USERNAME')"
-				autocomplete="sign-in email"
-				round
-			/>
-			<w-input
-				v-model="password"
-				class="auth-box__input my-5"
-				:placeholder="$t('SIGNIN_PASSWORD')"
-				autocomplete="sign-in password"
-				type="password"
-				round
-			/>
-		</form>
-		<div class="flex text-white">
-			<w-checkbox v-model="remember" round>
-				{{ $t("SIGNIN_REMEMBER_ME") }}
-			</w-checkbox>
+		<w-form class="flex flex-col h-full">
+			<section>
+				<w-input
+					v-model="identity"
+					class="auth-box__input my-5"
+					:placeholder="$t('SIGNIN_USERNAME')"
+					autocomplete="sign-in email"
+					round
+				/>
+				<w-input
+					v-model="password"
+					class="auth-box__input my-5"
+					:placeholder="$t('SIGNIN_PASSWORD')"
+					autocomplete="sign-in password"
+					type="password"
+					round
+				/>
+			</section>
+			<div class="flex text-white">
+				<w-checkbox v-model="remember" round>
+					{{ $t("SIGNIN_REMEMBER_ME") }}
+				</w-checkbox>
+				<spacer />
+				<a href="">{{ $t("SIGNIN_FORGOT_PASSWORD") }}</a>
+			</div>
 			<spacer />
-			<a href="">{{ $t("SIGNIN_FORGOT_PASSWORD") }}</a>
-		</div>
-		<spacer />
-		<w-button
-			round
-			class="w-full h-9 auth-box__button"
-			color="white"
-			bg-color="indigo-700"
-			:loading="loading"
-			@click="authenticate"
-		>
-			{{ $t("SIGNIN_SIGNIN") }}
-			<w-icon>
-				mdi mdi-chevron-right
-			</w-icon>
-		</w-button>
-
+			<w-button
+				round
+				class="w-full h-9 auth-box__button"
+				color="white"
+				bg-color="indigo-700"
+				type="submit"
+				:loading="loading"
+				@click="authenticate"
+			>
+				{{ $t("SIGNIN_SIGNIN") }}
+				<w-icon>
+					mdi mdi-chevron-right
+				</w-icon>
+			</w-button>
+		</w-form>
 		<div
 			v-if="canRegister"
 			class="auth-box__toggle"
