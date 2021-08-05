@@ -85,7 +85,7 @@ Commands:
   vindigo init                      Configure your vindigo installation
   vindigo run                       Start the Vindigo server in the foreground
   vindigo migrate:apply [--all]     Apply pending database migrations
-  vindigo migrate:rollback [-all]   Rollback a database migration
+  vindigo migrate:rollback [--all]   Rollback a database migration
   vindigo migrate:status            View the current database migration status
 
 Options:
