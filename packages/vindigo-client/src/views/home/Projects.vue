@@ -53,7 +53,7 @@ export default Vue.extend({
 <style lang="postcss">
 .your-projects__empty {
 	@apply flex flex-col items-center mt-4 pb-6 pt-5 text-white rounded-3xl;
-	@mixin emissive theme("colors.blue.500"), 0.85;
+	@mixin emissive theme("colors.blue.500"), 0.75;
 
 	background: linear-gradient(
 		135deg,

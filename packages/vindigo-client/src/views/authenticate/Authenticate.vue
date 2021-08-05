@@ -105,7 +105,7 @@ export default Vue.extend({
 
 	&__left {
 		@apply rounded-2xl laptop:rounded-tr-none laptop:rounded-br-none flex-1 px-8 py-4 text-center dark:z-10;
-		@mixin emissive theme("colors.blue.500"), 0.85;
+		@mixin emissive theme("colors.blue.500"), 0.75;
 
 		background: linear-gradient(
 			135deg,
