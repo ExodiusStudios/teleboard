@@ -57,27 +57,36 @@
 <script lang="ts">
 import Vue from "vue";
 import AppearenceTab from "./tabs/AppearenceTab.vue";
-import GeneralTab from "./tabs/GeneralTab.vue";
+import ProfileTab from "./tabs/ProfileTab.vue";
 import PrivacyTab from "./tabs/PrivacyTab.vue";
-import AccountTab from "./tabs/AccountTab.vue";
+import NotificationTab from "./tabs/NotificationTab.vue";
 import Avatar from "../../components/Avatar.vue";
 
 export default Vue.extend({
 	name: "VindigoSettings",
 	components: { Avatar },
 	data: () => ({
-		data: undefined
+		
 	}),
 	computed: {
 		settingTabs() {
 			return [
-				{ title: this.$t("SETTINGS_GENERAL"), content: GeneralTab },
+				{ 
+					title: this.$t("SETTINGS_TAB_PROFILE"), 
+					content: ProfileTab 
+				},
 				{
-					title: this.$t("SETTINGS_APPEARANCE"),
+					title: this.$t("SETTINGS_TAB_APPEARANCE"),
 					content: AppearenceTab,
 				},
-				{ title: this.$t("SETTINGS_PRIVACY"), content: PrivacyTab },
-				{ title: this.$t("SETTINGS_ACCOUNT"), content: AccountTab },
+				{ 
+					title: this.$t("SETTINGS_TAB_PRIVACY"), 
+					content: PrivacyTab 
+				},
+				{ 
+					title: this.$t("SETTINGS_TAB_NOTIFICATION"), 
+					content: NotificationTab
+				},
 			];
 		},
 		profileUrl(): string {
