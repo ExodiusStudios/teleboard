@@ -68,8 +68,7 @@
 						v-for="(user, index) in searchResults.users"
 						:key="index"
 						:to="`/profile/${user.id}`"
-						class="flex items-center mt-2"
-						tag="dev"
+						class="flex items-center mt-3"
 					>
 						<avatar
 							:profile="user" :size="22"
@@ -82,23 +81,27 @@
 					<section-title icon="mdi mdi-folder-open">
 						{{ $t("GENERAL_TEAMS") }}
 					</section-title>
-					<div
+					<router-link
 						v-for="(team, index) in searchResults.teams"
 						:key="index"
+						:to="`/team/${team.id}`"
+						class="flex items-center mt-3"
 					>
-						{{ team }}
-					</div>
+						{{ team.name }}
+					</router-link>
 				</div>
 				<div v-if="searchResults.projects.length > 0">
 					<section-title icon="mdi mdi-folder-open">
 						{{ $t("GENERAL_PROJECTS") }}
 					</section-title>
-					<div
+					<router-link
 						v-for="(project, index) in searchResults.projects"
 						:key="index"
+						:to="`/team/${project.id}`"
+						class="flex items-center mt-3"
 					>
 						{{ project.name }}
-					</div>
+					</router-link>
 				</div>
 			</template>
 		</w-menu>
@@ -637,6 +640,7 @@ export default Vue.extend({
 							}
 							teams {
 								id
+								name
 							}
 						}
 					}
