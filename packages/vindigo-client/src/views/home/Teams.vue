@@ -9,13 +9,11 @@
 			class="your-teams__team-row mt-4 mb-14"
 		>
 			<div class="your-teams__toolbar p-2 px-3 flex flex-row items-center bg-light-2 dark:bg-dark-2 rounded-lg">
-				<w-image
-					:src="team.logoImage"
-					class="rounded-lg overflow-hidden"
-					height="38"
-					width="38"
+				<team-icon
+					:team="team"
+					class="pr-3"
 				/>
-				<div class="pl-3 flex flex-col dark:text-white">
+				<div class="flex flex-col dark:text-white">
 					<span class="font-semibold text-base">
 						{{ team.name }}
 					</span>

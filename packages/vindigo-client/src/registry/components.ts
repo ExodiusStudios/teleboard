@@ -8,6 +8,7 @@ import Pagination from '../components/Pagination.vue';
 import ProjectList from '../components/ProjectList.vue';
 import SectionTitle from '../components/SectionTitle.vue';
 import Spacer from '../components/Spacer.vue';
+import TeamIcon from '../components/TeamIcon.vue';
 import Toolbar from '../components/Toolbar.vue';
 import Vue from 'vue';
 
@@ -22,6 +23,7 @@ export function registerComponents() {
 	Vue.component('Pagination', Pagination);
 	Vue.component('FileUpload', FileUpload);
 	Vue.component('Draggable', Draggable);
+	Vue.component('TeamIcon', TeamIcon);
 	Vue.component('Toolbar', Toolbar);
 	Vue.component('Spacer', Spacer);
 	Vue.component('Avatar', Avatar);
