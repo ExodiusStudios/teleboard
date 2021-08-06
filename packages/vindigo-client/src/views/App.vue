@@ -1,7 +1,8 @@
 <template>
 	<w-app class="min-h-screen bg-light-1 dark:bg-dark-1 dark:text-gray-100">
 		<template v-if="isReady">
-			<authenticate v-if="shouldAuth" />
+			<maintenance v-if="hasMaintenance" />
+			<authenticate v-else-if="shouldAuth" />
 			<router-view v-else />
 		</template>
 
@@ -23,14 +24,19 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 import Authenticate from '../views/authenticate/Authenticate.vue';
+import Maintenance from './Maintenance.vue';
 
 export default Vue.extend({
 	name: "Vindigo",
 	components: {
+		Maintenance,
 		Authenticate
 	},
 
 	computed: {
+		hasMaintenance(): boolean {
+			return this.$config.maintenance;
+		},
 		shouldAuth(): boolean {
 			return !this.$vuex.state.isAuthed;
 		},

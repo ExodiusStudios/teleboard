@@ -3,6 +3,7 @@ import Draggable from 'vuedraggable';
 import FileUpload from '../components/FileUpload.vue';
 import LanguagePicker from '../components/LanguagePicker.vue';
 import LoadingSpinner from '../components/LoadingSpinner.vue';
+import Logo from '../components/Logo.vue';
 import Pagination from '../components/Pagination.vue';
 import ProjectList from '../components/ProjectList.vue';
 import SectionTitle from '../components/SectionTitle.vue';
@@ -24,4 +25,5 @@ export function registerComponents() {
 	Vue.component('Toolbar', Toolbar);
 	Vue.component('Spacer', Spacer);
 	Vue.component('Avatar', Avatar);
+	Vue.component('Logo', Logo);
 }
