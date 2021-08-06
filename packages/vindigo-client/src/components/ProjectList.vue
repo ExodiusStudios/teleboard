@@ -17,6 +17,7 @@
 						:key="project.id"
 						:to="project.projectUrl || '/'"
 						class="project-tile"
+						:style="tileStyle(project)"
 					>
 						<div class="project-tile__title">
 							{{ project.name }}
@@ -39,6 +40,7 @@
 <script lang="ts">
 import { chunk } from 'lodash';
 import Vue from 'vue';
+import { Project } from '../../../vindigo-server/dist/models/project';
 
 export default Vue.extend({
 	name: 'ProjectList',
@@ -79,6 +81,11 @@ export default Vue.extend({
 			const tabs = (this.$refs.tabs as any);
 
 			tabs.openTab({ _index: page });
+		},
+		tileStyle(project: Project): any {
+			return {
+				backgroundImage: `url(${project.coverImage})`
+			};
 		}
 	}
 });
@@ -102,7 +109,7 @@ export default Vue.extend({
 }
 
 .project-tile {
-	@apply h-32 bg-light-2 dark:bg-dark-2 rounded-xl p-4 col-span-12 laptop:col-span-6 desktop:col-span-3;
+	@apply h-32 bg-light-2 dark:bg-dark-2 rounded-xl p-4 col-span-12 laptop:col-span-6 desktop:col-span-3 bg-cover;
 
 	&__title {
 		@apply text-gray-700 dark:text-gray-200 font-bold;
