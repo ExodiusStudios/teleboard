@@ -1,6 +1,7 @@
+import { api, routing } from "../..";
+
 import { ActionTree } from "vuex";
 import { RootState } from "./state";
-import { api } from "../..";
 import gql from "graphql-tag";
 import { profileFragment } from "../../fragments";
 
@@ -89,6 +90,8 @@ export const storeActions: ActionTree<RootState, RootState> = {
 		`);
 
 		commit('storeProfile', null);
+
+		routing.instance.push('/explorer');
 	}
 
 };
