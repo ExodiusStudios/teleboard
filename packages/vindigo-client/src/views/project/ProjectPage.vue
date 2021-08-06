@@ -3,13 +3,134 @@
 		<sidebar class="bg-accent-4" />
 		<section class="flex flex-col flex-grow">
 			<toolbar class="project-toolbar pl-0">
-				<w-button
-					v-wave
-					class="mx-3 text-gray-700"
-					icon="mdi mdi-chevron-down"
-					to="#"
-					xl
-				/>
+				<w-menu
+					custom
+					align-left
+					hide-on-menu-click
+				>
+					<template #activator="{ on }">
+						<w-button
+							v-wave
+							class="mx-3 text-gray-700"
+							icon="mdi mdi-chevron-down"
+							to="#"
+							xl
+							v-on="on"
+						/>
+					</template>
+					<div class="list-menu">
+						<p class="list-menu__title">
+							{{ $t('PROJECT_OPTIONS') }}
+						</p>
+						<w-divider />
+						<div class="list-menu__list">
+							<div
+								class="list-menu__item flex items-center"
+								@click="settingsDialog = true"
+							>
+								<w-icon size="1.1rem">
+									mdi mdi-cog-outline
+								</w-icon>
+								<div class="pl-1">
+									<div>
+										Settings
+									</div>
+									<small class="text-gray-400 -mt-1 block">
+										Project management
+									</small>
+								</div>
+							</div>
+							<w-divider />
+							<router-link
+								to=""
+								class="list-menu__item"
+								tag="div"
+							>
+								<w-icon size="1.1rem">
+									mdi mdi-lightning-bolt
+								</w-icon>
+								Automation
+							</router-link>
+							<router-link
+								to=""
+								class="list-menu__item"
+								tag="div"
+							>
+								<w-icon size="1.1rem">
+									mdi mdi-tag-text
+								</w-icon>
+								Labels & Tags
+							</router-link>
+							<router-link
+								to=""
+								class="list-menu__item"
+								tag="div"
+							>
+								<w-icon size="1.1rem">
+									mdi mdi-directions-fork
+								</w-icon>
+								Copy project
+							</router-link>
+							<router-link
+								to=""
+								class="list-menu__item"
+								tag="div"
+							>
+								<w-icon size="1.1rem">
+									mdi mdi-book
+								</w-icon>
+								Archive
+							</router-link>
+							<router-link
+								to=""
+								class="list-menu__item"
+								tag="div"
+							>
+								<w-icon size="1.1rem">
+									mdi mdi-bell
+								</w-icon>
+								Notifications
+							</router-link>
+							<w-divider />
+							<div class="px-4 pb-1 text-dark-3 font-semibold flex items-center">
+								Members
+								<spacer />
+								<small class="text-gray-500 font-medium underline cursor-pointer">
+									Manage
+								</small>
+							</div>
+							<div class="px-3 pb-2 flex flex-wrap">
+								<avatar
+									v-for="i in 5"
+									:key="i"
+									class="-mr-2 block"
+									:profile="$vuex.state.profile"
+									:open-profile="true"
+									:size="30"
+								/>
+							</div>
+							<w-divider />
+							<div class="px-4 pb-1 text-dark-3 font-semibold flex items-center">
+								Teams
+								<spacer />
+								<small class="text-gray-500 font-medium underline cursor-pointer">
+									Manage
+								</small>
+							</div>
+							<div class="px-3 pb-2 flex flex-wrap">
+								<avatar
+									v-for="i in 2"
+									:key="i"
+									class="-mr-2 block"
+									:profile="$vuex.state.profile"
+									:open-profile="true"
+									:size="30"
+								/>
+							</div>
+						</div>
+					</div>
+				</w-menu>
+
 				<div class="flex flex-col">
 					<h1 class="font-bold">
 						{{ project.name }}
@@ -22,7 +143,7 @@
 
 				<template #creation-list>
 					<div
-						class="toolbar-menu__item"
+						class="list-menu__item"
 					>
 						<w-icon size="1.1rem">
 							mdi mdi-text-box-check
@@ -42,6 +163,11 @@
 				</transition>
 			</main>
 		</section>
+
+		<settings
+			v-model="settingsDialog"
+			:project="project"
+		/>
 	</section>
 </template>
 
@@ -51,6 +177,7 @@ import Vue from "vue";
 import { parseSlug, updateTitle } from '../../util';
 import { api } from '../..';
 import gql from 'graphql-tag';
+import Settings from './Settings.vue';
 
 async function fetchProjectData(id: number) {
 	const res = await api.query(gql`
@@ -69,8 +196,10 @@ async function fetchProjectData(id: number) {
 
 export default Vue.extend({
 	name: 'ProjectPage',
+
 	components: {
-		Sidebar
+		Sidebar,
+		Settings
 	},
 
 	async beforeRouteEnter(to, _from, next) {
@@ -91,7 +220,8 @@ export default Vue.extend({
 	},
 
 	data: () => ({
-		project: {} as any
+		project: {} as any,
+		settingsDialog: false
 	}),
 
 	mounted() {

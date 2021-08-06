@@ -115,18 +115,18 @@
 					v-on="on"
 				/>
 			</template>
-			<div class="toolbar-menu">
-				<p class="toolbar-menu__title">
+			<div class="list-menu">
+				<p class="list-menu__title">
 					{{ $t("TOOLBAR_CREATE") }}
 				</p>
 				<w-divider />
-				<div class="toolbar-menu__list">
+				<div class="list-menu__list">
 					<template v-for="(item, i) in creationItems">
 						<w-divider v-if="item == MENU_DIVIDER" :key="i" />
 						<div
 							v-else
 							:key="i"
-							class="toolbar-menu__item"
+							class="list-menu__item"
 							@click="item.handler"
 						>
 							<w-icon size="1.1rem">
@@ -170,15 +170,15 @@
 					/>
 				</div>
 			</template>
-			<div class="toolbar-menu">
-				<p class="toolbar-menu__title">
+			<div class="list-menu">
+				<p class="list-menu__title">
 					{{ $t("YOUR_ACCOUNT") }}
 				</p>
 				<w-divider />
-				<div class="toolbar-menu__list">
+				<div class="list-menu__list">
 					<router-link
 						:to="`/profile/${userID}`"
-						class="toolbar-menu__item"
+						class="list-menu__item"
 						tag="div"
 					>
 						<w-icon size="1.1rem">
@@ -187,7 +187,7 @@
 						{{ $t("YOUR_ACCOUNT_PROFILE") }}
 					</router-link>
 					<router-link
-						to="" class="toolbar-menu__item"
+						to="" class="list-menu__item"
 						tag="div"
 					>
 						<w-icon size="1.1rem">
@@ -196,7 +196,7 @@
 						{{ $t("YOUR_ACCOUNT_PROJECTS") }}
 					</router-link>
 					<router-link
-						to="" class="toolbar-menu__item"
+						to="" class="list-menu__item"
 						tag="div"
 					>
 						<w-icon size="1.1rem">
@@ -205,7 +205,7 @@
 						{{ $t("YOUR_ACCOUNT_TEAMS") }}
 					</router-link>
 					<router-link
-						to="" class="toolbar-menu__item"
+						to="" class="list-menu__item"
 						tag="div"
 					>
 						<w-icon size="1.1rem">
@@ -216,7 +216,7 @@
 					<w-divider />
 					<a
 						href="https://github.com/ExodiusStudios/vindigo"
-						class="toolbar-menu__item block"
+						class="list-menu__item block"
 						target="_blank"
 					>
 						<w-icon size="1.1rem">
@@ -229,7 +229,7 @@
 					</a>
 					<router-link
 						to="/settings"
-						class="toolbar-menu__item"
+						class="list-menu__item"
 						tag="div"
 					>
 						<w-icon size="1.1rem">
@@ -239,7 +239,7 @@
 					</router-link>
 					<w-divider />
 					<div
-						class="toolbar-menu__item text-red-400"
+						class="list-menu__item text-red-400"
 						@click="$store.dispatch('signOut')"
 					>
 						<w-icon size="1.1rem">
@@ -698,35 +698,6 @@ export default Vue.extend({
 
 	.o-drop__trigger {
 		@apply flex items-center;
-	}
-}
-
-.toolbar-menu {
-	@apply bg-white overflow-hidden rounded-xl pt-3 w-60;
-	@mixin emissive theme("colors.gray.400");
-
-	&__title {
-		@apply text-center mb-3 text-gray-800 font-semibold;
-	}
-
-	&__list {
-		@apply overflow-hidden pb-1;
-	}
-
-	&__item {
-		@apply px-3 py-2 cursor-pointer transition-colors text-gray-700 hover:bg-gray-100;
-
-		.w-icon {
-			@apply mt-[-3px] mr-1;
-		}
-
-		p {
-			@apply text-sm;
-		}
-	}
-
-	.w-divider {
-		@apply my-1 border-gray-200;
 	}
 }
 

@@ -58,4 +58,35 @@
 .dark {
 	@apply caret-gray-400;
 }
+
+/* Structural classes */
+
+.list-menu {
+	@apply bg-white overflow-hidden rounded-xl pt-3 w-60;
+	@mixin emissive theme("colors.gray.400");
+
+	&__title {
+		@apply text-center mb-3 text-gray-800 font-semibold;
+	}
+
+	&__list {
+		@apply overflow-hidden pb-1;
+	}
+
+	&__item {
+		@apply px-3 py-2 cursor-pointer transition-colors text-gray-700 hover:bg-gray-100;
+
+		.w-icon {
+			@apply mt-[-3px] mr-1;
+		}
+
+		p {
+			@apply text-sm;
+		}
+	}
+
+	.w-divider {
+		@apply my-1 border-gray-200;
+	}
+}
 </style>
