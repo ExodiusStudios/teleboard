@@ -17,6 +17,7 @@ export const storeActions: ActionTree<RootState, RootState> = {
 			query {
 				config {
 					instanceName
+					maintenance
 					allowRegister
 					allowAnonymous
 				}

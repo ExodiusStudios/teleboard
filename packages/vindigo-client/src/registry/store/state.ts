@@ -50,6 +50,7 @@ export function registerState() {
 			},
 			config: {
 				instanceName: '',
+				maintenance: false,
 				allowAnonymous: false,
 				allowRegister: false
 			}

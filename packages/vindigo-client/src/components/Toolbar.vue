@@ -14,13 +14,7 @@
 		/>
 
 		<slot>
-			<router-link to="/">
-				<img
-					:src="logoUrl"
-					class="h-10 select-none"
-					@dragstart.prevent
-				>
-			</router-link>
+			<logo />
 		</slot>
 
 		<spacer />
@@ -459,11 +453,6 @@ export default Vue.extend({
 	computed: {
 		...mapState(["isWaiting"]),
 
-		logoUrl(): boolean {
-			return this.$store.state.isDark
-				? require("/src/assets/vindigo-white.svg")
-				: require("/src/assets/vindigo-black.svg");
-		},
 		userID(): Optional<Number> {
 			return this.$vuex.state.profile?.id;
 		},

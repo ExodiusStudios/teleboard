@@ -87,5 +87,8 @@
 
 	"NOTIFICATION_CREATE_PROJECT": "Project {0} aangemaakt",
 	"NOTIFICATION_CREATE_TEAM": "Team {0} aangemaakt",
-	"NOTIFICATION_INVALID_DETAILS": "Ongeldige gegevens"
+	"NOTIFICATION_INVALID_DETAILS": "Ongeldige gegevens",
+
+	"MAINTENANCE_TITLE": "Website in onderhoud",
+	"MAINTENANCE_DESC": "Deze installatie van Vindigo is momenteel in onderhoudsmodus. Je bent straks weer welkom."
 }
