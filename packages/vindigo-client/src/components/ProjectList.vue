@@ -88,13 +88,23 @@ export default Vue.extend({
 			tabs.openTab({ _index: page });
 		},
 		tileStyle(project: any): any {
-			return {
-				backgroundImage: project.coverImage ? `url(${project.coverImage})` : undefined
+			const cover = project.coverImage;
+			
+			if(!cover) return;
+
+			return cover.startsWith('#') ? {
+				backgroundColor: cover
+			} : {
+				backgroundImage: `url(${cover})`
 			};
 		},
 		tileClass(project: any): any {
+			const cover = project.coverImage;
+			const isColor = !!cover && cover.startsWith('#');
+
 			return {
-				'project-tile--cover': !!project.coverImage
+				'project-tile--cover': cover,
+				'project-tile--color': isColor,
 			};
 		}
 	}
@@ -125,13 +135,17 @@ export default Vue.extend({
 		@apply text-gray-700 dark:text-gray-200 font-bold;
 	}
 
+	.project-tile__overlay {
+		@apply absolute inset-0 bg-black bg-opacity-0 transition-colors;
+	}
+
+	&:hover .project-tile__overlay {
+		@apply bg-opacity-25;
+	}
+
 	&--cover {
 		.project-tile__cover {
 			@apply absolute inset-0 bg-center bg-cover transition-transform;
-		}
-
-		.project-tile__overlay {
-			@apply absolute inset-0 bg-black bg-opacity-20 transition-colors;
 		}
 
 		.project-tile__title {
@@ -140,14 +154,18 @@ export default Vue.extend({
 			text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6), 1px 1px 9px rgba(75, 75, 75, 0.5);
 		}
 
-		&:hover {
-			.project-tile__cover {
-				@apply scale-105;
-			}
+		.project-tile__overlay {
+			@apply bg-opacity-20;
+		}
 
-			.project-tile__overlay {
-				@apply bg-opacity-25;
-			}
+		&:hover .project-tile__cover {
+			@apply scale-105;
+		}
+	}
+
+	&--color {
+		.project-tile__overlay {
+			@apply bg-opacity-0;
 		}
 	}
 }
