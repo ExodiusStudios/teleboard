@@ -9,6 +9,9 @@ dist/
 # Data directory
 data/
 
+# Prisma directory (generated)
+prisma/
+
 # Log files
 npm-debug.log*
 yarn-debug.log*

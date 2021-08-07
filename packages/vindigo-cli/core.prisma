@@ -1,0 +1,7 @@
+model Profile {
+	id			String @id
+	firstName	String
+	lastName	String
+	fullName	String
+	email		String
+}

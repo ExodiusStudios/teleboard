@@ -6,6 +6,7 @@ import path, { basename } from "path";
 
 import chalk from 'chalk';
 import consola from "consola";
+import { generatePrisma } from '../util/prisma';
 
 export async function handleMigrateMake(args: any) {
 	assertInWorkingDirectory();
@@ -91,6 +92,17 @@ export async function handleMigrateStatus() {
 
 	consola.info(chalk`Currently at: {greenBright ${current}}`);
 	process.exit(0);
+}
+
+export async function handleMigrateGenerate() {
+	const then = Date.now();
+
+	consola.info('Generating database schema...');
+
+	await generatePrisma();
+	const diff = Date.now() - then;
+
+	consola.success(`Generation complete (${diff}ms)`);
 }
 
 function buildConnection({ database }: IServerConfig): Knex.StaticConnectionConfig {

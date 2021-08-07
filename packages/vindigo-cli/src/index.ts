@@ -1,4 +1,4 @@
-import { handleMigrateDown, handleMigrateMake, handleMigrateStatus, handleMigrateUp } from './handler/migrate';
+import { handleMigrateDown, handleMigrateGenerate, handleMigrateMake, handleMigrateStatus, handleMigrateUp } from './handler/migrate';
 
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
@@ -97,6 +97,11 @@ yargs
 		command: 'migrate:status',
 		describe: 'Display migration information',
 		handler: handleMigrateStatus
+	})
+	.command({
+		command: 'migrate:generate',
+		describe: 'Generate required code files',
+		handler: handleMigrateGenerate
 	})
 	.help()
 	.demandCommand()
