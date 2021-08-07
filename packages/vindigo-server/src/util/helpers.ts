@@ -77,7 +77,9 @@ export async function pollDatabase(logger: Consola, options: {driver: string, ho
  * @returns Result
  */
 export function hasField(info: GraphQLResolveInfo, field: string): boolean {
-	return getFieldNames(info).some(f => f.startsWith(field));
+	return getFieldNames(info).some(f =>
+		f == field || f.startsWith(field + '.')
+	);
 }
 
 /**

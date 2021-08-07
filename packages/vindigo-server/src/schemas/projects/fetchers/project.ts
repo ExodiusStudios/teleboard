@@ -11,8 +11,12 @@ import { hasField } from "../../../util/helpers";
 export function getProjectRelations(info: GraphQLResolveInfo): string[] {
 	const relations = [];
 
-	if(hasField(info, 'members.')) {
+	if(hasField(info, 'members')) {
 		relations.push('members');
+	}
+
+	if(hasField(info, 'teams')) {
+		relations.push('teams');
 	}
 
 	return relations;

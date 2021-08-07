@@ -90,11 +90,10 @@
 							</div>
 							<div class="px-3 pb-2 flex flex-wrap">
 								<avatar
-									v-for="i in 5"
-									:key="i"
+									v-for="{ member } in project.members"
+									:key="member.id"
 									class="-mr-2 block"
-									:profile="$vuex.state.profile"
-									:open-profile="true"
+									:profile="member"
 									:size="30"
 								/>
 							</div>
@@ -106,12 +105,11 @@
 								</small>
 							</div>
 							<div class="px-3 pb-2 flex flex-wrap">
-								<avatar
-									v-for="i in 2"
-									:key="i"
-									class="-mr-2 block"
-									:profile="$vuex.state.profile"
-									:open-profile="true"
+								<team-icon
+									v-for="{ team } in project.teams"
+									:key="team.id"
+									class="mr-1 block"
+									:team="team"
 									:size="30"
 								/>
 							</div>
@@ -166,6 +164,7 @@ import { parseSlug, updateTitle } from '../../util';
 import { api } from '../..';
 import gql from 'graphql-tag';
 import Settings from './Settings.vue';
+import { profileFragment, teamFragment } from '../../fragments';
 
 async function fetchProjectData(id: number) {
 	const res = await api.query(gql`
@@ -175,8 +174,20 @@ async function fetchProjectData(id: number) {
 				name
 				coverImage
 				projectUrl
+				members {
+					member {
+						...AllProfileFields
+					}
+				}
+				teams {
+					team {
+						...AllTeamFields		
+					}
+				}
 			}
 		}
+		${profileFragment}
+		${teamFragment}
 	`, { pid: id });
 
 	return res.project;

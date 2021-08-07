@@ -44,7 +44,7 @@ export default Vue.extend({
 			return this.openTeam ? `router-link` : 'span';
 		},
 		teamUrl(): Optional<string> {
-			return `/profile/${this.team.id}`;
+			return `/team/${this.team.id}`;
 		},
 		teamAbbr(): string {
 			return this.team.name
@@ -81,6 +81,6 @@ export default Vue.extend({
 }
 
 .team__placeholder {
-	@apply bg-gray-100 flex items-center justify-center font-bold dark:bg-dark-2 w-full h-full;
+	@apply bg-light-3 flex items-center justify-center font-bold dark:bg-dark-2 w-full h-full;
 }
 </style>

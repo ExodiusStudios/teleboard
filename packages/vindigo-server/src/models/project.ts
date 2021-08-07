@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 import { ProjectMember } from "./projectMember";
+import { ProjectTeam } from "./projectTeam";
 
 @Entity('projects')
 export class Project extends BaseEntity {
@@ -40,5 +41,8 @@ export class Project extends BaseEntity {
 
 	@OneToMany(() => ProjectMember, member => member.project)
 	public members: ProjectMember[];
+
+	@OneToMany(() => ProjectTeam, team => team.project)
+	public teams: ProjectTeam[];
 
 }

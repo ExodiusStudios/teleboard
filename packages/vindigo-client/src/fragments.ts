@@ -1,7 +1,7 @@
 import { gql } from "graphql-tag";
 
 /**
- * The user profile fragment
+ * All fields on profile
  */
 export const profileFragment = gql`
 	fragment AllProfileFields on Profile {
@@ -12,6 +12,21 @@ export const profileFragment = gql`
 		fullName
 		firstName
 		role
+	}
+`;
+
+/**
+ * All fields on team
+ */
+export const teamFragment = gql`
+	fragment AllTeamFields on Team {
+		id
+		slug
+		name
+		description
+		createdAt
+		logoImage
+		teamUrl
 	}
 `;
 
