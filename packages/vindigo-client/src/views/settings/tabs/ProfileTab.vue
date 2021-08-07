@@ -37,7 +37,7 @@
 		/>
 
 		<w-button class="mt-5 -ml-0" @click="saveUserProfile">
-			Opslaan
+			{{ $t("SETTINGS_PROFILE_SAVE") }}
 			<w-icon class="ml-2">
 				mdi mdi-content-save
 			</w-icon>
