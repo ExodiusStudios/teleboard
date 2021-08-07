@@ -215,7 +215,7 @@
 					</router-link>
 					<w-divider />
 					<router-link
-						v-show="user.role == 'admin'"
+						v-show="admin"
 						to="/admin"
 						class="list-menu__item"
 						tag="div"
@@ -424,7 +424,6 @@ import { gql } from "@apollo/client/core";
 import { MENU_DIVIDER, ToolbarCreationItem } from "../helpers";
 import { debounce, sum, values } from "lodash";
 import { mapState } from "vuex";
-import { Profile } from "../model/profile";
 
 interface SearchInterface {
 	projects: object[];
@@ -465,14 +464,14 @@ export default Vue.extend({
 	computed: {
 		...mapState(["isWaiting"]),
 
-		user(): Optional<Profile> {
-			return this.$vuex.state.profile;
-		},
 		userID(): Optional<Number> {
-			return this.user?.id;
+			return this.$vuex.state.profile?.id;
 		},
 		userName(): Optional<string> {
-			return this.user?.fullName;
+			return this.$vuex.state.profile?.fullName;
+		},
+		admin(): boolean {
+			return this.$vuex.state.profile?.role == 'admin';
 		},
 		waiterClass(): any {
 			return {
