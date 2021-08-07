@@ -81,6 +81,14 @@ export default Vue.extend({
 
 		&:first-child {
 			@apply bg-accent-5;
+
+			img {
+				@apply transition-transform;
+			}
+
+			&:hover img {
+				@apply transform scale-110;
+			}
 		}
 	}
 

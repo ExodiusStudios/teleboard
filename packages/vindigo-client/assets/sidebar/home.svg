@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="100%" height="100%" viewBox="0 0 238 238" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g transform="matrix(1.06668,0,0,1.06668,0.0434159,4.88498e-14)">
-        <path fill="white" d="M209.918,59.956C217.908,75.297 222.426,92.732 222.426,111.213C222.426,172.593 172.593,222.426 111.213,222.426C49.833,222.426 0,172.593 0,111.213C0,49.833 49.833,0 111.213,0C137.729,0 162.091,9.3 181.205,24.81C135.8,61.579 104.744,133.265 104.744,133.265C77.338,94.684 62.014,98.876 62.014,98.876C49.626,115.429 35.527,132.654 35.527,132.654C85.332,146.068 110.068,189.708 110.068,189.708C141.178,115.001 185.496,76.574 209.918,59.956Z" />
+    <g transform="matrix(0.97914,0,0,0.97914,0,-0.0434159)">
+        <circle cx="121.2" cy="121.2" r="121.2" style="fill:white;"/>
     </g>
+    <g transform="matrix(0.953903,0,0,0.953903,12.9136,12.542)">
+        <path d="M209.918,59.956C217.908,75.297 222.426,92.732 222.426,111.213C222.426,172.593 172.593,222.426 111.213,222.426C49.833,222.426 0,172.593 0,111.213C0,49.833 49.833,0 111.213,0C137.729,0 162.091,9.3 181.205,24.81C135.8,61.579 104.744,133.265 104.744,133.265C77.338,94.684 62.014,98.876 62.014,98.876C49.626,115.429 35.527,132.654 35.527,132.654C85.332,146.068 110.068,189.708 110.068,189.708C141.178,115.001 185.496,76.574 209.918,59.956Z" style="fill:url(#_Linear1);"/>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.36197e-14,222.426,-222.426,1.36197e-14,111.213,0)"><stop offset="0" style="stop-color:rgb(0,201,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(106,66,255);stop-opacity:1"/></linearGradient>
+    </defs>
 </svg>
