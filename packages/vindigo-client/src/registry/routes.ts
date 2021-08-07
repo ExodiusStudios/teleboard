@@ -1,8 +1,8 @@
 import ExplorerPage from '../views/explorer/ExplorerPage.vue';
 import HomePage from '../views/home/HomePage.vue';
 import KanbanPage from '../views/project/kanban/KanbanOverview.vue';
-import ProfilePage from '../views/profile/ProfilePage.vue';
 import OverviewPage from '../views/project/overview/ProjectOverview.vue';
+import ProfilePage from '../views/profile/ProfilePage.vue';
 import ProjectPage from '../views/project/ProjectPage.vue';
 import SettingsPage from '../views/settings/Settings.vue';
 import TasksPage from '../views/project/tasks/TasksOverview.vue';
@@ -91,13 +91,23 @@ export function registerRoutes() {
 		},
 		children: [
 			{
+				path: 'home',
+				name: 'Home',
+				redirect: '/',
+				meta: {
+					name: 'VIEW_HOME',
+					icon: require('/assets/sidebar/home.svg'),
+					order: 0
+				}
+			},
+			{
 				path: 'overview',
 				name: 'Project Overview',
 				component: OverviewPage,
 				meta: {
-					name: 'VIEW_HOME',
-					icon: 'mdi-home',
-					order: 0
+					name: 'VIEW_OVERVIEW',
+					icon: require('/assets/sidebar/overview.svg'),
+					order: 1
 				}
 			},
 			{
@@ -106,8 +116,8 @@ export function registerRoutes() {
 				component: TasksPage,
 				meta: {
 					name: 'VIEW_TASKS',
-					icon: 'mdi-format-list-bulleted-square',
-					order: 1
+					icon: require('/assets/sidebar/tasks.svg'),
+					order: 2
 				}
 			},
 			{
@@ -116,8 +126,8 @@ export function registerRoutes() {
 				component: KanbanPage,
 				meta: {
 					name: 'VIEW_KANBAN',
-					icon: 'mdi-view-column',
-					order: 2,
+					icon: require('/assets/sidebar/kanban.svg'),
+					order: 3,
 					creation: [
 						{
 							icon: 'mdi mdi-eye',
@@ -134,8 +144,8 @@ export function registerRoutes() {
 				component: undefined,
 				meta: {
 					name: 'VIEW_CALENDAR',
-					icon: 'mdi-calendar-blank',
-					order: 3
+					icon: require('/assets/sidebar/calendar.svg'),
+					order: 4
 				}
 			},
 			{
@@ -144,8 +154,8 @@ export function registerRoutes() {
 				component: undefined,
 				meta: {
 					name: 'VIEW_WHITEBOARD',
-					icon: 'mdi-brush',
-					order: 4
+					icon: require('/assets/sidebar/whiteboard.svg'),
+					order: 5
 				}
 			}
 		]

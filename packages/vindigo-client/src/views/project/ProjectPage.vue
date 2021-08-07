@@ -13,7 +13,6 @@
 							v-wave
 							class="mx-3 text-gray-700"
 							icon="mdi mdi-chevron-down"
-							to="#"
 							xl
 							v-on="on"
 						/>
@@ -67,16 +66,6 @@
 								tag="div"
 							>
 								<w-icon size="1.1rem">
-									mdi mdi-directions-fork
-								</w-icon>
-								Copy project
-							</router-link>
-							<router-link
-								to=""
-								class="list-menu__item"
-								tag="div"
-							>
-								<w-icon size="1.1rem">
 									mdi mdi-book
 								</w-icon>
 								Archive
@@ -109,7 +98,6 @@
 									:size="30"
 								/>
 							</div>
-							<w-divider />
 							<div class="px-4 pb-1 text-dark-3 font-semibold flex items-center">
 								Teams
 								<spacer />

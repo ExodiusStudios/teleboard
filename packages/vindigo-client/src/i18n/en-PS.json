@@ -44,7 +44,8 @@
 	"HOMEPAGE_NO_PROJECTS_DESC": "Press the button below to create yer first prject",
 	"HOMEPAGE_TEAM_NO_PROJECTS": "This crew have'th no prjects yet",
 
-	"VIEW_HOME": "Prject overview",
+	"VIEW_HOME": "Home",
+	"VIEW_OVERVIEW": "Overview",
 	"VIEW_TASKS": "Tasks",
 	"VIEW_KANBAN": "Kanban",
 	"VIEW_CALENDAR": "Calendar",

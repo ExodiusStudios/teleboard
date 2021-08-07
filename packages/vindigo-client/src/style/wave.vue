@@ -140,4 +140,13 @@
 	}
 }
 
+/** Tooltips */
+.w-tooltip {
+	@apply bg-dark border-dark border-opacity-70 bg-opacity-70 border-none text-white py-0.5;
+	
+	&::after {
+		@apply hidden;
+	}
+}
+
 </style>

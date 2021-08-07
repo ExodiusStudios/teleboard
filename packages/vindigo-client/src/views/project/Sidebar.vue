@@ -5,20 +5,25 @@
 			:style="offsetActiveRoute"
 		/>
 		<ol class="sidebar__container">
-			<router-link
+			<w-tooltip
 				v-for="(item, index) in listItems"
 				:key="index"
-				:to="item.href"
+				class="sidebar__item"
+				right
 			>
-				<li
-					class="sidebar__item"
-					@click="currentIndex = item.rank"
-				>
-					<w-icon xl class="text-white">
-						mdi {{ item.icon }}
-					</w-icon>
-				</li>
-			</router-link>
+				<template #activator="{ on }">
+					<router-link
+						:to="item.href"
+						tag="li"
+						@click="currentIndex = item.rank"
+					>
+						<div class="sidebar__item-inner" v-on="on">
+							<img :src="item.icon" class="w-7 h-7">
+						</div>
+					</router-link>
+				</template>
+				{{ $t(item.name) }}
+			</w-tooltip>
 		</ol>
 	</nav>
 </template>
@@ -50,6 +55,7 @@ export default Vue.extend({
 		// initializing list items
 		this.listItems = _.chain(route.children)
 			.map((child) => ({
+				name: child.meta?.name,
 				icon: child.meta?.icon,
 				rank: child.meta?.order,
 				href: child.path
@@ -71,7 +77,15 @@ export default Vue.extend({
 	}
 
 	&__item {
-		@apply py-1 w-14 h-14 flex items-center justify-center cursor-pointer transition-colors hover:bg-accent-5;
+		@apply cursor-pointer transition-colors hover:bg-accent-5;
+
+		&:first-child {
+			@apply bg-accent-5;
+		}
+	}
+
+	&__item-inner {
+		@apply py-1 w-14 h-14 flex items-center justify-center;
 	}
 
 }

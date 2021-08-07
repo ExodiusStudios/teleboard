@@ -44,7 +44,8 @@
 	"HOMEPAGE_NO_PROJECTS_DESC": "Press the the button below to create your first project",
 	"HOMEPAGE_TEAM_NO_PROJECTS": "This team has no projects yet",
 
-	"VIEW_HOME": "Project overview",
+	"VIEW_HOME": "Home",
+	"VIEW_OVERVIEW": "Overview",
 	"VIEW_TASKS": "Tasks",
 	"VIEW_KANBAN": "Kanban",
 	"VIEW_CALENDAR": "Calendar",
