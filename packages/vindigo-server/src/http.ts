@@ -233,7 +233,12 @@ export class HTTPService {
 	 * Register the file upload endpoints
 	 */
 	private registerUploads() {
-		const uploader = fileUpload();
+		const uploader = fileUpload({
+			abortOnLimit: true,
+			limits: {
+				fileSize: 5 * 1024 * 1024
+			}
+		});
 
 		this.express.post('/upload/avatar', uploader, new UploadAvatarController().build());
 	}
