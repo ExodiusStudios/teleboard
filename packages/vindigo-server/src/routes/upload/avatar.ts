@@ -1,9 +1,10 @@
+import { basename, dirname, join } from "path";
+import { bucketPath, saveToBucket } from "../../util/helpers";
+import { readdirSync, rmdirSync, unlinkSync } from "fs";
+
 import { ApiError } from "../../util/errors";
 import { Controller } from "../controller";
 import { UploadedFile } from "express-fileupload";
-import { bucketPath, saveToBucket } from "../../util/helpers";
-import { basename, dirname, join } from "path";
-import { fstat, readdirSync, rmdirSync, unlink, unlinkSync } from "fs";
 
 export default class UploadAvatarController extends Controller {
 
@@ -17,9 +18,9 @@ export default class UploadAvatarController extends Controller {
 		}
 
 		// delete old profile picture if they have one
-		const old = this.user.avatar
+		const old = this.user.avatar;
 
-		if(old != undefined) {
+		if(old) {
 			const oldFile = basename(old);
 			const oldPath = join('./data/public/avatar', `${oldFile.substr(0, 2)}`, oldFile);
 			const oldDir = dirname(oldPath);
@@ -34,7 +35,7 @@ export default class UploadAvatarController extends Controller {
 
 		const file = this.req.files.file as UploadedFile;
 		await saveToBucket('./data/public/avatar', file);
-		
+	
 		this.user.avatar = join('/data/avatar', bucketPath(file));
 
 		await this.user.save();

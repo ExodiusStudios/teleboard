@@ -1,10 +1,11 @@
-import { Consola } from "consola";
-import { UploadedFile } from "express-fileupload";
+import { dirname, join } from "path";
 import { existsSync, mkdirSync } from "fs";
+
+import { Consola } from "consola";
 import { GraphQLResolveInfo } from "graphql";
+import { UploadedFile } from "express-fileupload";
 import getFieldNames from 'graphql-list-fields';
 import { last } from "lodash";
-import { dirname, join } from "path";
 import waitOn from "wait-on";
 
 const awaitableDatabases: string[] = [
@@ -101,7 +102,6 @@ export function bucketPath(file: UploadedFile): string {
  * @returns the full path of the saved file
  */
 export async function saveToBucket(location: string, file: UploadedFile): Promise<string> {
-
 	const bucketLocation = bucketPath(file);
 	const fileLocation = join(location, bucketLocation);
 

@@ -233,7 +233,9 @@ export class HTTPService {
 	 * Register the file upload endpoints
 	 */
 	private registerUploads() {
-		this.express.post('/upload/avatar', fileUpload(), new UploadAvatarController().build());
+		const uploader = fileUpload();
+
+		this.express.post('/upload/avatar', uploader, new UploadAvatarController().build());
 	}
 }
 
