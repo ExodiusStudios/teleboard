@@ -4,12 +4,10 @@
 			<img
 				v-if="imgSrc"
 				:src="imgSrc"
-				:style="imgStyle"
 				class="team__img"
 			>
 			<div
 				v-else
-				:style="imgStyle"
 				class="team__placeholder"
 			>
 				{{ teamAbbr }}

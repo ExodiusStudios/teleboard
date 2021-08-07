@@ -92,6 +92,22 @@ export const storeActions: ActionTree<RootState, RootState> = {
 		commit('storeProfile', null);
 
 		routing.instance.push('/explorer');
-	}
+	},
+
+	/**
+	 * Refresh the current users profile
+	 */
+	async updateProfile({ commit }) {
+		const result = await api.query(gql`
+			query {
+				profile {
+					...AllProfileFields
+				}
+			}
+			${profileFragment}
+		`);
+
+		commit('storeProfile', result.profile);
+	},
 
 };

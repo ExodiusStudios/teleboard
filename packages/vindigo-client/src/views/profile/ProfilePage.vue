@@ -38,8 +38,10 @@ export default Vue.extend({
 		showPreview(preview: string) {
 			this.preview = preview;
 		},
-		uploadAvatar() {
-			api.upload('avatar', this.avatar!);
+		async uploadAvatar() {
+			await api.upload('avatar', this.avatar!);
+
+			this.$store.dispatch('updateProfile');
 		}
 	}
 });
