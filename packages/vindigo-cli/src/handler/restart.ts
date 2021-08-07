@@ -2,12 +2,15 @@ import { ENTRYPOINT, SCRIPT_NAME, assertConfigExists, assertInWorkingDirectory, 
 import pm2, { ProcessDescription, StartOptions } from 'pm2';
 
 import chalk from "chalk";
+import { checkForUpdates } from "../util/updater";
 import consola from "consola";
 
-export function handleRestart() {
+export async function handleRestart() {
 	assertInWorkingDirectory();
 	assertConfigExists();
 	assertServerDist();
+
+	await checkForUpdates();
 	
 	pm2.connect((err: any) => {
 		if(err) {
