@@ -15,7 +15,7 @@ export class ProjectMember extends BaseEntity {
 	@ManyToOne(() => Project, project => project.members)
 	public project: Project;
 
-	@ManyToOne(() => User, user => user.projects, { eager: true })
+	@ManyToOne(() => User, user => user.projects)
 	public member: User;
 
 	@Column()
