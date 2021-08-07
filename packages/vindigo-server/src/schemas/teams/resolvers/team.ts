@@ -8,5 +8,27 @@ export default {
 	},
 	teamUrl: async (team) => {
 		return '/team/' + composeSlug(team);
-	}
+	},
+	members: async (team) => {
+		const part = await Team.findOne({
+			select: ['id'],
+			relations: ['members'],
+			where: {
+				id: team.id
+			}
+		});
+
+		return part?.members;
+	},
+	projects: async (team) => {
+		const part = await Team.findOne({
+			select: ['id'],
+			relations: ['projects'],
+			where: {
+				id: team.id
+			}
+		});
+
+		return part?.projects;
+	},
 } as GraphQLResolvers<Team>;
