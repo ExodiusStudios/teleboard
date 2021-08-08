@@ -1,13 +1,14 @@
 import { GraphQLResolvers } from "../../../http";
-import { Like } from "typeorm";
 import { SearchRequest } from "./query";
-import { User } from "../../../models/user";
+import { database } from "../../..";
 
 export default {
 	users: async (request) => {
-		return await User.find({
-			where: { 
-				name: Like(`%${request.query}%`) 
+		return database.user.findMany({
+			where: {
+				name: {
+					contains: request.query
+				}
 			}
 		});
 	}

@@ -1,7 +1,7 @@
 import { InvalidArgumentError, MissingSessionError, NoPermissionError } from "../../../util/errors";
 
 import { GraphQLResolvers } from "../../../http";
-import { Team } from "../../../models/team";
+import { database } from "../../..";
 
 export default {
 	createTeam: async (_, { details }, ctx) => {
@@ -16,23 +16,28 @@ export default {
 			throw new InvalidArgumentError("Name cannot exceed 32 characters");
 		}
 
-		const team = new Team();
-
-		// Save project details
-		team.name = name;
-		team.createdAt = new Date();
-		team.description = description || '';
-		team.creatorId = ctx.user.id;
-		team.members = [ctx.user];
-		
-		return await team.save();
+		return database.team.create({
+			data: {
+				name: name,
+				createdAt: new Date(),
+				description: description || '',
+				creatorId: ctx.user.id,
+				members: {
+					create: {
+						member: {
+							connect: ctx.user
+						}
+					}
+				}
+			}
+		});
 	},
 	deleteTeam: async (_, { id }, ctx) => {
 		if(!ctx.user) {
 			throw new MissingSessionError();
 		}
 
-		const team = await Team.findOne({
+		const team = await database.team.findFirst({
 			where: {
 				id: id,
 				creatorId: ctx.user.id
@@ -43,11 +48,10 @@ export default {
 			throw new NoPermissionError();
 		}
 
-		await Team.remove(team);
-
-		// See https://github.com/typeorm/typeorm/issues/4058
-		team.id = id;
-		
-		return team;
+		return database.team.delete({
+			where: {
+				id: team.id
+			}
+		});
 	}
 } as GraphQLResolvers;

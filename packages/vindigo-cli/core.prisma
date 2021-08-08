@@ -1,34 +1,42 @@
+model Session {
+    id        String   @id
+    sid       String   @unique
+    data      String
+    expiresAt DateTime
+
+    @@map(name: "sessions")
+}
+
 model User {
-    id         Int             @id
-    username   String?
-    email      String?
-    password   String?
+    id         Int             @id @default(autoincrement())
+    username   String
+    email      String
+    password   String
     avatar     String?
     bio        String?
-    name       String?
-    role       String?
-    language   String?
+    name       String
+    role       String
+    language   String
     createdAt  DateTime
     lastSeenAt DateTime
-    isEnabled  Boolean?
-    isVerified Boolean?
+    isEnabled  Boolean
+    isVerified Boolean
     projects   ProjectMember[]
     teams      TeamMember[]
     created    Project[]
 
     @@map(name: "users")
-    Team Team[]
 }
 
 model Project {
-    id              Int             @id
-    name            String?
+    id              Int             @id @default(autoincrement())
+    name            String
     description     String?
     coverImage      String?
     backgroundImage String?
-    isVisible       Boolean?
-    isClosed        Boolean?
-    isPublic        Boolean?
+    isVisible       Boolean
+    isClosed        Boolean
+    isPublic        Boolean
     createdAt       DateTime
     lastModifiedAt  DateTime
     creatorId       Int
@@ -40,10 +48,10 @@ model Project {
 }
 
 model ProjectMember {
-    id          Int     @id
+    id          Int     @id @default(autoincrement())
     memberId    Int
     projectId   Int
-    accessLevel String?
+    accessLevel String
     project     Project @relation(fields: [projectId], references: [id])
     member      User    @relation(fields: [memberId], references: [id])
 
@@ -51,10 +59,10 @@ model ProjectMember {
 }
 
 model ProjectTeam {
-    id          Int     @id
+    id          Int     @id @default(autoincrement())
     teamId      Int
     projectId   Int
-    accessLevel String?
+    accessLevel String
     project     Project @relation(fields: [projectId], references: [id])
     team        Team    @relation(fields: [teamId], references: [id])
 
@@ -62,11 +70,11 @@ model ProjectTeam {
 }
 
 model Task {
-    id             Int      @id
+    id             Int      @id @default(autoincrement())
     parentId       Int?
     createdAt      DateTime
     lastModifiedAt DateTime
-    summary        String?
+    summary        String
     description    String?
     parent         Task?    @relation("parent", fields: [parentId], references: [id])
     children       Task[]   @relation("parent")
@@ -75,25 +83,24 @@ model Task {
 }
 
 model TeamMember {
-    id       Int  @id
+    id       Int  @id @default(autoincrement())
     memberId Int
     teamId   Int
-    users    User @relation(fields: [memberId], references: [id])
-    teams    Team @relation(fields: [teamId], references: [id])
+    member   User @relation(fields: [memberId], references: [id])
+    team     Team @relation(fields: [teamId], references: [id])
 
     @@map(name: "team_members")
 }
 
 model Team {
-    id           Int           @id
-    name         String?
-    description  String?
-    logoImage    String?
-    createdAt    DateTime
-    creatorId    Int
-    users        User          @relation(fields: [creatorId], references: [id])
-    projectTeams ProjectTeam[]
-    teamMembers  TeamMember[]
+    id          Int           @id @default(autoincrement())
+    name        String
+    description String?
+    logoImage   String?
+    createdAt   DateTime
+    creatorId   Int
+    projects    ProjectTeam[]
+    members     TeamMember[]
 
     @@map(name: "teams")
 }

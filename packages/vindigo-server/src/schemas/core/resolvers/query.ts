@@ -1,7 +1,8 @@
+import { config, database } from "../../..";
+import { fetchProfileById, fetchProfileByUsername } from "../fetchers/profile";
+
 import { GraphQLResolvers } from "../../../http";
 import { InvalidArgumentError } from "../../../util/errors";
-import { User } from "../../../models/user";
-import { config } from "../../..";
 
 export interface SearchRequest {
 	query: string;
@@ -20,21 +21,23 @@ export default {
 		const user = ctx.user;
 
 		if(user) {
-			user.lastSeenAt = new Date();
-			user.save();
+			database.user.update({
+				where: {
+					id: user.id
+				},
+				data: {
+					lastSeenAt: new Date()
+				}
+			});
 		}
 
 		return user;
 	},
 	profileById: async (_, { id }) => {
-		return User.findOne(id);
+		return fetchProfileById(id);
 	},
 	profileByName: async (_, { username }) => {
-		return User.findOne({
-			where: {
-				username: username
-			}
-		});
+		return fetchProfileByUsername(username);
 	},
 	search: async (_, args) => {
 		if(args.query.length < 3) {

@@ -1,14 +1,13 @@
 import { MissingSessionError, NotImplementedError } from "../../../util/errors";
 
-import { FindConditions } from "typeorm";
 import { GraphQLResolvers } from "../../../http";
-import { Project } from "../../../models/project";
-import { Task } from "../../../models/task";
+import { Prisma } from "@prisma/client";
+import { database } from "../../..";
 import { parseTakeSize } from "../../../util/http";
 
 export default {
-	projects: async (_, { mode, skip, take }, ctx, info) => {
-		let filter: FindConditions<Project>;
+	projects: async (_, { mode, skip, take }, ctx) => {
+		let filter: Prisma.ProjectWhereInput;
 
 		switch(mode) {
 			case 'OWNING': {
@@ -28,7 +27,11 @@ export default {
 				}
 
 				filter = {
-					creatorId: ctx.user.id
+					members: {
+						some: {
+							member: ctx.user
+						}
+					}
 				};
 
 				break;
@@ -47,18 +50,24 @@ export default {
 			}
 		}
 
-		return await Project.find({
+		return database.project.findMany({
 			where: filter,
 			skip: skip,
 			take: parseTakeSize(take, 50)
 		});
 	},
 	project: async (_, { id }, _ctx) => {
-		const ret = await Project.findOne(id);
-
-		return ret;
+		return database.project.findUnique({
+			where: {
+				id: id
+			}
+		});
 	},
 	task: async (_, { id }) => {
-		return Task.findOne(id);
+		return database.task.findUnique({
+			where: {
+				id: id
+			}
+		});
 	}
 } as GraphQLResolvers;

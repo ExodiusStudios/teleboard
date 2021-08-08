@@ -1,13 +1,15 @@
 import { GraphQLResolvers } from "../../../http";
-import { Team } from "../../../models/team";
+import { database } from "../../..";
 import { parseTakeSize } from "../../../util/http";
 
 export default {
 	team: async (_, { id }, _ctx) => {
-		return Team.findOne(id);
+		return database.team.findUnique({
+			where: { id }
+		});
 	},
 	teams: async (_, { skip, take}, _ctx) => {
-		return await Team.find({
+		return database.team.findMany({
 			skip: skip,
 			take: parseTakeSize(take, 50)
 		});

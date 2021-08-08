@@ -1,13 +1,14 @@
 import { GraphQLResolvers } from "../../../http";
-import { Like } from "typeorm";
 import { SearchRequest } from "../../core/resolvers/query";
-import { Team } from "../../../models/team";
+import { database } from "../../..";
 
 export default {
 	teams: async (request) => {
-		return await Team.find({
-			where: { 
-				name: Like(`%${request.query}%`) 
+		return database.team.findMany({
+			where: {
+				name: {
+					contains: request.query
+				}
 			}
 		});
 	}

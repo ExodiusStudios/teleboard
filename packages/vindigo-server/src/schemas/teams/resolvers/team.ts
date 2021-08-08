@@ -1,6 +1,7 @@
 import { GraphQLResolvers } from "../../../http";
-import { Team } from "../../../models/team";
+import { Team } from "@prisma/client";
 import { composeSlug } from "../../../util/helpers";
+import { database } from "../../..";
 
 export default {
 	slug: async (team) => {
@@ -10,25 +11,23 @@ export default {
 		return '/team/' + composeSlug(team);
 	},
 	members: async (team) => {
-		const part = await Team.findOne({
-			select: ['id'],
-			relations: ['members'],
-			where: {
-				id: team.id
+		const members = await database.teamMember.findMany({
+			where: { team },
+			include: {
+				member: true
 			}
 		});
 
-		return part?.members;
+		return members.map(m => m.member);
 	},
 	projects: async (team) => {
-		const part = await Team.findOne({
-			select: ['id'],
-			relations: ['projects'],
-			where: {
-				id: team.id
+		const projects = await database.projectTeam.findMany({
+			where: { team },
+			include: {
+				project: true
 			}
 		});
 
-		return part?.projects;
+		return projects.map(p => p.project);
 	},
 } as GraphQLResolvers<Team>;

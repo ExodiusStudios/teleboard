@@ -1,14 +1,13 @@
 import consola, { LogLevel } from "consola";
+import { isProduction, pollDatabase } from "./util/helpers";
 
-import { DatabaseService } from "./database";
 import { ExtensionService } from "./extensions";
 import { HTTPService } from "./http";
 import { MailingService } from "./mailer";
 import ON_DEATH from 'death';
+import { PrismaClient } from "@prisma/client";
 import fs from 'fs';
-import { isProduction } from "./util/helpers";
 import { readConfig } from "./util/config";
-import { registerModels } from "./registry/models";
 import { registerSchemas } from "./registry/schemas";
 
 // Assert CLI bootstrap
@@ -44,9 +43,9 @@ if(!production) {
 
 // Define the services
 const extensions = new ExtensionService(config);
-const database = new DatabaseService(config);
 const mailer = new MailingService(config);
 const http = new HTTPService(config);
+const database = new PrismaClient();
 
 export {
 	config,
@@ -57,12 +56,11 @@ export {
 	http
 };
 
-registerModels();
 registerSchemas();
 
 (async () => {
 	try {
-		await database.start();
+		await pollDatabase(logger, config.database);
 		await http.start();
 	} catch(err) {
 		logger.error(err);
@@ -71,8 +69,8 @@ registerSchemas();
 })();
 
 ON_DEATH(() => {
-	http.stop();  
-	database.stop();
+	http.stop();
+	database.$disconnect();
 
 	if(!production) {
 		fs.unlinkSync(PID_FILE);

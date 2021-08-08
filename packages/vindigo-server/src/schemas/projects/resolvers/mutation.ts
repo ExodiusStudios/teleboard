@@ -1,8 +1,7 @@
 import { InvalidArgumentError, MissingSessionError, NoPermissionError } from "../../../util/errors";
 
 import { GraphQLResolvers } from "../../../http";
-import { Project } from "../../../models/project";
-import { ProjectMember } from "../../../models/projectMember";
+import { database } from "../../..";
 
 export default {
 	createProject: async (_, { details }, ctx) => {
@@ -18,40 +17,34 @@ export default {
 			throw new InvalidArgumentError("Name cannot exceed 32 characters");
 		}
 
-		const project = new Project();
-		const member = new ProjectMember();
-
-		// Save project details
-		project.name = name;
-		project.isPublic = isPublic;
-		project.createdAt = new Date();
-		project.lastModifiedAt = new Date();
-		project.description = description || '';
-		project.creatorId = ctx.user.id;
-		project.isVisible = true;
-		project.isClosed = false;
-		project.isPublic = isPublic;
-		
-		const created = await project.save();
-
-		// Save owner member details
-		member.project = created;
-		member.member = ctx.user;
-		member.accessLevel = 'manager';
-
-		await member.save();
-		
-		return created;
+		return await database.project.create({
+			data: {
+				name: name,
+				isPublic: isPublic,
+				createdAt: new Date(),
+				lastModifiedAt: new Date(),
+				description: description || '',
+				creatorId: ctx.user.id,
+				isVisible: true,
+				isClosed: false,
+				members: {
+					create: {
+						memberId: ctx.user.id,
+						accessLevel: 'manager'
+					}
+				}
+			}
+		});
 	},
 	deleteProject: async (_, { id }, ctx) => {
 		if(!ctx.user) {
 			throw new MissingSessionError();
 		}
 
-		const project = await Project.findOne({
+		const project = await database.project.findFirst({
 			where: {
 				id: id,
-				creatorId: ctx.user.id
+				creator: ctx.user
 			}
 		});
 
@@ -59,11 +52,10 @@ export default {
 			throw new NoPermissionError();
 		}
 
-		await Project.remove(project);
-
-		// See https://github.com/typeorm/typeorm/issues/4058
-		project.id = id;
-		
-		return project;
+		return await database.project.delete({
+			where: {
+				id: project.id
+			}
+		});
 	}
 } as GraphQLResolvers;

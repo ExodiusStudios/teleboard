@@ -1,7 +1,8 @@
 import { ApiError, NoPermissionError } from "../util/errors";
 import { Request, RequestHandler, Response } from "express";
 
-import { User } from "../models/user";
+import { User } from "@prisma/client";
+import { database } from "..";
 
 /**
  * Contains logic for an individual API endpoint.
@@ -55,7 +56,11 @@ export abstract class Controller {
 			this.req = req;
 			this.res = res;
 
-			const user = await User.findOne(req.session.userId);
+			const user = await database.user.findUnique({
+				where: {
+					id: req.session.userId
+				}
+			});
 
 			// The user must be authenticated
 			if(!user) {

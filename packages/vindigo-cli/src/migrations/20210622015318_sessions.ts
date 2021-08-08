@@ -2,9 +2,10 @@ import { Knex } from 'knex';
 
 exports.up = async function({schema}: Knex) {
 	return schema.createTable('sessions', (table) => {
-		table.string('id');
-		table.bigInteger('expired_at');
-		table.text('json');
+		table.string('id').primary();
+		table.string('sid').unique();
+		table.text('data');
+		table.dateTime('expiresAt');
 	});
 };
 

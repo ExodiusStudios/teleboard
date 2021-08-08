@@ -1,5 +1,5 @@
 import { GraphQLResolvers } from "../../../http";
-import { User } from "../../../models/user";
+import { User } from "@prisma/client";
 import { composeSlug } from "../../../util/helpers";
 
 export default {

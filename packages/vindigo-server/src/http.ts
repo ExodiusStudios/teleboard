@@ -5,13 +5,14 @@ import express, { Request, Response } from "express";
 
 import { ApiError } from "./util/errors";
 import { GraphQLError } from "graphql";
+import { IPrisma } from "@quixo3/prisma-session-store/dist/@types";
 import { IResolvers } from "graphql-tools";
 import { IServerConfig } from "./util/config";
+import { Nullable } from "./typings/types";
+import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { Server } from "http";
-import { Session } from "./models/session";
-import { TypeormStore } from "connect-typeorm";
 import UploadAvatarController from "./routes/upload/avatar";
-import { User } from "./models/user";
+import { User } from '@prisma/client';
 import WebSocket from 'ws';
 import cors from "cors";
 import depthLimit from "graphql-depth-limit";
@@ -60,7 +61,6 @@ export class HTTPService {
 		const app = this.express;
 		const port = this.config.general.port;
 		const secret = this.config.authentication.secret;
-		const sessionRepo = database.connection.getRepository(Session);
 		const production = isProduction();
 
 		if(production) {
@@ -68,10 +68,10 @@ export class HTTPService {
 		}
 
 		// Configure the session store
-		const sessionStore = new TypeormStore({
-			cleanupLimit: 2,
-			limitSubquery: false
-		}).connect(sessionRepo);
+		const sessionStore = new PrismaSessionStore(database as unknown as IPrisma, {
+			checkPeriod: 2 * 60 * 1000,
+			dbRecordIdIsSessionId: true
+		});
 
 		// Apply security middleware
 		if(this.config.general.secure) {
@@ -89,8 +89,7 @@ export class HTTPService {
 			cookie: {
 				httpOnly: true,
 				secure: production,
-				sameSite: production,
-				maxAge: 2419200
+				sameSite: production
 			}
 		}));
 
@@ -135,6 +134,20 @@ export class HTTPService {
 	}
 
 	/**
+	 * Fetch the users profile
+	 * 
+	 * @param userId User id
+	 * @returns Profile promise
+	 */
+	private fetchProfile(userId: number): Promise<Nullable<User>> {
+		return database.user.findUnique({
+			where: {
+				id: userId
+			}
+		});
+	}
+
+	/**
 	 * Register the API related routes on the HTTP server
 	 * 
 	 * @param http The HTTP server
@@ -148,10 +161,10 @@ export class HTTPService {
 		// Configure a plain HTTP endpoint for handling
 		// simple non-subscription GraphQL requests.
 		this.express.use('/graphql', async (req, res) => {
-			const context: ResolverContext = { req, res };
+			const context: ResolverContext = { req, res, user: null };
 
 			if(req.session.userId) {
-				context.user = await User.findOne(req.session.userId);
+				context.user = await this.fetchProfile(req.session.userId);
 			}
 
 			graphqlHTTP({
@@ -181,7 +194,7 @@ export class HTTPService {
 				const address = getAddress(request);
 
 				if(request.session.userId) {
-					context.extra.user = await User.findOne(request.session.userId);
+					context.extra.user = await this.fetchProfile(request.session.userId);
 				}
 
 				this.clients.set(socket, request);
@@ -273,5 +286,5 @@ export interface ISchemaProvider {
 export interface ResolverContext extends Record<PropertyKey, any> {
 	req: Request;
 	res: Response;
-	user?: User;
+	user: User|null;
 }

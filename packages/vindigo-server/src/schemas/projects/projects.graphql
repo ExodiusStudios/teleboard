@@ -102,7 +102,7 @@ type ProjectMember {
 A single team that is participating on a project
 """
 type ProjectTeam {
-	team: Team
+	team: Team!
 	accessLevel: String!
 }
 

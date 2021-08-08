@@ -1,10 +1,9 @@
-import { GraphQLResolvers, ResolverContext } from '../../../http';
-import { compare, hash } from 'bcrypt';
-import { fetchProfileByEmail, fetchProfileByIdentity, fetchProfileByUsername, generateUsername } from '../fetchers/profile';
-
 import { ApiError, MissingSessionError } from '../../../util/errors';
-import { User } from '../../../models/user';
-import { logger } from '../../..';
+import { GraphQLResolvers, ResolverContext } from '../../../http';
+import { Prisma, User } from '@prisma/client';
+import { compare, hash } from 'bcrypt';
+import { database, logger } from '../../..';
+import { fetchProfileByEmail, fetchProfileByIdentity, fetchProfileByUsername, generateUsername } from '../fetchers/profile';
 
 /**
  * Sign in the session 
@@ -40,25 +39,26 @@ export default {
 
 		// Hash the provided password
 		const password = await hash(details.password, 7);
-		const user = new User();
-
-		user.username = username;
-		user.name = details.fullname;
-		user.email = details.email;
-		user.password = password;
-		user.role = 'guest';
-		user.language = 'en-US';
-		user.createdAt = new Date();
-		user.lastSeenAt = new Date();
-		user.isEnabled = true;
-		user.isVerified = false;
 
 		// Save the profile to the database
-		const saved = await user.save();
+		const profile = await database.user.create({
+			data: {
+				username: username,
+				name: details.fullname,
+				email: details.email,
+				password: password,
+				role: 'guest',
+				language: 'en-US',
+				createdAt: new Date(),
+				lastSeenAt: new Date(),
+				isEnabled: true,
+				isVerified: false
+			}
+		});
 
-		sessionSignIn(ctx, details.remember, user);
+		sessionSignIn(ctx, details.remember, profile);
 		logger.info(`Registered new user ${details.username}`);
-		return saved;
+		return profile;
 	},
 	authenticate: async (_, { details }, ctx) => {
 		if(!details.identity || !details.password) {
@@ -88,32 +88,38 @@ export default {
 		return user;
 	},
 	updateProfile: async (_, { details }, ctx) => {
-		
 		if(!ctx.user) {
 			throw new MissingSessionError();
 		}
+
+		const update: Prisma.UserUpdateInput = {};
 		
 		if(details.fullname) {
-			ctx.user.name = details.fullname;
+			update.name = details.fullname;
 		}
 
 		if(details.email) {
-			ctx.user.email = details.email;
+			update.email = details.email;
 		}
 
 		if(details.username) {
-			ctx.user.username = details.username;
+			update.username = details.username;
 		}
 
 		if(details.bio) {
-			//ctx.user.bio = details.bio;
+			//update.bio = details.bio;
 		}
 
 		if(details.website) {
-			//ctx.user.website = details.website;
+			//update.website = details.website;
 		}
 
-		await ctx.user.save();
+		await database.user.update({
+			where: {
+				id: ctx.user.id
+			},
+			data: update
+		});
 	},
 	signOut: async (_, _args, ctx) => {
 		return new Promise((resolve) => {

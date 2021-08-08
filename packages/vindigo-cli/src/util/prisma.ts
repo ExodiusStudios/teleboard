@@ -1,15 +1,10 @@
 import { IServerConfig, readConfig } from "../../../vindigo-server/dist/util/config";
-import { mkdirSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 
 import { assertInWorkingDirectory } from "../util";
 import { execSync } from "child_process";
 import { resolve } from "path";
-import { sync as rimraf } from "rimraf";
 import { stripIndent } from 'common-tags';
-
-// import { merge } from 'prisma-merge/lib/prisma-merge';
-
-
 
 const PRISMA_DIR = 'prisma';
 const SCHEMA_FILE = 'prisma/schema.prisma';
@@ -20,9 +15,10 @@ export async function generatePrisma() {
 	const config = readConfig();
 	const details = generateDetails(config);
 
-	// Regenerate prisma directory
-	rimraf(PRISMA_DIR);
-	mkdirSync(PRISMA_DIR);
+	// Generate prisma directory
+	if(!existsSync(PRISMA_DIR)) {
+		mkdirSync(PRISMA_DIR);
+	}
 
 	// Define schema list
 	const schemas: string[] = [
@@ -90,6 +86,7 @@ function generateBase(details: ConnectionDetails): string {
 		
 		generator client {
 			provider = "prisma-client-js"
+			previewFeatures = ["referentialActions"]
 		}
 	`;
 }

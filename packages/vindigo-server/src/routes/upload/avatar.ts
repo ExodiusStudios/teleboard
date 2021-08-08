@@ -5,6 +5,7 @@ import { readdirSync, rmdirSync, unlinkSync } from "fs";
 import { ApiError } from "../../util/errors";
 import { Controller } from "../controller";
 import { UploadedFile } from "express-fileupload";
+import { database } from "../..";
 
 export default class UploadAvatarController extends Controller {
 
@@ -35,10 +36,15 @@ export default class UploadAvatarController extends Controller {
 
 		const file = this.req.files.file as UploadedFile;
 		await saveToBucket('./data/public/avatar', file);
-	
-		this.user.avatar = join('/data/avatar', bucketPath(file));
 
-		await this.user.save();
+		await database.user.update({
+			where: {
+				id: this.user.id
+			},
+			data: {
+				avatar: join('/data/avatar', bucketPath(file))
+			}
+		});
 
 		return Promise.resolve('handling avatar');
 	}
