@@ -1,5 +1,5 @@
 <template>
-	<section v-if="profile != undefined" class="profile-page">
+	<section v-if="profile" class="profile-page">
 		<toolbar class="pl-0" />
 		<section class="bg-white pb-10 dark:bg-dark">
 			<div class="container container--thin flex items-center">
@@ -24,7 +24,7 @@
 			</div>
 			<section class="info">
 				<div class="bio">
-					About me: This is a bio
+					About me: This is a bio :D
 				</div>
 
 				<div class="location">
@@ -74,56 +74,29 @@ import { parseSlug, updateTitle } from "../../util";
 import { api } from "../..";
 import gql from "graphql-tag";
 import { profileFragment } from "../../fragments";
-
-async function fetchProfileData(id: number) {
-	console.log('fetchProfileData');
-	const res = await api.query(gql`
-		query ($uid: Int!) {
-			profileById(id: $uid) {
-				...AllProfileFields
-			}
-		}
-		${profileFragment}
-	`, { uid: id });
-
-	console.log(`Return... returning `, res.profileById);
-	return res.profileById;
-}
+import { NavigationGuardNext, Route } from "vue-router";
 
 export default Vue.extend({
 	name: "VindigoSettings",
 	components: { Avatar },
 
 	async beforeRouteEnter(to, _from, next) {
-		const uid = parseSlug(to.params.user);
-
-		console.log('KAANUS');
-
-		if(uid == undefined) {
-			console.log('REEE');
-			next('/');
-			return;
-		}
-
-		const profile = await fetchProfileData(uid);
-
-		if(!profile) {
-			next('/');
-		}
+		const data = await fetchPageData(to, next);
 
 		next((vm: any) => {
-			console.log('BRUH');
-			updateTitle(profile.fullName + "'s Profile");
-
-			vm.profile = profile;
+			vm.init(data);
 		});
+	},
 
-		console.log('AHHHHHHHHHHHHH');
+	async beforeRouteUpdate(to, _from, next) {
+		this.init(await fetchPageData(to, next));
+		next();
 	},
 	
 	data: () => ({
-		profile: undefined
+		profile: undefined as any
 	}),
+
 	computed: {
 		profileTabs() {
 			return [
@@ -142,7 +115,56 @@ export default Vue.extend({
 			];
 		}
 	},
+
+	mounted() {
+		if(!this.profile) {
+			this.$router.go(0); // HMR Fix
+		}
+	},
+
+	methods: {
+		init(profile: any) {
+			this.profile = profile;
+
+			updateTitle(`${this.profile.fullName}'s Profile`);
+		}
+	}
 });
+
+/**
+ * Fetch page data for later assignment
+ */
+async function fetchPageData(to: Route, next: NavigationGuardNext<Vue>): Promise<any> {
+	const uid = parseSlug(to.params.user);
+
+	// Redirect to home on malformed slug
+	if(uid == undefined) {
+		next('/');
+		return;
+	}
+	
+	// Fetch the profile details
+	const response = await api.query(gql`
+		query ($uid: Int!) {
+			profileById(id: $uid) {
+				...AllProfileFields
+			}
+		}
+		${profileFragment}
+	`, {
+		uid: uid
+	});
+
+	const profile = response.profileById;
+
+	// Redirect to home on unknown profile
+	if(!profile) {
+		next('/');
+		return;
+	}
+
+	return profile;
+}
 </script>
 
 <style lang="postcss">

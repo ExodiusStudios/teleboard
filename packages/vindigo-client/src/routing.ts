@@ -1,8 +1,8 @@
 import VueRouter, { RouteConfig, RouterOptions } from "vue-router";
 import { clientReadyTask, getRouteMeta, logger, updateTitle } from "./util";
+import { isString, last } from "lodash";
 
 import { Optional } from "./typings/types";
-import { isString } from "lodash";
 import { store } from ".";
 
 /**
@@ -81,16 +81,21 @@ export class RoutingService {
 			next();
 		});
 
-		router.beforeResolve((to, _from, next) => {
+		router.beforeResolve((to, from, next) => {
 			store.instance.commit('setWaiting', false);
 			store.instance.commit('setPageRendered');
 
-			const title = getRouteMeta(to, 'title');
+			const viewFrom = last(from.matched)?.instances?.default;
+			const viewTo = last(to.matched)?.instances?.default;
+			
+			if(viewFrom != viewTo) {
+				const title = getRouteMeta(to, 'title');
 
-			if(isString(title)) {
-				updateTitle(title);
-			} else if(title !== false && to.name) {
-				updateTitle(to.name);
+				if(isString(title)) {
+					updateTitle(title);
+				} else if(title !== false && to.name) {
+					updateTitle(to.name);
+				}
 			}
 			
 			next();
