@@ -35,7 +35,7 @@ export default Vue.extend({
 
 	computed: {
 		hasMaintenance(): boolean {
-			return this.$config.maintenance;
+			return this.$config.maintenance && this.$vuex.state.profile?.role != 'admin';
 		},
 		shouldAuth(): boolean {
 			return !this.$vuex.state.isAuthed;
