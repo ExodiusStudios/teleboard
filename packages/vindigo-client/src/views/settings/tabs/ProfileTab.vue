@@ -2,7 +2,7 @@
 	<div class="profile-page">
 		<w-input
 			v-model="fullname"
-			placeholder="Volledige naam"
+			:placeholder="$t('GENERAL_FULL_NAME')"
 			tile inner-icon-left="mdi mdi-account"
 			inner-icon-right="mdi mdi-exclamation-thick text-red-500"
 		/>
@@ -10,7 +10,7 @@
 		<w-input
 			v-model="email"
 			class="mt-5"
-			placeholder="Email"
+			:placeholder="$t('GENERAL_EMAIL')"
 			tile inner-icon-left="mdi mdi-mail"
 			inner-icon-right="mdi mdi-exclamation-thick text-red-500"
 		/>
@@ -18,7 +18,7 @@
 		<w-input
 			v-model="username"
 			class="mt-5"
-			placeholder="Username"
+			:placeholder="$t('GENERAL_USERNAME')"
 			tile inner-icon-left="mdi mdi-account"
 			inner-icon-right="mdi mdi-exclamation-thick text-red-500"
 		/>
@@ -26,13 +26,13 @@
 		<w-textarea
 			v-model="bio"
 			class="mt-5"
-			placeholder="Bio (Optional)"
+			:placeholder="$t('SETTINGS_PROFILE_BIO') + ' (Optional)'"
 		/>
  
 		<w-input
 			v-model="website"
 			class="mt-5"
-			placeholder="Website (Optional)"
+			:placeholder="$t('SETTINGS_PROFILE_WEBSITE') + ' (Optional)'"
 			tile inner-icon-left="mdi mdi-earth"
 		/>
 
@@ -89,6 +89,10 @@ export default Vue.extend({
 			});
 
 			this.$store.dispatch('updateProfile');
+			this.$waveui.notify({
+				message: this.$t("SETTINGS_PROFILE_UPDATE_SUCCESS"),
+				success: true
+			});
 		}
 	}
 });
