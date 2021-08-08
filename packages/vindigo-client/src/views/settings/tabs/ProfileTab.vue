@@ -1,75 +1,75 @@
 <template>
 	<div class="profile-page">
-		<div class="profile-avatar">
-			<div class="avatar-upload">
-				Profile Picture
-				<file-upload 
-					v-model="avatar" 
-					class="avatarUpload" 
-					@preview="showPreview"
-				>
-					<w-button>
-						Change
-					</w-button>
-				</file-upload>
-				<avatar
-					v-if="preview == ''"
-					class="preview"
-					:profile="$vuex.state.profile"
-				/>
-				<img 
-					v-if="preview != ''"
-					class="preview" 
-					:src="preview"
-				>
-			</div>
-		</div>
-
-		<w-divider class="avatar-details-divider" />
 		
 		<div class="profile-details">
-			<w-input
-				v-model="fullname"
-				:placeholder="$t('GENERAL_FULL_NAME')"
-				tile inner-icon-left="mdi mdi-account"
-				inner-icon-right="mdi mdi-exclamation-thick text-red-500"
-			/>
+			<w-flex wrap>
+				<div class="picture-upload sm12 md2">
+					<avatar
+						v-if="preview == ''"
+						class="block picture-upload__image"
+						:profile="$vuex.state.profile"
+					/>
+					<img
+						v-if="preview != ''"
+						class="block picture-upload__image" 
+						:src="preview"
+					>
+					<file-upload
+						class="mt-5 w-full"
+						v-model="avatar" 
+						@preview="showPreview"
+					>
+						<w-button class="w-full h-9 ml-0">
+							Change
+						</w-button>
+					</file-upload>
+				</div>
+				<div class="sm12 md10 laptop:pl-5 mobile:pl-0">
+					<w-input
+						class="co"
+						v-model="fullname"
+						:placeholder="$t('GENERAL_FULL_NAME')"
+						tile inner-icon-left="mdi mdi-account"
+						inner-icon-right="mdi mdi-exclamation-thick text-red-500"
+					/>
 
-			<w-input
-				v-model="email"
-				class="mt-5"
-				:placeholder="$t('GENERAL_EMAIL')"
-				tile inner-icon-left="mdi mdi-mail"
-				inner-icon-right="mdi mdi-exclamation-thick text-red-500"
-			/>
+					<w-input
+						v-model="email"
+						class="mt-5 flex-1"
+						:placeholder="$t('GENERAL_EMAIL')"
+						tile inner-icon-left="mdi mdi-mail"
+						inner-icon-right="mdi mdi-exclamation-thick text-red-500"
+					/>
 
-			<w-input
-				v-model="username"
-				class="mt-5"
-				:placeholder="$t('GENERAL_USERNAME')"
-				tile inner-icon-left="mdi mdi-account"
-				inner-icon-right="mdi mdi-exclamation-thick text-red-500"
-			/>
-
-			<w-textarea
-				v-model="bio"
-				class="mt-5"
-				:placeholder="$t('SETTINGS_PROFILE_BIO') + ' (Optional)'"
-			/>
+					<w-input
+						v-model="username"
+						class="mt-5"
+						:placeholder="$t('GENERAL_USERNAME')"
+						tile inner-icon-left="mdi mdi-account"
+						inner-icon-right="mdi mdi-exclamation-thick text-red-500"
+					/>
+					<w-textarea
+						v-model="bio"
+						class="mt-5"
+						:placeholder="$t('SETTINGS_PROFILE_BIO')"
+					/>
 	
-			<w-input
-				v-model="website"
-				class="mt-5"
-				:placeholder="$t('SETTINGS_PROFILE_WEBSITE') + ' (Optional)'"
-				tile inner-icon-left="mdi mdi-earth"
-			/>
+					<w-input
+						v-model="website"
+						class="mt-5"
+						:placeholder="$t('SETTINGS_PROFILE_WEBSITE')"
+						tile inner-icon-left="mdi mdi-earth"
+					/>
 
-			<w-button class="mt-5 -ml-0" @click="saveUserProfile">
-				{{ $t("SETTINGS_PROFILE_SAVE") }}
-				<w-icon class="ml-2">
-					mdi mdi-content-save
-				</w-icon>
-			</w-button>
+					<w-button class="mt-5 -ml-0" @click="saveUserProfile">
+						{{ $t("SETTINGS_PROFILE_SAVE") }}
+						<w-icon class="ml-2">
+							mdi mdi-content-save
+						</w-icon>
+					</w-button>
+				</div>
+			</w-flex>
+
 		</div>
 	</div>
 </template>
@@ -137,24 +137,18 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss">
-	.profile-avatar {
-		.preview {
-			width: 100px;
-			height: 100px;
-		}
-		.avatarUpload {
-			@apply flex-grow;
 
-			margin-top: 10px;
-			display: inline-block;
-			justify-self: right;
-			position: sticky;
+	.picture-upload {
+
+		&__image {
+			@apply bg-light-1 dark:bg-dark-3 rounded-full ;
+			width: 148px;
+			height: 148px;
 		}
 	}
-	.avatar-details-divider {
-		@apply my-6 h-1 bg-gray-200 dark:bg-gray-200;
-	}
+
 	.profile-details {
+
 		.w-input {
 			@apply rounded-md bg-light-3 px-3 outline-none overflow-hidden;
 
