@@ -1,5 +1,5 @@
 <template>
-	<section class="profile-page">
+	<section v-if="profile != undefined" class="profile-page">
 		<toolbar class="pl-0" />
 		<section class="bg-white pb-10 dark:bg-dark">
 			<div class="container container--thin flex items-center">
@@ -66,22 +66,65 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Profile } from '../../model/profile';
 import Avatar from "../../components/Avatar.vue";
 import ContributionsTab from "./tabs/ContributionsTab.vue";
 import TeamsTab from "./tabs/TeamsTab.vue";
 import PostsTab from "./tabs/PostsTab.vue";
+import { parseSlug, updateTitle } from "../../util";
+import { api } from "../..";
+import gql from "graphql-tag";
+import { profileFragment } from "../../fragments";
+
+async function fetchProfileData(id: number) {
+	console.log('fetchProfileData');
+	const res = await api.query(gql`
+		query ($uid: Int!) {
+			profileById(id: $uid) {
+				...AllProfileFields
+			}
+		}
+		${profileFragment}
+	`, { uid: id });
+
+	console.log(`Return... returning `, res.profileById);
+	return res.profileById;
+}
 
 export default Vue.extend({
 	name: "VindigoSettings",
 	components: { Avatar },
+
+	async beforeRouteEnter(to, _from, next) {
+		const uid = parseSlug(to.params.user);
+
+		console.log('KAANUS');
+
+		if(uid == undefined) {
+			console.log('REEE');
+			next('/');
+			return;
+		}
+
+		const profile = await fetchProfileData(uid);
+
+		if(!profile) {
+			next('/');
+		}
+
+		next((vm: any) => {
+			console.log('BRUH');
+			updateTitle(profile.fullName + "'s Profile");
+
+			vm.profile = profile;
+		});
+
+		console.log('AHHHHHHHHHHHHH');
+	},
+	
 	data: () => ({
-		
+		profile: undefined
 	}),
 	computed: {
-		profile(): Profile {
-			return this.$vuex.state.profile!;
-		},
 		profileTabs() {
 			return [
 				{ 
