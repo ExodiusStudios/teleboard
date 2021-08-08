@@ -122,6 +122,9 @@ type Profile {
 
     "The role of the user"
     role: String
+
+    "The date the user was created"
+    createdAt: String!
 }
 
 """

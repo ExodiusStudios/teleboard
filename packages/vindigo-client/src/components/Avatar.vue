@@ -78,6 +78,10 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss">
+.avatar {
+	-webkit-user-select: none;
+	user-select: none;
+}
 .avatar__img {
 	@apply rounded-full;
 

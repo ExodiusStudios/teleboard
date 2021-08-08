@@ -10,4 +10,5 @@ export interface Profile {
 	email?: string
 	username: string
 	role: string
+	createdAt: string
 }

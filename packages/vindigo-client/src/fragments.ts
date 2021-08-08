@@ -14,6 +14,7 @@ export const profileFragment = gql`
 		bio
 		website
 		role
+		createdAt
 	}
 `;
 
