@@ -11,10 +11,10 @@ exports.up = async ({ schema }: Knex) => {
 		table.string('name');
 		table.string('role');
 		table.string('language');
-		table.timestamp('created_at');
-		table.timestamp('last_seen_at');
-		table.boolean('is_enabled').defaultTo(true);
-		table.boolean('is_verified').defaultTo(false);
+		table.timestamp('createdAt');
+		table.timestamp('lastSeenAt');
+		table.boolean('isEnabled').defaultTo(true);
+		table.boolean('isVerified').defaultTo(false);
 	});
 };
 

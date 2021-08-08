@@ -1,7 +1,99 @@
-model Profile {
-	id			String @id
-	firstName	String
-	lastName	String
-	fullName	String
-	email		String
+model User {
+    id         Int             @id
+    username   String?
+    email      String?
+    password   String?
+    avatar     String?
+    bio        String?
+    name       String?
+    role       String?
+    language   String?
+    createdAt  DateTime
+    lastSeenAt DateTime
+    isEnabled  Boolean?
+    isVerified Boolean?
+    projects   ProjectMember[]
+    teams      TeamMember[]
+    created    Project[]
+
+    @@map(name: "users")
+    Team Team[]
+}
+
+model Project {
+    id              Int             @id
+    name            String?
+    description     String?
+    coverImage      String?
+    backgroundImage String?
+    isVisible       Boolean?
+    isClosed        Boolean?
+    isPublic        Boolean?
+    createdAt       DateTime
+    lastModifiedAt  DateTime
+    creatorId       Int
+    creator         User            @relation(fields: [creatorId], references: [id])
+    members         ProjectMember[]
+    teams           ProjectTeam[]
+
+    @@map("projects")
+}
+
+model ProjectMember {
+    id          Int     @id
+    memberId    Int
+    projectId   Int
+    accessLevel String?
+    project     Project @relation(fields: [projectId], references: [id])
+    member      User    @relation(fields: [memberId], references: [id])
+
+    @@map(name: "project_members")
+}
+
+model ProjectTeam {
+    id          Int     @id
+    teamId      Int
+    projectId   Int
+    accessLevel String?
+    project     Project @relation(fields: [projectId], references: [id])
+    team        Team    @relation(fields: [teamId], references: [id])
+
+    @@map(name: "project_teams")
+}
+
+model Task {
+    id             Int      @id
+    parentId       Int?
+    createdAt      DateTime
+    lastModifiedAt DateTime
+    summary        String?
+    description    String?
+    parent         Task?    @relation("parent", fields: [parentId], references: [id])
+    children       Task[]   @relation("parent")
+
+    @@map(name: "tasks")
+}
+
+model TeamMember {
+    id       Int  @id
+    memberId Int
+    teamId   Int
+    users    User @relation(fields: [memberId], references: [id])
+    teams    Team @relation(fields: [teamId], references: [id])
+
+    @@map(name: "team_members")
+}
+
+model Team {
+    id           Int           @id
+    name         String?
+    description  String?
+    logoImage    String?
+    createdAt    DateTime
+    creatorId    Int
+    users        User          @relation(fields: [creatorId], references: [id])
+    projectTeams ProjectTeam[]
+    teamMembers  TeamMember[]
+
+    @@map(name: "teams")
 }

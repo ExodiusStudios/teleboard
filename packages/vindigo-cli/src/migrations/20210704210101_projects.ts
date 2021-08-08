@@ -8,15 +8,15 @@ exports.up = async function({schema}: Knex) {
 			table.increments();
 			table.string('name');
 			table.text('description');
-			table.text('cover_image');
-			table.text('background_image');
-			table.boolean('is_visible');
-			table.boolean('is_closed');
-			table.boolean('is_public');
-			table.timestamp('created_at');
-			table.timestamp('last_modified_at');
+			table.text('coverImage');
+			table.text('backgroundImage');
+			table.boolean('isVisible');
+			table.boolean('isClosed');
+			table.boolean('isPublic');
+			table.timestamp('createdAt');
+			table.timestamp('lastModifiedAt');
 
-			table.integer('creator_id')
+			table.integer('creatorId')
 				.unsigned()
 				.notNullable()
 				.references('users.id')
@@ -28,10 +28,10 @@ exports.up = async function({schema}: Knex) {
 			table.increments();
 			table.string('name');
 			table.text('description');
-			table.text('logo_image');
-			table.timestamp('created_at');
+			table.text('logoImage');
+			table.timestamp('createdAt');
 
-			table.integer('creator_id')
+			table.integer('creatorId')
 				.unsigned()
 				.notNullable()
 				.references('users.id')
@@ -41,74 +41,66 @@ exports.up = async function({schema}: Knex) {
 		// ANCHOR Tasks table
 		.createTable('tasks', (table) => {
 			table.increments();
-			table.timestamp('created_at');
-			table.timestamp('last_modified_at');
+			table.timestamp('createdAt');
+			table.timestamp('lastModifiedAt');
 			table.string('summary');
 			table.text('description');
+
+			table.integer('parentId')
+				.unsigned()
+				.references('tasks.id')
+				.onDelete('SET NULL');
 		})
 
 		// ANCHOR Project invited teams table
 		.createTable('project_teams', (table) => {
 			table.increments();
 
-			table.integer('team_id')
+			table.integer('teamId')
 				.unsigned()
 				.notNullable()
 				.references('teams.id')
 				.onDelete('CASCADE');
 			
-			table.integer('project_id')
+			table.integer('projectId')
 				.unsigned()
 				.notNullable()
 				.references('projects.id')
 				.onDelete('CASCADE');
 			
-			table.string('access_level');
+			table.string('accessLevel');
 		})
 
 		// ANCHOR Project invited members table
 		.createTable('project_members', (table) => {
 			table.increments();
 			
-			table.integer('member_id')
+			table.integer('memberId')
 				.unsigned()
 				.notNullable()
 				.references('users.id')
 				.onDelete('CASCADE');
 			
-			table.integer('project_id')
+			table.integer('projectId')
 				.unsigned()
 				.notNullable()
 				.references('projects.id')
 				.onDelete('CASCADE');
 			
-			table.string('access_level');
-		})
-
-		// ANCHOR Parent-child task join table
-		.createTable('child_tasks', (table) => {
-			table.integer('parent_id')
-				.unsigned()
-				.notNullable()
-				.references('tasks.id')
-				.onDelete('CASCADE');
-			
-			table.integer('child_id')
-				.unsigned()
-				.notNullable()
-				.references('tasks.id')
-				.onDelete('CASCADE');
+			table.string('accessLevel');
 		})
 
 		// ANCHOR Team member join table
 		.createTable('team_members', (table) => {
-			table.integer('member_id')
+			table.increments();
+
+			table.integer('memberId')
 				.unsigned()
 				.notNullable()
 				.references('users.id')
 				.onDelete('CASCADE');
 			
-			table.integer('team_id')
+			table.integer('teamId')
 				.unsigned()
 				.notNullable()
 				.references('teams.id')
@@ -121,7 +113,6 @@ exports.down = async function({schema}: Knex) {
 		.dropTable('team_members')
 		.dropTable('project_members')
 		.dropTable('project_teams')
-		.dropTable('child_tasks')
 		.dropTable('teams')
 		.dropTable('tasks')
 		.dropTable('projects');
