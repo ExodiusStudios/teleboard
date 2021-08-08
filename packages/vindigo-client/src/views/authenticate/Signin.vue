@@ -100,3 +100,15 @@ export default Vue.extend({
 	},
 });
 </script>
+
+<style lang="postcss">
+
+.sign-in {
+
+	.auth-box__input input {
+		@apply text-gray-600;
+	}
+
+}
+
+</style>
