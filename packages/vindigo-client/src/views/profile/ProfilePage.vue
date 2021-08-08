@@ -1,7 +1,7 @@
 <template>
 	<section class="profile-page">
 		<toolbar class="pl-0" />
-		<section class="bg-[#ffffff] pb-10">
+		<section class="bg-white pb-10 dark:bg-dark">
 			<div class="container container--thin flex items-center">
 				<div class="flex items-center py-10">
 					<avatar
