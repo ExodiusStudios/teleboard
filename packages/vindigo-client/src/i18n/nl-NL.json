@@ -60,7 +60,11 @@
 	"SETTINGS_TAB_NOTIFICATION": "Notificatie",
 	"SETTINGS_PROFILE_DESCRIPTION": "Jouw persoonlijk account",
 	"SETTINGS_PROFILE_VIEW_PROFILE": "Bekijk profiel",
+	"SETTINGS_PROFILE_FULL_NAME": "Volledige Naam",
 	"SETTINGS_PROFILE_SAVE": "Opslaan",
+	"SETTINGS_PROFILE_UPDATE_SUCCESS": "~Profile updated successfully!",
+	"SETTINGS_PROFILE_BIO": "~Bio",
+	"SETTINGS_PROFILE_WEBSITE": "~Website",
 	
 	"SIGNIN_WELCOME": "Welkom",
 	"SIGNIN_USERNAME": "Email of Gebruikernaam",
@@ -70,12 +74,14 @@
 	"SIGNIN_SIGNIN": "Log in",
 	"SIGNIN_NO_ACCOUNT": "Heb je nog geen account? <strong>Registreer</strong>!",
 	"SIGNIN_SIGNUP": "Registreer",
-	"SIGNIN_EMAIL": "Email Adres",
-	"SIGNIN_FULL_NAME": "Volledige Naam",
 	"SIGNIN_REGISTER_ACCOUNT": "Registreer Account",
 	"SIGNIN_HAVE_ACCOUNT": "Heb je al een account? <strong>Log in</strong>",
 
 	"PROJECT_OPTIONS": "Project Opties",
+
+	"GENERAL_FULL_NAME": "Volledige Naam",
+	"GENERAL_EMAIL": "Email Adres",
+	"GENERAL_USERNAME": "Gebruikernaam",
 
 	"GENERAL_USERS": "Gebruikers",
 	"GENERAL_TEAMS": "Teams",

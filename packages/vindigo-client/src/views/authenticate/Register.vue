@@ -16,7 +16,7 @@
 				<w-input
 					v-model="email"
 					class="auth-box__input my-5 text-center"
-					:placeholder="$t('SIGNIN_EMAIL')"
+					:placeholder="$t('GENERAL_EMAIL')"
 					autocomplete="sign-up email"
 					name="email"
 					round
@@ -24,7 +24,7 @@
 				<w-input
 					v-model="fullname"
 					class="auth-box__input my-5 text-center"
-					:placeholder="$t('SIGNIN_FULL_NAME')"
+					:placeholder="$t('GENERAL_FULL_NAME')"
 					autocomplete="sign-up name"
 					name="name"
 					round

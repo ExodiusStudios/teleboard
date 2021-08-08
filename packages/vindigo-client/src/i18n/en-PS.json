@@ -59,6 +59,11 @@
 	"SETTINGS_TAB_NOTIFICATION": "Notification",
 	"SETTINGS_PROFILE_DESCRIPTION": "Yer personal account",
 	"SETTINGS_PROFILE_VIEW_PROFILE": "View profile",
+	"SETTINGS_PROFILE_FULL_NAME": "Full Name",
+	"SETTINGS_PROFILE_SAVE": "Save",
+	"SETTINGS_PROFILE_UPDATE_SUCCESS": "Profile updated successfully!",
+	"SETTINGS_PROFILE_BIO": "Bio",
+	"SETTINGS_PROFILE_WEBSITE": "Website",
 
 	"SIGNIN_WELCOME": "Ahoy",
 	"SIGNIN_USERNAME": "Email or Username",
@@ -68,12 +73,15 @@
 	"SIGNIN_SIGNIN": "Sign in",
 	"SIGNIN_NO_ACCOUNT": "Don't have an account? <strong>Sign up</strong> instead!",
 	"SIGNIN_SIGNUP": "Sign up",
-	"SIGNIN_EMAIL": "Email Address",
-	"SIGNIN_FULL_NAME": "Full Name",
 	"SIGNIN_REGISTER_ACCOUNT": "Register Account",
 	"SIGNIN_HAVE_ACCOUNT": "Already have an account? <strong>Sign in</strong>",
 
 	"PROJECT_OPTIONS": "Yer Project Options",
+
+	
+	"GENERAL_FULL_NAME": "Full Name",
+	"GENERAL_EMAIL": "Email Address",
+	"GENERAL_USERNAME": "Username",
 
 	"GENERAL_USERS": "Users",
 	"GENERAL_TEAMS": "Crews",
