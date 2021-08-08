@@ -62,8 +62,8 @@
 	"SETTINGS_PROFILE_VIEW_PROFILE": "View profile",
 	"SETTINGS_PROFILE_SAVE": "Save",
 	"SETTINGS_PROFILE_UPDATE_SUCCESS": "Profile updated successfully!",
-	"SETTINGS_PROFILE_BIO": "Bio",
-	"SETTINGS_PROFILE_WEBSITE": "Website",
+	"SETTINGS_PROFILE_BIO": "Bio (Optional)",
+	"SETTINGS_PROFILE_WEBSITE": "Website (Optional)",
 
 	"SIGNIN_WELCOME": "Welcome",
 	"SIGNIN_USERNAME": "Email or Username",

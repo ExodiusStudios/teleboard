@@ -62,9 +62,9 @@
 	"SETTINGS_PROFILE_VIEW_PROFILE": "Bekijk profiel",
 	"SETTINGS_PROFILE_FULL_NAME": "Volledige Naam",
 	"SETTINGS_PROFILE_SAVE": "Opslaan",
-	"SETTINGS_PROFILE_UPDATE_SUCCESS": "~Profile updated successfully!",
-	"SETTINGS_PROFILE_BIO": "~Bio",
-	"SETTINGS_PROFILE_WEBSITE": "~Website",
+	"SETTINGS_PROFILE_UPDATE_SUCCESS": "Profiel succesvol geupload!",
+	"SETTINGS_PROFILE_BIO": "Bio (Optioneel)",
+	"SETTINGS_PROFILE_WEBSITE": "Website (Optioneel)",
 	
 	"SIGNIN_WELCOME": "Welkom",
 	"SIGNIN_USERNAME": "Email of Gebruikernaam",
