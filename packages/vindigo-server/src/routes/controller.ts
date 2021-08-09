@@ -99,7 +99,9 @@ export abstract class Controller {
 		if(value instanceof ApiError) {
 			response.code = value.code;
 			response.success = false;
-			response.data = null;
+			response.data = {
+				message: value.message
+			}
 		}
 
 		this.res.json(response);

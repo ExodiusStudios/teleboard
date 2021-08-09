@@ -3,25 +3,32 @@ import { existsSync, mkdirSync } from "fs";
 import { last } from "lodash";
 import { dirname, join } from "path";
 
+const ERROR_FILE_NOT_LOADED = new Error('No file is currently loaded. Use the file() method to do so.');
+
+/**
+ * Tool used to upload files to the system using the bucket path convention
+ * 
+ * @author Jackson Bean
+ */
 export default class BucketStorage {
 	
-	private location: string | undefined;
-	private uploadedFile: UploadedFile;
+	protected location: string | undefined;
+	protected currentFile: UploadedFile | null;
 
 	/**
 	 * @param location System path for the bucket
 	 */
-	constructor(location: string | undefined) {
+	constructor(location?: string | undefined) {
 		this.location = location;
 	}
 
 	/**
-	 * Loads a file into the bucket storage for later saving
+	 * Loads a file into the bucket storage for later manipulation
 	 * 
 	 * @param file File to be loaded
 	 */
 	public file(file: UploadedFile) {
-		this.uploadedFile = file;
+		this.currentFile = file;
 
 		return this;
 	}
@@ -33,7 +40,11 @@ export default class BucketStorage {
 	 */
 	public get bucketPath(): string {
 
-		const { md5, name } = this.uploadedFile;
+		if(!this.currentFile) {
+			throw ERROR_FILE_NOT_LOADED;
+		}
+
+		const { md5, name } = this.currentFile;
 		const ext = last(name.split(/\./g));
 		const newName = `${md5}.${ext}`;
 		const bucket = `${md5.substr(0, 2)}/${newName}`;
@@ -60,11 +71,15 @@ export default class BucketStorage {
 	 */
 	public async save() {
 
+		if(!this.currentFile) {
+			throw ERROR_FILE_NOT_LOADED;
+		}
+
 		if(!existsSync(dirname(this.fullPath))) {
 			mkdirSync(dirname(this.fullPath), { recursive: true });
 		}
 
-		await this.uploadedFile.mv(this.fullPath);
+		await this.currentFile.mv(this.fullPath);
 
 		return this;
 	}
