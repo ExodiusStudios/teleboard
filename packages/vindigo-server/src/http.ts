@@ -11,7 +11,7 @@ import { IServerConfig } from "./util/config";
 import { Nullable } from "./typings/types";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { Server } from "http";
-import UploadAvatarController from "./routes/upload/avatar";
+import { UploadAvatarController } from "./routes/upload/avatar";
 import { User } from '@prisma/client';
 import WebSocket from 'ws';
 import cors from "cors";

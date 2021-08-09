@@ -1,13 +1,16 @@
 import { basename, dirname, join } from "path";
-import { bucketPath, saveToBucket } from "../../util/helpers";
 import { readdirSync, rmdirSync, unlinkSync } from "fs";
 
 import { ApiError } from "../../util/errors";
 import { Controller } from "../controller";
 import { UploadedFile } from "express-fileupload";
 import { database } from "../..";
+import BucketStorage from "../../util/bucket";
 
-export default class UploadAvatarController extends Controller {
+export const AVATAR_SYSTEM_PATH = "./data/public/avatar";
+export const AVATAR_PUBLIC_PATH = ""
+
+export class UploadAvatarController extends Controller {
 
 	public authorize() {
 		return true;
@@ -23,7 +26,7 @@ export default class UploadAvatarController extends Controller {
 
 		if(old) {
 			const oldFile = basename(old);
-			const oldPath = join('./data/public/avatar', `${oldFile.substr(0, 2)}`, oldFile);
+			const oldPath = join(AVATAR_SYSTEM_PATH, `${oldFile.substr(0, 2)}`, oldFile);
 			const oldDir = dirname(oldPath);
 
 			unlinkSync(oldPath);
@@ -34,15 +37,17 @@ export default class UploadAvatarController extends Controller {
 			}
 		}
 
+		const avatarStorage = new BucketStorage(AVATAR_SYSTEM_PATH);
 		const file = this.req.files.file as UploadedFile;
-		await saveToBucket('./data/public/avatar', file);
+
+		await avatarStorage.file(file).save();
 
 		await database.user.update({
 			where: {
 				id: this.user.id
 			},
 			data: {
-				avatar: join('/data/avatar', bucketPath(file))
+				avatar: join(AVATAR_SYSTEM_PATH, avatarStorage.bucketPath)
 			}
 		});
 

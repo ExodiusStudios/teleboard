@@ -81,37 +81,3 @@ export function hasField(info: GraphQLResolveInfo, field: string): boolean {
 		f == field || f.startsWith(field + '.')
 	);
 }
-
-/**
- * Returns a string containing the md5 file name, as well as the md5 bucket it will go in.
- * ex. "/c4/c4..."
- * @param file The file in question
- */
-export function bucketPath(file: UploadedFile): string {
-	const md5 = file.md5;
-
-	const bucket = md5.substr(0, 2);
-	const extension = last(file.name.split(/\./g));
-	const fileName = `${md5}.${extension}`;
-
-	return join(bucket, fileName);
-}
-
-/**
- * 
- * @param location The location on the server to save the file
- * @param file The file in question
- * @returns the full path of the saved file
- */
-export async function saveToBucket(location: string, file: UploadedFile): Promise<string> {
-	const bucketLocation = bucketPath(file);
-	const fileLocation = join(location, bucketLocation);
-
-	if(!existsSync(dirname(fileLocation))) {
-		mkdirSync(dirname(fileLocation), { recursive: true });
-	}
-
-	await file.mv(fileLocation);
-
-	return fileLocation;
-}
