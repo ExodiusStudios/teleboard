@@ -1,7 +1,7 @@
 import { ApiError } from "../../util/errors";
+import AvatarStorage from "../../storage/avatar";
 import { Controller } from "../controller";
 import { UploadedFile } from "express-fileupload";
-import AvatarStorage from "../../storage/avatar";
 
 export class UploadAvatarController extends Controller {
 
@@ -14,7 +14,7 @@ export class UploadAvatarController extends Controller {
 			return new ApiError('invalid-request', 'Invalid avatar');
 		}
 
-		const storage = new AvatarStorage;
+		const storage = new AvatarStorage();
 		const avatar = this.req.files.file as UploadedFile;
 
 		await storage.file(avatar).save(); // save to the system

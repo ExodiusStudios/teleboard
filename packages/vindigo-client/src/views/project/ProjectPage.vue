@@ -97,7 +97,7 @@
 									:size="30"
 								/>
 							</div>
-							<div class="px-4 pb-1 text-dark-3 font-semibold flex items-center">
+							<div v-if="project.teams.length > 0" class="px-4 pb-1 text-dark-3 font-semibold flex items-center">
 								Teams
 								<spacer />
 								<small class="text-gray-500 font-medium underline cursor-pointer">

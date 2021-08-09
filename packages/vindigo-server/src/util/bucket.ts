@@ -1,7 +1,8 @@
-import { UploadedFile } from "express-fileupload";
-import { existsSync, mkdirSync } from "fs";
-import { last } from "lodash";
 import { dirname, join } from "path";
+import { existsSync, mkdirSync } from "fs";
+
+import { UploadedFile } from "express-fileupload";
+import { last } from "lodash";
 
 const ERROR_FILE_NOT_LOADED = new Error('No file is currently loaded. Use the file() method to do so.');
 
@@ -18,7 +19,7 @@ export default class BucketStorage {
 	/**
 	 * @param location System path for the bucket
 	 */
-	constructor(location?: string | undefined) {
+	protected constructor(location?: string | undefined) {
 		this.location = location;
 	}
 
@@ -39,7 +40,6 @@ export default class BucketStorage {
 	 * ex. "/32/3277f73cb2b1727a88a201691792d4ff.png"
 	 */
 	public get bucketPath(): string {
-
 		if(!this.currentFile) {
 			throw ERROR_FILE_NOT_LOADED;
 		}
@@ -70,7 +70,6 @@ export default class BucketStorage {
 	 * Saves the currently loaded file to the system
 	 */
 	public async save() {
-
 		if(!this.currentFile) {
 			throw ERROR_FILE_NOT_LOADED;
 		}
