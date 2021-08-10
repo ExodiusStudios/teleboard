@@ -3,7 +3,6 @@ const ts = require('gulp-typescript');
 const sm = require('gulp-sourcemaps');
 const path = require('path');
 const fs = require('fs');
-const { ncp } = require('ncp');
 
 // Declare constants
 const tsProject = ts.createProject('tsconfig.json');
@@ -34,8 +33,8 @@ function cleanDist(cb) {
 }
 
 // Save the distribution files
-function moveCache(cb) {
-	ncp(distTempDir, distDir, cb);
+function moveCache() {
+	return src(distTempDir + '/**/*').pipe(dest(distDir));
 }
 
 // Finish the compilation process

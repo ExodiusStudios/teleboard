@@ -2,7 +2,6 @@ const {series, dest} = require('gulp');
 const ts = require('gulp-typescript');
 const sm = require('gulp-sourcemaps');
 const path = require('path');
-const { ncp } = require('ncp');
 const fs = require('fs');
 
 // Declare constants
@@ -29,8 +28,8 @@ function cleanDist(cb) {
 }
 
 // Save the distribution files
-function moveCache(cb) {
-	ncp(distTempDir, distDir, cb);
+function moveCache() {
+	return src(distTempDir + '/**/*').pipe(dest(distDir));
 }
 
 // Finish the compilation process
