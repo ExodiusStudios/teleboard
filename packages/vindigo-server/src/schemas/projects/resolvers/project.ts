@@ -25,5 +25,26 @@ export default {
 				team: true
 			}
 		});
+	},
+	accessLevel: async (project, _argsa, ctx) => {
+		const user = ctx.user;
+
+		// If the user is not signed in they should
+		// always be recognised as guest.
+		if(!user) {
+			return 'guest';
+		}
+
+		const member = await database.projectMember.findFirst({
+			select: {
+				accessLevel: true
+			},
+			where: {
+				project,
+				member: user
+			}
+		});
+
+		return member?.accessLevel;
 	}
 } as GraphQLResolvers<Project>;

@@ -44,6 +44,8 @@ type Project {
 	id: Int!
 	slug: String!
 	name: String!
+	readme: String
+	accessLevel: String!
 	createdAt: String!
 	lastModifiedAt: String!
 	projectUrl: String!

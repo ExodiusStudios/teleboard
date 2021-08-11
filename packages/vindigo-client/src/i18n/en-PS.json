@@ -44,6 +44,10 @@
 	"HOMEPAGE_NO_PROJECTS_DESC": "Press the button below to create yer first prject",
 	"HOMEPAGE_TEAM_NO_PROJECTS": "This crew have'th no prjects yet",
 
+	"PROJECT_OVERVIEW_SECTION_INFO": "Information",
+	"PROJECT_OVERVIEW_SECTION_PROGRESS": "Progress",
+	"PROJECT_OVERVIEW_SECTION_HISTORY": "Recent activity",
+
 	"VIEW_HOME": "Home",
 	"VIEW_OVERVIEW": "Overview",
 	"VIEW_TASKS": "Tasks",
@@ -77,11 +81,13 @@
 	"SIGNIN_HAVE_ACCOUNT": "Already have an account? <strong>Sign in</strong>",
 
 	"PROJECT_OPTIONS": "Yer Project Options",
-
 	
 	"GENERAL_FULL_NAME": "Full Name",
 	"GENERAL_EMAIL": "Email Address",
 	"GENERAL_USERNAME": "Username",
+	"GENERAL_TASK": "Task | Tasks",
+	"GENERAL_MEMBER": "Member | Members",
+	"GENERAL_TEAM": "Team | Teams",
 
 	"GENERAL_USERS": "Users",
 	"GENERAL_TEAMS": "Crews",

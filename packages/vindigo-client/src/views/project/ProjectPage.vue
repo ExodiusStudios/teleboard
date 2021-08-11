@@ -144,7 +144,7 @@
 			<main role="main" class="flex-grow">
 				<transition>
 					<keep-alive>
-						<router-view />
+						<router-view :project="project" />
 					</keep-alive>
 				</transition>
 			</main>
@@ -172,6 +172,8 @@ async function fetchProjectData(id: number) {
 			project(id: $pid) {
 				id
 				name
+				readme
+				accessLevel
 				coverImage
 				projectUrl
 				members {

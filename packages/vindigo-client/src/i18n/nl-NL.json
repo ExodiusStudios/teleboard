@@ -45,6 +45,10 @@
 	"HOMEPAGE_NO_PROJECTS_DESC": "Druk op de onderstaande knop om je eerste project aan te maken",
 	"HOMEPAGE_TEAM_NO_PROJECTS": "Deze team is nog geen lid van een project",
 
+	"PROJECT_OVERVIEW_SECTION_INFO": "Informatie",
+	"PROJECT_OVERVIEW_SECTION_PROGRESS": "Vooruitgang",
+	"PROJECT_OVERVIEW_SECTION_HISTORY": "Recente activiteit",
+
 	"VIEW_HOME": "Home",
 	"VIEW_OVERVIEW": "Overzicht",
 	"VIEW_TASKS": "Takenlijst",
@@ -82,6 +86,9 @@
 	"GENERAL_FULL_NAME": "Volledige Naam",
 	"GENERAL_EMAIL": "Email Adres",
 	"GENERAL_USERNAME": "Gebruikernaam",
+	"GENERAL_TASK": "Taak | Taken",
+	"GENERAL_MEMBER": "Deelnemer | Deelnemers",
+	"GENERAL_TEAM": "Organisatie | Organisaties",
 
 	"GENERAL_USERS": "Gebruikers",
 	"GENERAL_TEAMS": "Teams",
