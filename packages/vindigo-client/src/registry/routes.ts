@@ -94,7 +94,7 @@ export function registerRoutes() {
 				{
 					icon: 'mdi mdi-text-box-check',
 					title: 'TOOLBAR_CREATE_TASK',
-					description: 'TOOLBAR_CREATE_DESC',
+					description: 'TOOLBAR_CREATE_TASK_DESC',
 					handler: 'createTask'
 				}
 			]
