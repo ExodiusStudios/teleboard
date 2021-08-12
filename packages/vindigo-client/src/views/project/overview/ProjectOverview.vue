@@ -29,9 +29,10 @@
 					<section-title icon="mdi mdi-text-box">
 						{{ $t('PROJECT_OVERVIEW_SECTION_INFO') }}
 					</section-title>
-					<div class="project-readme">
+					<div class="project-readme markdown-enabled">
 						<article
 							v-if="project.readmeHtml"
+							class="project-readme__content"
 							v-html="project.readmeHtml"
 						/>
 						<div v-else class="project-readme__missing">
@@ -123,6 +124,10 @@ export default Vue.extend({
 	@apply bg-light shadow-xl flex flex-col rounded-3xl p-4 mt-2 dark:bg-dark-2;
 
 	min-height: 250px;
+
+	&__content {
+		@apply rounded-3xl overflow-hidden;
+	}
 
 	&__missing {
 		@apply text-center my-4;

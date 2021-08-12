@@ -13,15 +13,18 @@
 
 		<w-tabs
 			:items="settingTabs"
+			:fill-bar="true"
 			active-class="accent-1"
 			slider-color="accent-1"
 			class="project-settings__tabs"
 		>
 			<template #item-content="{ item }">
-				<component
-					:is="item.content"
-					:project="project"
-				/>
+				<div class="p-4">
+					<component
+						:is="item.content"
+						:project="project"
+					/>
+				</div>
 			</template>
 		</w-tabs>
 	</w-dialog>
@@ -41,6 +44,10 @@ export default Vue.extend({
 			return [
 				{ 
 					title: this.$t('PROJECT_SETTINGS_TAB_GENERAL'), 
+					content: GeneralTab 
+				},
+				{ 
+					title: this.$t('PROJECT_SETTINGS_TAB_INFORMATION'), 
 					content: GeneralTab 
 				},
 				{ 
@@ -81,7 +88,7 @@ export default Vue.extend({
 		}
 
 		.w-tabs__content {
-			@apply p-0 pt-4;
+			@apply p-0;
 		}
 	}
 

@@ -1,6 +1,7 @@
 import 'wave-ui/dist/wave-ui.css';
 import './style/global.vue';
 import './style/wave.vue';
+import './style/markdown.vue';
 
 import { APIService } from './api';
 import App from './views/App.vue';

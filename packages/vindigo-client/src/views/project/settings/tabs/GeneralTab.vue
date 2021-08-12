@@ -1,9 +1,30 @@
 <template>
 	<div>
+		<label class="text-gray-500 mb-1 block text-sm">
+			{{ $t("CREATE_NEW_PROJECT_NAME") }}
+		</label>
+		<w-input
+			v-model="projectName"
+			class="rounded-lg overflow-hidden"
+			bg-color="gray-200"
+			color="gray-700"
+		/>
+
+		<label class="text-gray-500 mb-1 mt-3 block text-sm">
+			<div v-html="$t('CREATE_NEW_DESC')" />
+		</label>
+		<w-textarea
+			v-model="projectDesc"
+			class="rounded-lg overflow-hidden mb-3"
+			bg-color="gray-200"
+			color="gray-700"
+			rows="3"
+		/>
+
 		<w-button
 			v-wave
 			class="mx-0 text-red-400"
-			text
+			outline
 			@click="deletionDialog = true"
 		>
 			Close project
@@ -71,9 +92,17 @@ export default Vue.extend({
 	props: ['project'],
 
 	data: () => ({
+		projectName: '',
+		projectDesc: '',
+
 		deletionDialog: false,
 		deletionActive: false
 	}),
+
+	created() {
+		this.projectName = this.project.name;
+		this.projectDesc = this.project.description;
+	},
 
 	methods: {
 		async deleteProject() {

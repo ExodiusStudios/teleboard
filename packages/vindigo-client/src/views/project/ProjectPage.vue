@@ -1,5 +1,5 @@
 <template>
-	<section ref="pageView" class="project-page flex min-h-screen">
+	<section v-if="project.id" class="project-page flex min-h-screen">
 		<sidebar
 			:project="project"
 			class="bg-accent-4"
