@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import GeneralTab from './GeneralTab.vue';
+import GeneralTab from './tabs/GeneralTab.vue';
 
 export default Vue.extend({
 	name: 'ProjectSettings',

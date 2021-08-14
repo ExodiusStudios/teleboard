@@ -92,6 +92,10 @@ export default {
 			}
 		}
 
+		if(details.isPublic !== undefined) {
+			mutation.isPublic = details.isPublic;
+		}
+
 		if(details.description !== undefined) {
 			mutation.description = details.description || null;
 		}

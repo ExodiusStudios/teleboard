@@ -33,7 +33,7 @@ Creation details used to instance a new project
 """
 input ProjectCreationInput {
 	name: String!
-	public: Boolean!
+	public: Boolean! "TODO Rename to public"
 	description: String
 }
 
@@ -45,6 +45,7 @@ input ProjectUpdate {
     readme: String
     description: String
     coverImage: String
+	isPublic: Boolean
 }
 
 """

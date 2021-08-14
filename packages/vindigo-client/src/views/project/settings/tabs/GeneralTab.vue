@@ -3,13 +3,13 @@
 		<label v-html="$t('CREATE_NEW_PROJECT_NAME')" />
 		<w-input
 			v-model="projectName"
-			class="rounded-lg overflow-hidden mb-5"
+			class="mb-5"
 		/>
 
 		<label v-html="$t('CREATE_NEW_DESC')" />
 		<w-textarea
 			v-model="projectDesc"
-			class="rounded-lg overflow-hidden mb-5"
+			class="mb-5"
 			rows="3"
 		/>
 
@@ -19,11 +19,15 @@
 		</small>
 		<w-switch
 			v-model="projectPublic"
-			class="rounded-lg overflow-hidden mb-4"
+			class="mb-4"
 		/>
 
 		<div class="block">
-			<w-button class="mx-0 mt-2" @click="saveUserProfile">
+			<w-button
+				class="mx-0 mt-2"
+				:loading="isSaving"
+				@click="saveDetails"
+			>
 				{{ $t('GENERAL_SAVE') }}
 				<w-icon class="ml-2">
 					mdi mdi-content-save
@@ -106,12 +110,15 @@ import Vue from 'vue';
 import gql from 'graphql-tag';
 import { api } from '../../../..';
 
+
 export default Vue.extend({
 	name: 'GeneralTab',
 
 	props: ['project'],
 
 	data: () => ({
+		isSaving: false,
+
 		projectName: '',
 		projectDesc: '',
 		projectPublic: false,
@@ -121,24 +128,36 @@ export default Vue.extend({
 	}),
 
 	created() {
-		console.log(this.project);
-
 		this.projectName = this.project.name;
 		this.projectDesc = this.project.description;
 		this.projectPublic = this.project.isPublic;
 	},
 
 	methods: {
+		async saveDetails() {
+			if(this.isSaving) return;
+			this.isSaving = true;
+
+			await api.query(SAVE_MUTATION, {
+				id: this.project.id,
+				details: {
+					name: this.projectName,
+					description: this.projectDesc,
+					isPublic: this.projectPublic
+				},
+			});
+
+			this.isSaving = false;
+
+			this.$waveui.notify({
+				message: this.$t('PROJECT_SETTINGS_GENERAL_SAVE_SUCCESS'),
+				success: true
+			});
+		},
 		async deleteProject() {
 			this.deletionActive = true;
 
-			await api.query(gql`
-				mutation ($id: Int!) {
-					deleteProject(id: $id) {
-						id
-					}
-				}
-			`, {
+			await api.query(ARCHIVE_MUTATION, {
 				id: this.project.id
 			});
 
@@ -146,4 +165,20 @@ export default Vue.extend({
 		}
 	}
 });
+
+const SAVE_MUTATION = gql`
+	mutation ($id: Int!, $details: ProjectUpdate!) {
+		updateProject(id: $id, details: $details) {
+			id
+		}
+	}
+`;
+
+const ARCHIVE_MUTATION = gql`
+	mutation ($id: Int!) {
+		deleteProject(id: $id) {
+			id
+		}
+	}
+`;
 </script>

@@ -94,8 +94,8 @@
 	}
 }
 
-label {
-	@apply block text-dark-5 dark:text-light-3 font-medium;
+label:not(:w-checkbox__label) {
+	@apply block text-dark-5 dark:text-light-3 font-medium text-opacity-90 dark:text-opacity-90;
 }
 
 small {

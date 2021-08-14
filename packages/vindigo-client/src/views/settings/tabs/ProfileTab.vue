@@ -38,7 +38,7 @@
 					</label>
 					<w-input
 						v-model="email"
-						class="mb-5 flex-1"
+						class="mb-5"
 					/>
 
 					<label>

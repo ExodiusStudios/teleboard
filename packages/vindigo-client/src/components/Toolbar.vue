@@ -272,31 +272,21 @@
 				{{ $t("CREATE_NEW_PROJECT") }}
 			</section-title>
 
-			<div class="p-2">
-				<label class="text-gray-500 mb-1 mt-3 block text-sm">
-					{{ $t("CREATE_NEW_PROJECT_NAME") }}
-				</label>
+			<div class="p-2 pt-4">
+				<label v-html="$t('CREATE_NEW_PROJECT_NAME')" />
 				<w-input
 					v-model="newProjectName"
-					class="rounded-lg overflow-hidden"
-					bg-color="gray-200"
-					color="gray-700"
+					class="mb-5"
 				/>
 
-				<label class="text-gray-500 mb-1 mt-3 block text-sm">
-					<div v-html="$t('CREATE_NEW_DESC')" />
-				</label>
+				<label v-html="$t('CREATE_NEW_DESC')" />
 				<w-textarea
 					v-model="newProjectDesc"
-					class="rounded-lg overflow-hidden"
-					bg-color="gray-200"
-					color="gray-700"
+					class="mb-5"
 					rows="3"
 				/>
 
-				<label class="text-gray-500 mb-1 mt-3 block text-sm">
-					<div v-html="$t('CREATE_NEW_INVITE_MEMBERS')" />
-				</label>
+				<label v-html="$t('CREATE_NEW_INVITE_MEMBERS')" />
 
 				<div class="addition-list">
 					<!-- TODO Implement member addition -->
@@ -319,7 +309,7 @@
 					</div>
 				</div>
 
-				<div class="flex mt-5">
+				<div class="flex mt-3">
 					<spacer />
 					<w-button
 						v-wave
@@ -347,31 +337,21 @@
 				{{ $t("CREATE_NEW_TEAM") }}
 			</section-title>
 
-			<div class="p-2">
-				<label class="text-gray-500 mb-1 mt-3 block text-sm">
-					{{ $t("CREATE_NEW_TEAM_NAME") }}
-				</label>
+			<div class="p-2 pt-4">
+				<label v-html="$t('CREATE_NEW_TEAM_NAME')" />
 				<w-input
 					v-model="newTeamName"
-					class="rounded-lg overflow-hidden"
-					bg-color="gray-200"
-					color="gray-700"
+					class="mb-5"
 				/>
 
-				<label class="text-gray-500 mb-1 mt-3 block text-sm">
-					<div v-html="$t('CREATE_NEW_DESC')" />
-				</label>
+				<label v-html="$t('CREATE_NEW_DESC')" />
 				<w-textarea
 					v-model="newTeamDesc"
-					class="rounded-lg overflow-hidden"
-					bg-color="gray-200"
-					color="gray-700"
+					class="mb-5"
 					rows="3"
 				/>
 
-				<label class="text-gray-500 mb-1 mt-3 block text-sm">
-					<div v-html="$t('CREATE_NEW_INVITE_MEMBERS')" />
-				</label>
+				<label v-html="$t('CREATE_NEW_INVITE_MEMBERS')" />
 
 				<div class="addition-list">
 					<!-- TODO Implement member addition -->
@@ -394,7 +374,7 @@
 					</div>
 				</div>
 
-				<div class="flex mt-5">
+				<div class="flex mt-3">
 					<spacer />
 					<w-button
 						v-wave

@@ -104,7 +104,23 @@ export default Vue.extend({
 	max-width: 735px;
 
 	.w-input__input-wrap, .w-select__selection-wrap {
-		@apply ring-4 ring-white ring-opacity-40;
+		@apply border-none bg-white text-sm h-9 rounded-lg ring-4 ring-white ring-opacity-40;
+
+		&--round, &--round input {
+			@apply rounded-full;
+		}
+	}
+
+	.w-textarea__textarea-wrap {
+		@apply border-none ring-4 ring-white bg-white ring-opacity-30 text-sm;
+
+		&--round input {
+			@apply rounded-full;
+		}
+
+		&::after {
+			display: none;
+		}
 	}
 
 	&__left {

@@ -5,7 +5,7 @@ import KanbanPage from '../views/project/kanban/KanbanOverview.vue';
 import OverviewPage from '../views/project/overview/ProjectOverview.vue';
 import ProfilePage from '../views/profile/ProfilePage.vue';
 import ProjectPage from '../views/project/ProjectPage.vue';
-import ProjectSettingsPage from '../views/project/settings/tabs/ProjectSettings.vue';
+import ProjectSettingsPage from '../views/project/settings/ProjectSettings.vue';
 import SettingsPage from '../views/settings/Settings.vue';
 import TasksPage from '../views/project/tasks/TasksOverview.vue';
 import { routing } from "..";

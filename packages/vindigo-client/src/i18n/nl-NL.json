@@ -54,6 +54,7 @@
 	"PROJECT_SETTINGS_TAB_COVER": "Omslagfoto",
 	"PROJECT_SETTINGS_TAB_MEMBERS": "Deelnemers",
 	"PROJECT_SETTINGS_TAB_TEAMS": "Organisaties",
+	"PROJECT_SETTINGS_GENERAL_SAVE_SUCCESS": "Project succesvol opgeslagen!",
 
 	"VIEW_HOME": "Home",
 	"VIEW_SETTINGS": "Instellingen",
@@ -71,7 +72,8 @@
 	"SETTINGS_TAB_NOTIFICATION": "Notificatie",
 	"SETTINGS_PROFILE_DESCRIPTION": "Jouw persoonlijk account",
 	"SETTINGS_PROFILE_VIEW_PROFILE": "Bekijk profiel",
-	"SETTINGS_PROFILE_UPDATE_SUCCESS": "Profiel succesvol geupload!",	
+	"SETTINGS_PROFILE_UPDATE_SUCCESS": "Profiel succesvol opgeslagen!",
+		
 	"SIGNIN_WELCOME": "Welkom",
 	"SIGNIN_USERNAME": "Email of Gebruikernaam",
 	"SIGNIN_PASSWORD": "Wachtwoord",

@@ -35,8 +35,10 @@
 	}
 }
 
-/* Input fields */
-.w-input, .w-select {
+/* Top level inputs */
+.w-input, .w-select, .w-textarea {
+	@apply transition-shadow;
+
 	&:not(&--outline) {
 		@apply border-none;
 	}
@@ -46,6 +48,52 @@
 	.dark & .w-select__icon {
 		@apply text-light;
 	}
+
+	input, textarea, select {
+		@apply text-gray-600 dark:text-white text-sm;
+	}
+}
+
+/* Input wrappers */
+.w-input__input-wrap,
+.w-textarea__textarea-wrap,
+.w-select__selection-wrap {
+	@apply border-none rounded-md;
+	@apply pl-2 py-1 !important;
+
+	&--round {
+		@apply rounded-full;
+
+		input {
+			@apply pl-1 !important;
+		}
+	}
+
+	&::after {
+		display: none;
+	}
+
+}
+
+/* Input specific */
+.w-input {
+	&__input-wrap {
+		@apply px-1 bg-light-3 dark:bg-dark-3;
+	}
+}
+
+/* Select specific */
+.w-select {
+	&__select-wrap {
+		@apply px-1 bg-light-3 dark:bg-dark-3;
+	}
+}
+
+/* Textarea specific */
+.w-textarea {
+	&__textarea-wrap {
+		@apply px-1 bg-light-3 dark:bg-dark-3;
+	}
 }
 
 /* Add padding for inner icons */
@@ -53,64 +101,11 @@
 	@apply pl-8 !important;
 }
 
-/* ---------------------- */
-
-/* Input fields */
-.w-input__input-wrap, .w-select__selection-wrap {
-	@apply border-none bg-white text-sm h-9 rounded-lg;
-
-	&--round, &--round input {
-		@apply rounded-full;
-	}
-
-	&::after {
-		display: none;
-	}
-}
-
-/* Textarea fields */
-.w-textarea__textarea-wrap {
-	@apply border-none ring-4 ring-white bg-white ring-opacity-30 text-sm;
-
-	&--round input {
-		@apply rounded-full;
-	}
-
-	&::after {
-		display: none;
-	}
-}
-
-/* ---------------------- */
-
-/* Input elements */
-
-.w-input {
-	@apply rounded-md bg-light-3 outline-none overflow-hidden;
-
-	&__input-wrap, &--filled, &:not(&--filled) {
-		@apply px-1 bg-light-3 dark:bg-dark-3;
-	}
-}
-
-.w-input input, .w-textarea textarea {
-	@apply text-gray-600 dark:text-white;
-}
-
-.w-input--focused {
-	@apply outline-none;
-}
-
-.w-textarea {
-	@apply bg-light-3 rounded-lg overflow-hidden dark:bg-dark-3;
-
-	&__textarea {
-		@apply bg-light-3 py-2 dark:bg-dark-3;
-	}
-
-	&__textarea-wrap {
-		@apply bg-light-3 px-2 dark:bg-dark-3;
-	}
+/* Input focusing */
+.w-input--focused .w-input__input-wrap,
+.w-textarea--focused .w-textarea__textarea-wrap,
+.w-select--focused .w-select__select-wrap {
+	@apply ring-2 ring-accent-1 outline-none;
 }
 
 /* Checkboxes */

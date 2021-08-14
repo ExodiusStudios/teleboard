@@ -29,10 +29,10 @@
 					<section-title icon="mdi mdi-text-box">
 						{{ $t('PROJECT_OVERVIEW_SECTION_INFO') }}
 					</section-title>
-					<div class="project-readme markdown-enabled">
+					<div class="project-readme">
 						<article
 							v-if="project.readmeHtml"
-							class="project-readme__content"
+							class="project-readme__content markdown-enabled"
 							v-html="project.readmeHtml"
 						/>
 						<div v-else class="project-readme__missing">
