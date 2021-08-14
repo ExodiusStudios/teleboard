@@ -100,16 +100,6 @@ export default Vue.extend({
 		@apply pt-5;
 	}
 
-	.setting {
-		small {
-			@apply block opacity-50;
-		}
-
-		&:not(:first-child) {
-			@apply mt-8;
-		}
-	}
-
 	.w-tabs {
 		@apply border-none;
 

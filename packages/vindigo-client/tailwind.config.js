@@ -12,26 +12,30 @@ module.exports = {
 		extend: {
 			colors: {
 				'gray': colors.trueGray,
+				'primary': '#4036b5', // accent-3
 
 				'light': '#FFFFFF',
 				'light-1': '#FAF8FE',
 				'light-2': '#e1e4ee',
 				'light-3': '#e5e5e5',
+				'light-4': '#2f3a41',
+				'light-5': '#293238',
 
 				'dark': '#0f0f0f',
 				'dark-1': '#171717',
 				'dark-2': '#262626',
 				'dark-3': "#35353a",
+				'dark-4': "#272c2f",
+				'dark-5': "#343d42",
 
 				'accent-1': '#8b5cf6',
 				'accent-2': '#6159eb',
 				'accent-3': '#4036b5',
-				'accent-4': '#2f3a41',
-				'accent-5': '#293238'
+				'accent-4': '#4036b5',
 			}
 		},
 		fontFamily: {
-			'sans': ['Ubuntu', 'ui-sans-serif', 'system-ui'],
+			'sans': ['Rubik', 'ui-sans-serif', 'system-ui'],
 			'mono': ['JetBrains Mono', 'ui-monospace', 'Consolas', 'system-ui']
 		},
 		container: {

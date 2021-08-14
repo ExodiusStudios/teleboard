@@ -116,12 +116,6 @@ export default Vue.extend({
 		}
 	},
 
-	mounted() {
-		if(!this.profile) {
-			this.$router.go(0); // HMR Fix
-		}
-	},
-
 	methods: {
 		init(profile: any) {
 			this.profile = profile;

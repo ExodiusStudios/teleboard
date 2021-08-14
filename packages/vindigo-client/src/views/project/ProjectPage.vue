@@ -1,9 +1,6 @@
 <template>
 	<section v-if="project.id" class="project-page flex min-h-screen">
-		<sidebar
-			:project="project"
-			class="bg-accent-4"
-		/>
+		<sidebar :project="project" />
 
 		<section class="flex flex-col flex-grow">
 			<toolbar class="project-toolbar pl-0">
@@ -27,9 +24,10 @@
 						</p>
 						<w-divider />
 						<div class="list-menu__list">
-							<div
+							<router-link
+								to="settings"
 								class="list-menu__item flex items-center"
-								@click="settingsDialog = true"
+								tag="div"
 							>
 								<w-icon size="1.1rem">
 									mdi mdi-cog-outline
@@ -38,11 +36,11 @@
 									<div>
 										Settings
 									</div>
-									<small class="text-gray-400 -mt-1 block">
+									<small class="text-gray-500 -mt-1 block">
 										Project management
 									</small>
 								</div>
-							</div>
+							</router-link>
 							<w-divider />
 							<router-link
 								to=""
@@ -153,22 +151,16 @@
 				</transition>
 			</main>
 		</section>
-
-		<settings-dialog
-			v-model="settingsDialog"
-			:project="project"
-		/>
 	</section>
 </template>
 
 <script lang="ts">
-import Sidebar from './Sidebar.vue';
 import Vue from "vue";
+import Sidebar from './Sidebar.vue';
 import { parseSlug, updateTitle } from '../../util';
+import { profileFragment, teamFragment } from '../../fragments';
 import { api } from '../..';
 import gql from 'graphql-tag';
-import SettingsDialog from './settings/SettingsDialog.vue';
-import { profileFragment, teamFragment } from '../../fragments';
 
 async function fetchProjectData(id: number) {
 	const res = await api.query(gql`
@@ -182,6 +174,7 @@ async function fetchProjectData(id: number) {
 				coverImage
 				projectUrl
 				accentColor
+				isPublic
 				members {
 					member {
 						...AllProfileFields
@@ -205,8 +198,7 @@ export default Vue.extend({
 	name: 'ProjectPage',
 
 	components: {
-		Sidebar,
-		SettingsDialog
+		Sidebar
 	},
 
 	async beforeRouteEnter(to, _from, next) {
@@ -227,15 +219,8 @@ export default Vue.extend({
 	},
 
 	data: () => ({
-		project: {} as any,
-		settingsDialog: false
+		project: {} as any
 	}),
-
-	mounted() {
-		if(!this.project.id) {
-			this.$router.go(0);
-		}
-	},
 
 	methods: {
 		// NOTE Invoked from creation menu

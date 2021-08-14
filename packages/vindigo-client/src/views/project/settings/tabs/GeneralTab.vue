@@ -1,33 +1,52 @@
 <template>
-	<div>
-		<label class="text-gray-500 mb-1 block text-sm">
-			{{ $t("CREATE_NEW_PROJECT_NAME") }}
-		</label>
+	<div class="setting">
+		<label v-html="$t('CREATE_NEW_PROJECT_NAME')" />
 		<w-input
 			v-model="projectName"
-			class="rounded-lg overflow-hidden"
-			bg-color="gray-200"
-			color="gray-700"
+			class="rounded-lg overflow-hidden mb-5"
 		/>
 
-		<label class="text-gray-500 mb-1 mt-3 block text-sm">
-			<div v-html="$t('CREATE_NEW_DESC')" />
-		</label>
+		<label v-html="$t('CREATE_NEW_DESC')" />
 		<w-textarea
 			v-model="projectDesc"
-			class="rounded-lg overflow-hidden mb-3"
-			bg-color="gray-200"
-			color="gray-700"
+			class="rounded-lg overflow-hidden mb-5"
 			rows="3"
 		/>
 
+		<label>Public access</label>
+		<small>
+			Setting your project to be publically accessible means everyone will be able to view it as <em>guest</em>
+		</small>
+		<w-switch
+			v-model="projectPublic"
+			class="rounded-lg overflow-hidden mb-4"
+		/>
+
+		<div class="block">
+			<w-button class="mx-0 mt-2" @click="saveUserProfile">
+				{{ $t('GENERAL_SAVE') }}
+				<w-icon class="ml-2">
+					mdi mdi-content-save
+				</w-icon>
+			</w-button>
+		</div>
+
+		<hr class="my-5">
+
+		<label>
+			Archive project
+		</label>
+		<small>
+			Archiving this project will lock it from further modifications and will hide it from the project listings. 
+		</small>
+
 		<w-button
 			v-wave
-			class="mx-0 text-red-400"
+			class="mx-0 mt-2 text-red-400"
 			outline
 			@click="deletionDialog = true"
 		>
-			Close project
+			Archive project
 			<w-icon class="pl-2">
 				mdi mdi-delete
 			</w-icon>
@@ -86,6 +105,7 @@
 import Vue from 'vue';
 import gql from 'graphql-tag';
 import { api } from '../../../..';
+
 export default Vue.extend({
 	name: 'GeneralTab',
 
@@ -94,14 +114,18 @@ export default Vue.extend({
 	data: () => ({
 		projectName: '',
 		projectDesc: '',
+		projectPublic: false,
 
 		deletionDialog: false,
 		deletionActive: false
 	}),
 
 	created() {
+		console.log(this.project);
+
 		this.projectName = this.project.name;
 		this.projectDesc = this.project.description;
+		this.projectPublic = this.project.isPublic;
 	},
 
 	methods: {

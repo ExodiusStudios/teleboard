@@ -74,8 +74,8 @@
 	pre {
 		@apply bg-light-2 dark:bg-dark-2 p-3 mb-3 rounded-lg overflow-auto;
 
-		font-size: 85%;
-		line-height: 1.45;
+		font-size: 95%;
+		line-height: 1.4;
 		word-break: normal;
 		word-wrap: normal;
 	
