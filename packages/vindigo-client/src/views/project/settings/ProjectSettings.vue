@@ -1,6 +1,6 @@
 <template>
 	<section class="project-settings">
-		<div class="bg-light dark:bg-dark h-40" />
+		<div class="bg-light dark:bg-dark h-24" />
 		<main class="mt-[-60px]" role="main">
 			<section class="container container--thin">
 				<w-tabs
