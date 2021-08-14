@@ -62,12 +62,12 @@
 			dialog-class="rounded-xl"
 			width="350"
 		>
-			<section-title icon="mdi mdi-delete" class="text-red-400">
+			<section-title icon="mdi mdi-delete" class="text-red-400 dark:text-red-400">
 				Close project
 			</section-title>
 
 			<div class="my-4">
-				<p class="mb-1">
+				<p class="text-dark mb-1">
 					Are you sure you want to continue?
 				</p>
 				<small class="text-gray-500">
