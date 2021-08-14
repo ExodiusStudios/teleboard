@@ -1,6 +1,5 @@
 <template>
 	<div class="profile-page">
-		
 		<div class="profile-details">
 			<w-flex wrap>
 				<div class="picture-upload sm12 md2">
@@ -15,8 +14,8 @@
 						:src="preview || require('/assets/avatar-placeholder.svg')"
 					>
 					<file-upload
-						class="mt-5 w-full"
-						v-model="avatar" 
+						v-model="avatar"
+						class="mt-5 w-full" 
 						@preview="showPreview"
 					>
 						<w-button class="w-full h-9 ml-0">
@@ -24,52 +23,58 @@
 						</w-button>
 					</file-upload>
 				</div>
-				<div class="sm12 md10 laptop:pl-5 mobile:pl-0">
+				<w-form class="sm12 md10 laptop:pl-5 mobile:pl-0">
+					<label>
+						Full name
+					</label>
+					
 					<w-input
-						class="co"
 						v-model="fullname"
-						:placeholder="$t('GENERAL_FULL_NAME')"
-						tile inner-icon-left="mdi mdi-account"
-						inner-icon-right="mdi mdi-exclamation-thick text-red-500"
+						class="mb-5"
 					/>
 
+					<label>
+						Email address
+					</label>
 					<w-input
 						v-model="email"
-						class="mt-5 flex-1"
-						:placeholder="$t('GENERAL_EMAIL')"
-						tile inner-icon-left="mdi mdi-mail"
-						inner-icon-right="mdi mdi-exclamation-thick text-red-500"
+						class="mb-5 flex-1"
 					/>
 
+					<label>
+						Username
+					</label>
 					<w-input
 						v-model="username"
-						class="mt-5"
-						:placeholder="$t('GENERAL_USERNAME')"
-						tile inner-icon-left="mdi mdi-account"
-						inner-icon-right="mdi mdi-exclamation-thick text-red-500"
+						class="mb-5"
 					/>
+
+					<label>
+						Bio <small>(Optional)</small>
+					</label>
+					<!-- REMOVE: :placeholder="$t('SETTINGS_PROFILE_BIO')" -->
 					<w-textarea
 						v-model="bio"
-						class="mt-5"
-						:placeholder="$t('SETTINGS_PROFILE_BIO')"
+						class="mb-5"
+						placeholder="Enter bio..."
 					/>
 	
+					<label>
+						Website <small>(Optional)</small>
+					</label>
 					<w-input
 						v-model="website"
-						class="mt-5"
-						:placeholder="$t('SETTINGS_PROFILE_WEBSITE')"
-						tile inner-icon-left="mdi mdi-earth"
+						placeholder="Enter website URL..."
 					/>
 
 					<w-button class="mt-5 -ml-0" @click="saveUserProfile">
-						{{ $t("SETTINGS_PROFILE_SAVE") }}
+						{{ $t('GENERAL_SAVE') }}
 						<w-icon class="ml-2">
 							mdi mdi-content-save
 						</w-icon>
 					</w-button>
-				</div>
+				</w-form>
 			</w-flex>
-
 		</div>
 	</div>
 </template>
@@ -144,37 +149,6 @@ export default Vue.extend({
 			@apply bg-light-1 dark:bg-dark-3 rounded-full ;
 			width: 148px;
 			height: 148px;
-		}
-	}
-
-	.profile-details {
-
-		.w-input {
-			@apply rounded-md bg-light-3 px-3 outline-none overflow-hidden;
-
-			&__input-wrap, &--filled, &:not(&--filled) {
-				@apply bg-light-3 dark:bg-dark-3;
-			}
-		}
-
-		.w-input input, .w-textarea textarea {
-			@apply text-gray-500 dark:text-white;
-		}
-
-		.w-input--focused {
-			outline: unset !important;
-		}
-
-		.w-textarea {
-			@apply bg-light-3 rounded-lg overflow-hidden dark:bg-dark-3;
-
-			&__textarea {
-				@apply bg-light-3 px-3 py-2 dark:bg-dark-3;
-			}
-
-			&__textarea-wrap {
-				@apply bg-light-3 dark:bg-dark-3;
-			}
 		}
 	}
 </style>

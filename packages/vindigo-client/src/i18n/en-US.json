@@ -56,6 +56,7 @@
 	"PROJECT_SETTINGS_TAB_TEAMS": "Teams",
 
 	"VIEW_HOME": "Home",
+	"VIEW_SETTINGS": "Settings",
 	"VIEW_OVERVIEW": "Overview",
 	"VIEW_TASKS": "Tasks",
 	"VIEW_KANBAN": "Kanban",
@@ -70,10 +71,7 @@
 	"SETTINGS_TAB_NOTIFICATION": "Notification",
 	"SETTINGS_PROFILE_DESCRIPTION": "Your personal account",
 	"SETTINGS_PROFILE_VIEW_PROFILE": "View profile",
-	"SETTINGS_PROFILE_SAVE": "Save",
 	"SETTINGS_PROFILE_UPDATE_SUCCESS": "Profile updated successfully!",
-	"SETTINGS_PROFILE_BIO": "Bio (Optional)",
-	"SETTINGS_PROFILE_WEBSITE": "Website (Optional)",
 
 	"SIGNIN_WELCOME": "Welcome",
 	"SIGNIN_USERNAME": "Email or Username",
@@ -88,6 +86,7 @@
 
 	"PROJECT_OPTIONS": "Project Options",
 
+	"GENERAL_SAVE": "Save",
 	"GENERAL_FULL_NAME": "Full Name",
 	"GENERAL_EMAIL": "Email Address",
 	"GENERAL_USERNAME": "Username",

@@ -90,6 +90,6 @@ export default Vue.extend({
 }
 
 .avatar__placeholder {
-	@apply bg-light-3 rounded-full flex items-center justify-center font-bold dark:bg-dark-2;
+	@apply bg-light-3 text-black dark:text-light rounded-full flex items-center justify-center font-semibold dark:bg-dark-2;
 }
 </style>

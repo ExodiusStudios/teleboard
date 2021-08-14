@@ -52,9 +52,13 @@ export default Vue.extend({
 
 	computed: {
 		highlightStyle(): any {
-			return {
+			const hasOrder = this.$route.meta?.order !== undefined;
+
+			return hasOrder ? {
 				top: (this.$route.meta!.order * 56) + 'px',
 				backgroundColor: this.project.accentColor
+			} : {
+				display: 'none'
 			};
 		}
 	},
@@ -64,7 +68,10 @@ export default Vue.extend({
 
 		// initializing list items
 		this.listItems = _.chain(route.children)
-			.map((child) => ({
+			.filter(child =>
+				child.meta?.order !== undefined
+			)
+			.map(child => ({
 				name: child.meta?.name,
 				icon: child.meta?.icon,
 				rank: child.meta?.order,
@@ -81,7 +88,7 @@ export default Vue.extend({
 
 <style lang="postcss">
 .sidebar {
-	@apply w-14;
+	@apply w-14 bg-light-4 dark:bg-dark-4;
 
 	&__inner {
 		@apply sticky top-0;
@@ -92,10 +99,10 @@ export default Vue.extend({
 	}
 
 	&__item {
-		@apply cursor-pointer transition-colors hover:bg-accent-5;
+		@apply cursor-pointer transition-colors hover:bg-light-5 dark:hover:bg-dark-5;
 
 		&:first-child {
-			@apply bg-accent-5;
+			@apply bg-light-5 dark:bg-dark-5;
 
 			img {
 				@apply transition-transform;

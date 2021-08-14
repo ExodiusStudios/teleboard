@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<section class="setting">
+		<section class="mb-5">
 			<div class="flex items-center mb-1">
 				<w-switch
 					v-model="darkMode"
@@ -13,7 +13,7 @@
 				Choose a theme that Vindigo will appear as to you
 			</small>
 		</section>
-		<section class="setting">
+		<section>
 			<label>
 				{{ $t('SETTINGS_APPEARANCE_LANGUAGE') }}
 			</label>

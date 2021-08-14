@@ -9,11 +9,11 @@
 				:profile="$vuex.state.profile"
 				:open-profile="false"
 			/>
-			<div class="pl-6 dark:text-gray-100">
-				<h2 class="font-extrabold text-2xl">
+			<div class="pl-6 dark:text-gray-100 font-semibold text-2xl">
+				<h2>
 					{{ $t('HOMEPAGE_WELCOME') }}
 				</h2>
-				<h1 class="font-extrabold text-2xl">
+				<h1>
 					{{ firstName }}
 				</h1>
 			</div>

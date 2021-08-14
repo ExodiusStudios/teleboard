@@ -56,6 +56,7 @@
 	"PROJECT_SETTINGS_TAB_TEAMS": "Organisaties",
 
 	"VIEW_HOME": "Home",
+	"VIEW_SETTINGS": "Instellingen",
 	"VIEW_OVERVIEW": "Overzicht",
 	"VIEW_TASKS": "Takenlijst",
 	"VIEW_KANBAN": "Kanban",
@@ -70,12 +71,7 @@
 	"SETTINGS_TAB_NOTIFICATION": "Notificatie",
 	"SETTINGS_PROFILE_DESCRIPTION": "Jouw persoonlijk account",
 	"SETTINGS_PROFILE_VIEW_PROFILE": "Bekijk profiel",
-	"SETTINGS_PROFILE_FULL_NAME": "Volledige Naam",
-	"SETTINGS_PROFILE_SAVE": "Opslaan",
-	"SETTINGS_PROFILE_UPDATE_SUCCESS": "Profiel succesvol geupload!",
-	"SETTINGS_PROFILE_BIO": "Bio (Optioneel)",
-	"SETTINGS_PROFILE_WEBSITE": "Website (Optioneel)",
-	
+	"SETTINGS_PROFILE_UPDATE_SUCCESS": "Profiel succesvol geupload!",	
 	"SIGNIN_WELCOME": "Welkom",
 	"SIGNIN_USERNAME": "Email of Gebruikernaam",
 	"SIGNIN_PASSWORD": "Wachtwoord",
@@ -89,6 +85,7 @@
 
 	"PROJECT_OPTIONS": "Project Opties",
 
+	"GENERAL_SAVE": "Opslaan",
 	"GENERAL_FULL_NAME": "Volledige Naam",
 	"GENERAL_EMAIL": "Email Adres",
 	"GENERAL_USERNAME": "Gebruikernaam",

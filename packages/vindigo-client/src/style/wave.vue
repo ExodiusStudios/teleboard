@@ -53,6 +53,8 @@
 	@apply pl-8 !important;
 }
 
+/* ---------------------- */
+
 /* Input fields */
 .w-input__input-wrap, .w-select__selection-wrap {
 	@apply border-none bg-white text-sm h-9 rounded-lg;
@@ -76,6 +78,38 @@
 
 	&::after {
 		display: none;
+	}
+}
+
+/* ---------------------- */
+
+/* Input elements */
+
+.w-input {
+	@apply rounded-md bg-light-3 outline-none overflow-hidden;
+
+	&__input-wrap, &--filled, &:not(&--filled) {
+		@apply px-1 bg-light-3 dark:bg-dark-3;
+	}
+}
+
+.w-input input, .w-textarea textarea {
+	@apply text-gray-600 dark:text-white;
+}
+
+.w-input--focused {
+	@apply outline-none;
+}
+
+.w-textarea {
+	@apply bg-light-3 rounded-lg overflow-hidden dark:bg-dark-3;
+
+	&__textarea {
+		@apply bg-light-3 py-2 dark:bg-dark-3;
+	}
+
+	&__textarea-wrap {
+		@apply bg-light-3 px-2 dark:bg-dark-3;
 	}
 }
 

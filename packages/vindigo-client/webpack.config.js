@@ -113,7 +113,10 @@ module.exports = {
 		})
 	],
 	devServer: {
-		hot: true,
+		// Unfortunately hot reloading causes all kinds of stupid issues
+		// such as beforeRouteEnter() not calling, as well as hot reloading
+		// suddenly deciding to stop out of the blue.
+		hot: false,
 		port: 8080,
 		compress: true,
 		historyApiFallback: true,

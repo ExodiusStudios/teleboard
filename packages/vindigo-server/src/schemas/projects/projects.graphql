@@ -69,6 +69,7 @@ type Project {
 	backgroundImage: String
 	isClosed: Boolean!
 	isStarred: Boolean!
+	isPublic: Boolean!
 	creator: Profile!
 	tasks: [Task!]!
 	members: [ProjectMember!]!
