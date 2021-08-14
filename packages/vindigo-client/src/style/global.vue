@@ -5,6 +5,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
+html {
+	@apply overflow-y-scroll;
+}
+
 .sortable-drag { opacity: 0; }
 
 .container--thin {
