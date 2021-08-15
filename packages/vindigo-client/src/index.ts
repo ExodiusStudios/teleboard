@@ -17,7 +17,7 @@ import dayjs from 'dayjs';
 import { registerComponents } from './registry/components';
 import { registerPlugins } from './registry/plugins';
 import { registerRoutes } from './registry/routes';
-import { registerState } from './registry/store/state';
+import { registerState } from './store/state';
 
 dayjs.extend(RelativeTime);
 

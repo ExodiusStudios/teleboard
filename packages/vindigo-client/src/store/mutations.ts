@@ -2,7 +2,7 @@ import { identity, values } from "lodash";
 
 import { MutationTree } from "vuex";
 import { RootState } from "./state";
-import { clientReadyTask } from "../../util";
+import { clientReadyTask } from "../util";
 
 /**
  * Register store mutations
