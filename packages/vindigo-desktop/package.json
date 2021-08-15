@@ -1,0 +1,21 @@
+{
+    "name": "vindigo-desktop",
+    "version": "1.0.0",
+    "private": true,
+    "main": "dist/index.js",
+    "scripts": {
+        "watch": "nodemon",
+        "build": "gulp",
+        "start": "electron ."
+    },
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-sourcemaps": "^3.0.0",
+        "gulp-typescript": "^6.0.0-alpha.1",
+        "nodemon": "^2.0.12",
+        "typescript": "^4.2.4"
+    },
+    "dependencies": {
+        "electron": "^13.1.9"
+    }
+}

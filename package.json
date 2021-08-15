@@ -16,7 +16,8 @@
 		"packages/vindigo-config",
 		"packages/vindigo-server",
 		"packages/vindigo-client",
-		"packages/vindigo-cli"
+		"packages/vindigo-cli",
+		"packages/vindigo-desktop"
 	],
 	"engines": {
 		"node": ">=10.12.0"
