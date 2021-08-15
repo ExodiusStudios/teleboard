@@ -15,26 +15,8 @@
 			"path": "packages/vindigo-cli/",
 			"group": "build",
 			"problemMatcher": [],
-			"label": "Build CLI",
+			"label": "CLI - Build",
 			"detail": "Build the cli distribution files"
-		},
-		{
-			"type": "npm",
-			"script": "build",
-			"path": "packages/vindigo-server/",
-			"group": "build",
-			"problemMatcher": [],
-			"label": "Build Server",
-			"detail": "Build the server distribution files"
-		},
-		{
-			"type": "npm",
-			"script": "build",
-			"path": "packages/vindigo-client/",
-			"group": "build",
-			"problemMatcher": [],
-			"label": "Build Client",
-			"detail": "Build the client distribution files"
 		},
 		{
 			"type": "npm",
@@ -42,8 +24,17 @@
 			"path": "packages/vindigo-cli/",
 			"group": "build",
 			"problemMatcher": [],
-			"label": "Watch CLI",
+			"label": "CLI - Watch",
 			"detail": "Automatically compile the CLI"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "packages/vindigo-server/",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "Server - Build",
+			"detail": "Build the server distribution files"
 		},
 		{
 			"type": "npm",
@@ -51,8 +42,17 @@
 			"path": "packages/vindigo-server/",
 			"group": "build",
 			"problemMatcher": [],
-			"label": "Watch Server",
+			"label": "Server - Watch",
 			"detail": "Automatically compile the server"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "packages/vindigo-client/",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "Client - Build",
+			"detail": "Build the client distribution files"
 		},
 		{
 			"type": "npm",
@@ -60,8 +60,26 @@
 			"path": "packages/vindigo-client/",
 			"group": "build",
 			"problemMatcher": [],
-			"label": "Watch Client",
+			"label": "Client - Watch",
 			"detail": "Run the webpack development server"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "packages/vindigo-desktop/",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "Desktop - Build",
+			"detail": "Build the desktop Electron app"
+		},
+		{
+			"type": "npm",
+			"script": "watch",
+			"path": "packages/vindigo-desktop/",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "Desktop - Watch",
+			"detail": "Automatically compile the desktop app"
 		},
 		{
 			"type": "npm",
@@ -69,7 +87,7 @@
 			"path": "packages/vindigo-config/",
 			"group": "build",
 			"problemMatcher": [],
-			"label": "Build Config",
+			"label": "Config - Build",
 			"detail": "Build the config distribution files"
 		},
 		{
