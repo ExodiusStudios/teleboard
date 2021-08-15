@@ -83,9 +83,21 @@ export default Vue.extend({
 	computed: {
 		infoBarItems(): any[] {
 			return [
-				{ icon: 'mdi mdi-bookmark-check', name: 'GENERAL_TASK', value: 3 },
-				{ icon: 'mdi mdi-account', name: 'GENERAL_MEMBER', value: 3 },
-				{ icon: 'mdi mdi-account-group', name: 'GENERAL_TEAM', value: 3 }
+				{
+					name: 'GENERAL_TASK',
+					icon: 'mdi mdi-bookmark-check',
+					value: 0
+				},
+				{
+					name: 'GENERAL_MEMBER',
+					icon: 'mdi mdi-account',
+					value: this.project.members.length
+				},
+				{
+					name: 'GENERAL_TEAM',
+					icon: 'mdi mdi-account-group',
+					value: this.project.teams.length
+				}
 			];
 		},
 		titleBarStyle(): any {
