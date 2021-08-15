@@ -35,6 +35,15 @@
 						@click="resetCover"
 					/>
 					<w-button
+						v-else-if="projectCoverPreview"
+						class="bg rounded-full shadow-lg w-11 h-11"
+						icon="mdi mdi-delete"
+						bg-color="red-500"
+						color="white"
+						lg
+						@click="removeCover"
+					/>
+					<w-button
 						class="bg rounded-full shadow-lg w-11 h-11"
 						icon="mdi mdi-pencil"
 						bg-color="accent-1"
@@ -159,6 +168,7 @@ export default Vue.extend({
 
 		projectCover: null,
 		projectCoverPreview: '',
+		projectRemoveCover: false,
 
 		deletionDialog: false,
 		deletionActive: false
@@ -174,10 +184,15 @@ export default Vue.extend({
 	methods: {
 		updatePreview(preview: string) {
 			this.projectCoverPreview = preview;
+			this.projectRemoveCover = false;
 		},
 		resetCover() {
 			this.projectCoverPreview = this.project.coverImage;
 			this.projectCover = null;
+		},
+		removeCover() {
+			this.projectCoverPreview = '';
+			this.projectRemoveCover = true;
 		},
 		async saveDetails() {
 			if(this.isSaving) return;
@@ -192,7 +207,8 @@ export default Vue.extend({
 				details: {
 					name: this.projectName,
 					description: this.projectDesc,
-					isPublic: this.projectPublic
+					isPublic: this.projectPublic,
+					removeCover: this.projectRemoveCover
 				}
 			});
 

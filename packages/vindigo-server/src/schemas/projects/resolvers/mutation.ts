@@ -100,8 +100,9 @@ export default {
 			mutation.description = details.description || null;
 		}
 
-		if(details.coverImage !== undefined) {
-			mutation.coverImage = details.coverImage || null;
+		// TODO Delete the actual image from disk
+		if(details.removeCover) {
+			mutation.coverImage = null;
 		}
 
 		return await database.project.update({
@@ -110,5 +111,5 @@ export default {
 			},
 			data: mutation
 		});
-	},
+	}
 } as GraphQLResolvers;

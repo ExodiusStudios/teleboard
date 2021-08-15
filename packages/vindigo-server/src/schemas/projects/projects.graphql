@@ -44,8 +44,8 @@ input ProjectUpdate {
     name: String
     readme: String
     description: String
-    coverImage: String
 	isPublic: Boolean
+	removeCover: Boolean
 }
 
 """
