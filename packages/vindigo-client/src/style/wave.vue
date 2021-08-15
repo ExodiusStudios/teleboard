@@ -133,7 +133,7 @@
 		@apply rounded-full;
 	}
 
-	&--icon {
+	&--icon:not(.bg) {
 		@apply bg-transparent border-none !important;
 	}
 

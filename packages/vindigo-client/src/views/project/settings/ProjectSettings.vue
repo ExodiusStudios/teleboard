@@ -47,10 +47,6 @@ export default Vue.extend({
 					content: InformationTab 
 				},
 				{ 
-					title: this.$t('PROJECT_SETTINGS_TAB_COVER'), 
-					content: undefined 
-				},
-				{ 
 					title: this.$t('PROJECT_SETTINGS_TAB_MEMBERS'), 
 					content: undefined 
 				},

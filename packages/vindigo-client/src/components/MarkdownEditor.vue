@@ -135,8 +135,6 @@ export default Vue.extend({
 		},
 
 		applyBold() {
-			console.log('bruh moment');
-
 			this.toggleAround('**', '**');
 		},
 

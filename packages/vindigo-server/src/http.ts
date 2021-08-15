@@ -25,6 +25,7 @@ import path from "path";
 import session from 'express-session';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import ws from "ws";
+import { UploadCoverController } from "./routes/upload/cover";
 
 /**
  * Used to enable type checking for resolver
@@ -254,6 +255,7 @@ export class HTTPService {
 		});
 
 		this.express.post('/upload/avatar', uploader, new UploadAvatarController().build());
+		this.express.post('/upload/cover', uploader, new UploadCoverController().build());
 	}
 }
 

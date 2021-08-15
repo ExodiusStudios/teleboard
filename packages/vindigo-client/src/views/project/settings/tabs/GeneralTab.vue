@@ -13,12 +13,46 @@
 			rows="3"
 		/>
 
+		<label>Cover image</label>
+		<div class="mb-5 w-52 relative">
+			<img
+				:src="projectCoverPreview || require('/assets/avatar-placeholder.svg')"
+				class="cover-preview"
+			>
+			<file-upload
+				v-model="projectCover"
+				class="absolute -bottom-5 -right-5"
+				@preview="updatePreview"
+			>
+				<template #activator="{ on }">
+					<w-button
+						v-if="projectCover"
+						class="bg rounded-full shadow-lg w-11 h-11"
+						icon="mdi mdi-close"
+						bg-color="gray-700"
+						color="white"
+						lg
+						@click="resetCover"
+					/>
+					<w-button
+						class="bg rounded-full shadow-lg w-11 h-11"
+						icon="mdi mdi-pencil"
+						bg-color="accent-1"
+						color="white"
+						lg
+						v-on="on"
+					/>
+				</template>
+			</file-upload>
+		</div>
+
 		<label>Public access</label>
 		<small>
 			Setting your project to be publically accessible means everyone will be able to view it as <em>guest</em>
 		</small>
 		<w-switch
 			v-model="projectPublic"
+			color="success"
 			class="mb-4"
 		/>
 
@@ -123,6 +157,9 @@ export default Vue.extend({
 		projectDesc: '',
 		projectPublic: false,
 
+		projectCover: null,
+		projectCoverPreview: '',
+
 		deletionDialog: false,
 		deletionActive: false
 	}),
@@ -131,12 +168,24 @@ export default Vue.extend({
 		this.projectName = this.project.name;
 		this.projectDesc = this.project.description;
 		this.projectPublic = this.project.isPublic;
+		this.projectCoverPreview = this.project.coverImage;
 	},
 
 	methods: {
+		updatePreview(preview: string) {
+			this.projectCoverPreview = preview;
+		},
+		resetCover() {
+			this.projectCoverPreview = this.project.coverImage;
+			this.projectCover = null;
+		},
 		async saveDetails() {
 			if(this.isSaving) return;
 			this.isSaving = true;
+
+			if(this.projectCover != null) {
+				await api.upload(`cover?project=${this.project.id}`, this.projectCover!);
+			}
 
 			await api.query(SAVE_MUTATION, {
 				id: this.project.id,
@@ -144,7 +193,7 @@ export default Vue.extend({
 					name: this.projectName,
 					description: this.projectDesc,
 					isPublic: this.projectPublic
-				},
+				}
 			});
 
 			this.isSaving = false;
@@ -182,3 +231,9 @@ const ARCHIVE_MUTATION = gql`
 	}
 `;
 </script>
+
+<style lang="postcss">
+.cover-preview {
+	@apply h-32 w-52 rounded-xl object-cover;
+}
+</style>

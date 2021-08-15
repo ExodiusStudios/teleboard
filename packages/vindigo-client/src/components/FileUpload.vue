@@ -1,7 +1,7 @@
 <template>
 	<div class="file-upload">
-		<div class="file-upload__trigger" @click="openPicker">
-			<slot />
+		<div class="file-upload__trigger">
+			<slot name="activator" :on="handlers" />
 		</div>
 		<input
 			ref="uploadInput"
@@ -27,6 +27,11 @@ export default Vue.extend({
 	computed: {
 		hasPreviewListener(): boolean {
 			return this.$listeners && !!this.$listeners.preview;
+		},
+		handlers(): any {
+			return {
+				click: this.openPicker
+			};
 		}
 	},
 
