@@ -1,5 +1,5 @@
 <template>
-	<div class="setting">
+	<section>
 		<label v-html="$t('CREATE_NEW_PROJECT_NAME')" />
 		<w-input
 			v-model="projectName"
@@ -102,7 +102,7 @@
 				</w-button>
 			</div>
 		</w-dialog>
-	</div>
+	</section>
 </template>
 
 <script lang="ts">
@@ -150,7 +150,7 @@ export default Vue.extend({
 			this.isSaving = false;
 
 			this.$waveui.notify({
-				message: this.$t('PROJECT_SETTINGS_GENERAL_SAVE_SUCCESS'),
+				message: this.$t('PROJECT_SETTINGS_SAVE_SUCCESS'),
 				success: true
 			});
 		},

@@ -1,4 +1,5 @@
 import 'wave-ui/dist/wave-ui.css';
+import 'codemirror/lib/codemirror.css';
 import './style/global.vue';
 import './style/wave.vue';
 import './style/markdown.vue';

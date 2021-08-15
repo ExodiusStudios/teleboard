@@ -1022,6 +1022,13 @@
     "@types/connect" "*"
     "@types/node" "*"
 
+"@types/codemirror@^5.60.2":
+  version "5.60.2"
+  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-5.60.2.tgz#1f8b604964efb4fa2f5a6d6d8c5656f93a050d8a"
+  integrity sha512-tk8YxckrdU49GaJYRKxdzzzXrTlyT2nQGnobb8rAk34jt+kYXOxPKGqNgr7SJpl5r6YGaRD4CDfqiL+6A+/z7w==
+  dependencies:
+    "@types/tern" "*"
+
 "@types/common-tags@^1.8.1":
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/@types/common-tags/-/common-tags-1.8.1.tgz#a5a49ca5ebbb58e0f8947f3ec98950c8970a68a9"
@@ -1275,6 +1282,13 @@
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@types/tailwindcss/-/tailwindcss-2.2.1.tgz#891349cc71b5a85208ca5796938d91dd48cc0417"
   integrity sha512-raLwtQF+uul9lsvs7+GUizeNrpxRqbnckIu/va5hzPPwZsImZunkyLFAS/1rwEHhhvFMNiMJmTiP5PPGa0oNJA==
+
+"@types/tern@*":
+  version "0.23.4"
+  resolved "https://registry.yarnpkg.com/@types/tern/-/tern-0.23.4.tgz#03926eb13dbeaf3ae0d390caf706b2643a0127fb"
+  integrity sha512-JAUw1iXGO1qaWwEOzxTKJZ/5JxVeON9kvGZ/osgZaJImBnyjyn0cjovPsf6FNLmyGY8Vw9DoXZCMlfMkMwHRWg==
+  dependencies:
+    "@types/estree" "*"
 
 "@types/through@*":
   version "0.0.30"
@@ -2695,6 +2709,11 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
+
+codemirror@^5.62.2:
+  version "5.62.2"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.62.2.tgz#bce6d19c9829e6e788f83886d48ecf5c1e106e65"
+  integrity sha512-tVFMUa4J3Q8JUd1KL9yQzQB0/BJt7ZYZujZmTPgo/54Lpuq3ez4C8x/ATUY/wv7b7X3AUq8o3Xd+2C5ZrCGWHw==
 
 collection-map@^1.0.0:
   version "1.0.0"

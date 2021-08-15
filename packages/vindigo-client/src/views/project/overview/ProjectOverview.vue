@@ -126,7 +126,7 @@ export default Vue.extend({
 	min-height: 250px;
 
 	&__content {
-		@apply rounded-3xl overflow-hidden;
+		@apply rounded-3xl;
 	}
 
 	&__missing {

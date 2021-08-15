@@ -4,6 +4,7 @@ import FileUpload from '../components/FileUpload.vue';
 import LanguagePicker from '../components/LanguagePicker.vue';
 import LoadingSpinner from '../components/LoadingSpinner.vue';
 import Logo from '../components/Logo.vue';
+import MarkdownEditor from '../components/MarkdownEditor.vue';
 import Pagination from '../components/Pagination.vue';
 import ProjectList from '../components/ProjectList.vue';
 import SectionTitle from '../components/SectionTitle.vue';
@@ -18,6 +19,7 @@ import Vue from 'vue';
 export function registerComponents() {
 	Vue.component('LanguagePicker', LanguagePicker);
 	Vue.component('LoadingSpinner', LoadingSpinner);
+	Vue.component('MarkdownEditor', MarkdownEditor);
 	Vue.component('SectionTitle', SectionTitle);
 	Vue.component('ProjectList', ProjectList);
 	Vue.component('Pagination', Pagination);

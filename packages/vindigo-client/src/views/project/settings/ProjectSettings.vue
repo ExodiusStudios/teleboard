@@ -28,6 +28,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import GeneralTab from './tabs/GeneralTab.vue';
+import InformationTab from './tabs/InformationTab.vue';
 
 export default Vue.extend({
 	name: 'ProjectSettings',
@@ -43,19 +44,19 @@ export default Vue.extend({
 				},
 				{ 
 					title: this.$t('PROJECT_SETTINGS_TAB_INFORMATION'), 
-					content: GeneralTab 
+					content: InformationTab 
 				},
 				{ 
 					title: this.$t('PROJECT_SETTINGS_TAB_COVER'), 
-					content: GeneralTab 
+					content: undefined 
 				},
 				{ 
 					title: this.$t('PROJECT_SETTINGS_TAB_MEMBERS'), 
-					content: GeneralTab 
+					content: undefined 
 				},
 				{ 
 					title: this.$t('PROJECT_SETTINGS_TAB_TEAMS'), 
-					content: GeneralTab 
+					content: undefined 
 				}
 			];
 		}

@@ -5,10 +5,6 @@
 		@apply pt-0 mb-3;
 	}
 
-	a {
-		@apply text-accent-1;
-	}
-
 	hr {
 		@apply bg-light-2 dark:bg-dark-2;
 
@@ -84,5 +80,39 @@
 		}
 	}
 	
+}
+
+.cm-s-vindigo {
+	font-family: 'JetBrains Mono';
+
+	span.cm-meta { color: #808000; }
+	span.cm-number { color: #4a7edf; }
+	span.cm-keyword { line-height: 1em; font-weight: bold; color: #000080; }
+	span.cm-atom { font-weight: bold; color: #000080; }
+	span.cm-def { color: #000000; }
+	span.cm-variable { color: black; }
+	span.cm-variable-2 { color: black; }
+	span.cm-variable-3, .cm-s-idea span.cm-type { color: black; }
+	span.cm-property { color: black; }
+	span.cm-operator { color: black; }
+	span.cm-comment { color: #455696; }
+	span.cm-string { color: #209dd6; }
+	span.cm-string-2 { color: #4db149; }
+	span.cm-qualifier { color: #7c7266; }
+	span.cm-error { color: #FF0000; }
+	span.cm-attribute { color: #e4bd3f; }
+	span.cm-tag { color: #f3863e; }
+	span.cm-link { color: #8b5cf6; }
+	span.cm-builtin { color: #30a; }
+	span.cm-bracket { color: #cc7; }
+
+	.CodeMirror-matchingbracket {
+		outline: 1px solid grey;
+		color: black !important;
+	}
+
+	.CodeMirror-activeline-background {
+		background: #FFFAE3;
+	}
 }
 </style>

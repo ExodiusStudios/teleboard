@@ -5,9 +5,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
-body {
-	@apply overflow-y-scroll;
-}
 
 .sortable-drag { opacity: 0; }
 
@@ -98,7 +95,13 @@ body {
 	}
 }
 
-label:not(:w-checkbox__label) {
+/* Element styling */
+
+body {
+	@apply overflow-y-scroll;
+}
+
+label:not(.w-checkbox__label) {
 	@apply block text-dark-5 dark:text-light-3 font-medium text-opacity-90 dark:text-opacity-90;
 }
 
@@ -112,6 +115,10 @@ label small {
 
 label + small {
 	@apply block -mt-1 mb-1;
+}
+
+a {
+	@apply text-accent-1;
 }
 
 </style>
