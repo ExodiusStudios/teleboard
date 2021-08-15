@@ -41,7 +41,7 @@ export default Vue.extend({
 		const container = this.$refs.container as HTMLElement;
 		
 		this.editor = createEditor(container, {
-			value: this.value,
+			value: this.value || '',
 			mode: 'gfm',
 			theme: 'vindigo',
 			extraKeys: {
