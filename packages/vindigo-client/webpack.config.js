@@ -113,11 +113,8 @@ module.exports = {
 		})
 	],
 	devServer: {
-		// Unfortunately hot reloading causes all kinds of stupid issues
-		// such as beforeRouteEnter() not calling, as well as hot reloading
-		// suddenly deciding to stop out of the blue.
-		hot: false,
 		port: 8080,
+		open: true,
 		compress: true,
 		historyApiFallback: true,
 		contentBase: path.join(__dirname, 'public'),
@@ -125,11 +122,19 @@ module.exports = {
 			errors: true,
 			warnings: false
 		},
+
+		// Forward connections to the locally
+		// running vindigo server.
 		proxy: {
 			'/data': 'http://localhost:8085',
 			'/upload': 'http://localhost:8085',
 			'/graphql': 'http://localhost:8085',
 			'/subscription': 'http://localhost:8085'
-		}
+		},
+
+		// Unfortunately hot reloading causes all kinds of stupid issues
+		// such as beforeRouteEnter() not calling, as well as hot reloading
+		// suddenly deciding to stop out of the blue.
+		hot: false,
 	}
 };
