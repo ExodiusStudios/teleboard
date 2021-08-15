@@ -104,7 +104,7 @@
 	span.cm-tag { color: #f3863e; }
 	span.cm-link { color: #8b5cf6; }
 	span.cm-builtin { color: #30a; }
-	span.cm-bracket { color: #cc7; }
+	span.cm-bracket { color: #a34831; }
 
 	.CodeMirror-matchingbracket {
 		outline: 1px solid grey;

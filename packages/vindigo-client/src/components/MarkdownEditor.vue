@@ -44,6 +44,7 @@ export default Vue.extend({
 			value: this.value || '',
 			mode: 'gfm',
 			theme: 'vindigo',
+			lineWrapping: true,
 			extraKeys: {
 				"Ctrl-B": this.applyBold.bind(this),
 				"Ctrl-I": this.applyItalicize.bind(this),

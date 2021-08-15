@@ -83,6 +83,8 @@ const SAVE_MUTATION = gql`
 
 <style lang="postcss">
 .info-editor .CodeMirror {
-	@apply rounded-md ring-2 ring-light-2;
+	@apply rounded-md ring-2 ring-light-2 !important;
+
+	height: 400px;
 }
 </style>
