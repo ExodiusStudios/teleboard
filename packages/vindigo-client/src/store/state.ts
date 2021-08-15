@@ -1,8 +1,8 @@
-import { ClientConfig } from "../../model/config";
+import { ClientConfig } from "../model/config";
 import { Dictionary } from "vue-router/types/router";
-import { Optional } from "../../typings/types";
-import { Profile } from "../../model/profile";
-import { store } from "../..";
+import { Optional } from "../typings/types";
+import { Profile } from "../model/profile";
+import { store } from "..";
 import { storeActions } from "./actions";
 import { storeGetters } from "./getters";
 import { storeMutations } from "./mutations";
