@@ -1,7 +1,7 @@
 import { config, logger } from '.';
 import nodemailer, { Transporter } from 'nodemailer';
 
-import { IServerConfig } from './util/config';
+import { IServerConfig } from 'vindigo-config';
 import directTransport from 'nodemailer-direct-transport';
 
 /**

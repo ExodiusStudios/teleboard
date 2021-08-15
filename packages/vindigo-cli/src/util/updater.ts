@@ -3,7 +3,7 @@
 import compare from 'semver-compare';
 import consola from 'consola';
 import fetch from 'node-fetch';
-import { readConfig } from '../../../vindigo-server/dist/util/config';
+import { readConfig } from 'vindigo-config';
 import { trimStart } from 'lodash';
 
 const RELEASE_URL = 'https://api.github.com/repos/ExodiusStudios/vindigo/releases/latest';

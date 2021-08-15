@@ -1,4 +1,4 @@
-import { IServerConfig, readConfig } from "../../../vindigo-server/dist/util/config";
+import { IServerConfig, readConfig } from "vindigo-config";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 
 import { assertInWorkingDirectory } from "../util";

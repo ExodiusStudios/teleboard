@@ -7,7 +7,7 @@ import { ApiError } from "./util/errors";
 import { GraphQLError } from "graphql";
 import { IPrisma } from "@quixo3/prisma-session-store/dist/@types";
 import { IResolvers } from "graphql-tools";
-import { IServerConfig } from "./util/config";
+import { IServerConfig } from "vindigo-config";
 import { Nullable } from "./typings/types";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 import { Server } from "http";

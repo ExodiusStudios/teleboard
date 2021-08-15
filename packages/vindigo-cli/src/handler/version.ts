@@ -3,7 +3,7 @@ import { getCurrentVersion, getLatestVersion } from "../util/updater";
 import chalk from "chalk";
 import compare from 'semver-compare';
 import consola from "consola";
-import { readConfig } from "../../../vindigo-server/dist/util/config";
+import { readConfig } from "vindigo-config";
 
 export async function handleVersion() {
 	const config = readConfig();

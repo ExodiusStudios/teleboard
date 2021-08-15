@@ -1,4 +1,4 @@
-import { IServerConfig } from "./util/config";
+import { IServerConfig } from "vindigo-config";
 
 /**
  * The service in charge of managing routing 

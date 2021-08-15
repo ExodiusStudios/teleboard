@@ -1,4 +1,4 @@
-import { IServerConfig, readConfig } from 'vindigo-server/dist/util/config';
+import { IServerConfig, readConfig } from 'vindigo-config';
 import { assertConfigExists, assertInWorkingDirectory, getResource } from "../util";
 import { isProduction, pollDatabase } from 'vindigo-server/dist/util/helpers';
 import knex, { Knex } from "knex";

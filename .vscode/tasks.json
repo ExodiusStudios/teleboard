@@ -65,6 +65,15 @@
 		},
 		{
 			"type": "npm",
+			"script": "build",
+			"path": "packages/vindigo-config/",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "Build Config",
+			"detail": "Build the config distribution files"
+		},
+		{
+			"type": "npm",
 			"script": "lint",
 			"group": "build",
 			"problemMatcher": [],

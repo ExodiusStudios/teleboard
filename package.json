@@ -13,6 +13,7 @@
 		"docker:publish": "yarn docker:build && docker push macjuul/vindigo"
 	},
 	"workspaces": [
+		"packages/vindigo-config",
 		"packages/vindigo-server",
 		"packages/vindigo-client",
 		"packages/vindigo-cli"

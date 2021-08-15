@@ -7,7 +7,7 @@ import { MailingService } from "./mailer";
 import ON_DEATH from 'death';
 import { PrismaClient } from "@prisma/client";
 import fs from 'fs';
-import { readConfig } from "./util/config";
+import { readConfig } from "vindigo-config";
 import { registerSchemas } from "./registry/schemas";
 
 // Assert CLI bootstrap
