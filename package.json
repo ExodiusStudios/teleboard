@@ -6,7 +6,6 @@
 	"author": "Julian Mills",
 	"license": "MIT",
 	"scripts": {
-		"build": "yarn workspaces run build",
 		"lint": "eslint . --ext .ts,.vue",
 		"lint:fix": "eslint . --fix --ext .ts,.vue",
 		"docker:build": "docker build . -t vindigo -t macjuul/vindigo",

@@ -57,14 +57,14 @@ yargs
 		handler: handleInit
 	})
 	.command({
-		command: 'check-version',
-		describe: 'Query the latest version',
-		handler: handleVersion
-	})
-	.command({
 		command: 'update',
 		describe: 'Perform update scripts',
 		handler: handleUpdate
+	})
+	.command({
+		command: 'check-version',
+		describe: 'Query the latest version',
+		handler: handleVersion
 	})
 	.command({
 		command: 'migrate:make <name>',

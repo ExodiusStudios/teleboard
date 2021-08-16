@@ -1,5 +1,4 @@
 import consola, { LogLevel } from "consola";
-import { isProduction, pollDatabase } from "./util/helpers";
 
 import { ExtensionService } from "./extensions";
 import { HTTPService } from "./http";
@@ -7,7 +6,7 @@ import { MailingService } from "./mailer";
 import ON_DEATH from 'death';
 import { PrismaClient } from "@prisma/client";
 import fs from 'fs';
-import { readConfig } from "vindigo-config";
+import { isProduction, pollDatabase, readConfig } from "vindigo-config";
 import { registerSchemas } from "./registry/schemas";
 
 // Assert CLI bootstrap
@@ -60,7 +59,7 @@ registerSchemas();
 
 (async () => {
 	try {
-		await pollDatabase(logger, config.database);
+		await pollDatabase(logger, config);
 		await http.start();
 	} catch(err) {
 		logger.error(err);

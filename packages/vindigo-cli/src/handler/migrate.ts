@@ -1,6 +1,6 @@
 import { IServerConfig, readConfig } from 'vindigo-config';
 import { assertConfigExists, assertInWorkingDirectory, getResource } from "../util";
-import { isProduction, pollDatabase } from 'vindigo-server/dist/util/helpers';
+import { isProduction, pollDatabase } from 'vindigo-config';
 import knex, { Knex } from "knex";
 import path, { basename } from "path";
 
@@ -13,44 +13,43 @@ export async function handleMigrateMake(args: any) {
 	assertConfigExists();
 
 	const config = readConfig();
-	const migrator = await initMigrator(config);
-    
-	const fullName = await migrator.make(args.name, {
-		directory: path.join(__dirname, '../../src/migrations')
-	});
 	
-	const fileName = basename(fullName);
-
-	consola.success(chalk`Created new migration {cyanBright ${fileName}}`);
-	process.exit(0);
+	await withDatabase(config, async (db) => {
+		const fullName = await db.migrate.make(args.name, {
+			directory: path.join(__dirname, '../../src/migrations')
+		});
+		
+		const fileName = basename(fullName);
+	
+		consola.success(chalk`Created new migration {cyanBright ${fileName}}`);
+	});
 }
 
-export async function handleMigrateUp(args: any) {
+export async function handleMigrateUp() {
 	assertInWorkingDirectory();
 	assertConfigExists();
     
 	const config = readConfig();
-	const migrator = await initMigrator(config);
-	const list = await migrator.list();
+	
+	await withDatabase(config, async (db) => {
+		const list = await db.migrate.list();
 
-	if(list[1].length < 1) {
-		consola.info('Migrations already up-to-date');
-	} else {
-		consola.info('Applying migrations...');
-		const then = Date.now();
+		if(list[1].length < 1) {
+			consola.info('Migrations already up-to-date');
+		} else {
+			consola.info('Applying migrations...');
+			const then = Date.now();
 
+			await db.migrate.latest();
+			await generatePrisma();
 
-		await migrator.latest();
-		await generatePrisma();
+			const current = await getCurrent(db);
+			const diff = Date.now() - then;
 
-		const current = await getCurrent(migrator);
-		const diff = Date.now() - then;
-
-		consola.success(`Migrations executed (${diff}ms)`);
-		consola.info(chalk`Now at {greenBright ${current}}`);
-	}
-
-	process.exit(0);
+			consola.success(`Migrations executed (${diff}ms)`);
+			consola.info(chalk`Now at {greenBright ${current}}`);
+		}
+	});
 }
 
 export async function handleMigrateDown(args: any) {
@@ -58,25 +57,26 @@ export async function handleMigrateDown(args: any) {
 	assertConfigExists();
     
 	const config = readConfig();
-	const migrator = await initMigrator(config);
-	const list = await migrator.list();
 	
-	if(list[0].length < 1) {
-		consola.info('Migrations already up-to-date');
-	} else {
-		if(args.all) {
-			await migrator.rollback({}, true);
-
-			consola.success('Rolled back all migration successfully');
+	await withDatabase(config, async (db) => {
+		const list = await db.migrate.list();
+		
+		if(list[0].length < 1) {
+			consola.info('Migrations already up-to-date');
 		} else {
-			await migrator.down();
-			const current = await getCurrent(migrator);
-			
-			consola.success(chalk`Rolled back migration, now at {greenBright ${current}}`);
-		}
-	}
+			if(args.all) {
+				await db.migrate.rollback({}, true);
 
-	process.exit(0);
+				consola.success('Rolled back all migration successfully');
+			} else {
+				await db.migrate.down();
+				const current = await getCurrent(db);
+				
+				consola.success(chalk`Rolled back migration, now at {greenBright ${current}}`);
+			}
+		}
+
+	});
 }
 
 export async function handleMigrateStatus() {
@@ -84,18 +84,19 @@ export async function handleMigrateStatus() {
 	assertConfigExists();
 
 	const config = readConfig();
-	const migrator = await initMigrator(config);
-	const current = await getCurrent(migrator);
-	const list = await migrator.list();
+	
+	await withDatabase(config, async (db) => {
+		const current = await getCurrent(db);
+		const list = await db.migrate.list();
 
-	if(list[1].length < 1) {
-		consola.info('Migrations already up-to-date');
-	} else {
-		consola.info(chalk`There are {cyanBright ${list[1].length}} pending migrations available`);
-	}
+		if(list[1].length < 1) {
+			consola.info('Migrations already up-to-date');
+		} else {
+			consola.info(chalk`There are {cyanBright ${list[1].length}} pending migrations available`);
+		}
 
-	consola.info(chalk`Currently at: {greenBright ${current}}`);
-	process.exit(0);
+		consola.info(chalk`Currently at: {greenBright ${current}}`);
+	});
 }
 
 export async function handleMigrateGenerate() {
@@ -118,11 +119,11 @@ function buildConnection({ database }: IServerConfig): Knex.StaticConnectionConf
 	};
 }
 
-async function initMigrator(config: IServerConfig): Promise<Knex.Migrator> {
+async function withDatabase(config: IServerConfig, callback: (db: Knex) => Promise<any>) {
 
 	// Attempt to establish a connection to the database
 	// and fail with a user error upon timeout.
-	await pollDatabase(consola, config.database);
+	await pollDatabase(consola, config);
 	
 	const options: Knex.Config = {
 		debug: !isProduction(),
@@ -173,11 +174,17 @@ async function initMigrator(config: IServerConfig): Promise<Knex.Migrator> {
 		}
 	}
 
-	return knex(options).migrate;
+	const db = knex(options);
+	
+	try {
+		await callback(db);
+	} finally {
+		db.destroy();
+	}
 }
 
-async function getCurrent(migrator: Knex.Migrator) {
-	const list = await migrator.list();
+async function getCurrent(database: Knex) {
+	const list = await database.migrate.list();
 	const completed = list[0];
 
 	if(completed.length < 1) return 'none';
