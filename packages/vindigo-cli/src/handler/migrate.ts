@@ -35,6 +35,7 @@ export async function handleMigrateUp() {
 		const list = await db.migrate.list();
 
 		if(list[1].length < 1) {
+			await generatePrisma();
 			consola.info('Migrations already up-to-date');
 		} else {
 			consola.info('Applying migrations...');

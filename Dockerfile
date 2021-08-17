@@ -13,7 +13,10 @@ RUN yarn install
 
 # Build the source
 COPY . .
-RUN yarn build
+
+# Trigger the default setup and generation
+# of most distribution files.
+RUN node vindigo init --defaults --skip-migrate
 
 # Start the app platform
 VOLUME ["/vindigo/data"]

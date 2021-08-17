@@ -3,4 +3,5 @@
 Dockerfile
 docker-compose.yml
 node_modules
+prisma
 data

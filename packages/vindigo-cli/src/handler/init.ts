@@ -6,7 +6,7 @@ import consola from 'consola';
 import { getResource } from '../util';
 import inquirer from 'inquirer';
 import { randomBytes } from 'crypto';
-import { handleMigrateUp } from './migrate';
+import { handleMigrateGenerate, handleMigrateUp } from './migrate';
 import { buildClientAndServer } from '../util/builder';
 
 const DEFAULT_CONFIG = getResource('config.default.toml');
@@ -141,8 +141,15 @@ export async function handleInit(args: any) {
 	mkdirSync(parentDir, { recursive: true });
 	writeFileSync(ACTUAL_CONFIG, finalConfig);
 
-	await handleMigrateUp();
-	await buildClientAndServer();
+	if(!args['skip-migrate']) {
+		await handleMigrateUp();
+	} else {
+		await handleMigrateGenerate();
+	}
+
+	if(!args['skip-build']) {
+		await buildClientAndServer();
+	}
 
 	consola.success(chalk`Successfully generated the configuration file ({yellow ${parentDir}/config.toml})`);
 	consola.success(chalk`Use {cyanBright vindigo start} to start the Vindigo server`);
