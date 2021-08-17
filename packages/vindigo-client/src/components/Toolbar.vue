@@ -152,9 +152,17 @@
 			<!-- Notification button -->
 			<w-button
 				v-wave
-				class="mr-3 text-gray-600 dark:text-gray-100"
+				class="mr-0 text-gray-600 dark:text-gray-100"
 				icon="mdi mdi-bell"
-				to="#"
+				xl
+			/>
+
+			<!-- Explorer button -->
+			<w-button
+				v-wave
+				class="mr-3 text-gray-600 dark:text-gray-100"
+				icon="mdi mdi-compass"
+				route="/explorer"
 				xl
 			/>
 

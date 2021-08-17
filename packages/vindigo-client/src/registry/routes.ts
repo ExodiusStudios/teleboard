@@ -9,6 +9,8 @@ import ProjectSettingsPage from '../views/project/settings/ProjectSettings.vue';
 import SettingsPage from '../views/settings/Settings.vue';
 import TasksPage from '../views/project/tasks/TasksOverview.vue';
 import Authenticate from '../views/authenticate/Authenticate.vue';
+import Verification from '../views/authenticate/Verification.vue';
+import Completion from '../views/authenticate/Completion.vue';
 import { routing } from "..";
 
 /**
@@ -22,6 +24,24 @@ export function registerRoutes() {
 		component: HomePage,
 		meta: {
 			title: ''
+		}
+	});
+
+	routing.defineRoute({
+		path: '/authenticate/verify',
+		name: 'Verify Account',
+		component: Verification,
+		meta: {
+			title: 'Verify Account'
+		}
+	});
+
+	routing.defineRoute({
+		path: '/authenticate/complete',
+		name: 'Registration Complete',
+		component: Completion,
+		meta: {
+			title: 'Registration Complete'
 		}
 	});
 

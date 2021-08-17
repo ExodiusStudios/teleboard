@@ -94,7 +94,7 @@ export default Vue.extend({
 			if (!profile) {
 				this.$waveui.notify(this.$t("NOTIFICATION_INVALID_DETAILS"), "error");
 			} else {
-				this.$router.push('/');
+				this.$router.push('/authenticate/complete');
 			}
 
 			this.loading = false;
