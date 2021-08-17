@@ -16,8 +16,8 @@ COPY . .
 
 # Trigger the default setup and generation
 # of most distribution files.
-RUN node vindigo init --skip-config --skip-migrate
-
+RUN node vindigo init --defaults --skip-migrate
+RUN rm ./data/config.toml
 
 # Start the app platform
 VOLUME ["/vindigo/data"]

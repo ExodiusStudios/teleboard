@@ -53,8 +53,6 @@ yargs
 		}).option('defaults', {
 			alias: 'D',
 			describe: 'Use default values without prompt'
-		}).option('skip-config', {
-			describe: 'Skip the config generation'
 		}).option('skip-migrate', {
 			describe: 'Skip the initial migration process'
 		}).option('skip-generate', {
