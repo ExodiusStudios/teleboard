@@ -53,18 +53,22 @@ yargs
 		}).option('defaults', {
 			alias: 'D',
 			describe: 'Use default values without prompt'
+		}).option('skip-migrate', {
+			describe: 'Skip the initial migration process'
+		}).option('skip-build', {
+			describe: 'Skip the initial server and client build process'
 		}),
 		handler: handleInit
-	})
-	.command({
-		command: 'check-version',
-		describe: 'Query the latest version',
-		handler: handleVersion
 	})
 	.command({
 		command: 'update',
 		describe: 'Perform update scripts',
 		handler: handleUpdate
+	})
+	.command({
+		command: 'check-version',
+		describe: 'Query the latest version',
+		handler: handleVersion
 	})
 	.command({
 		command: 'migrate:make <name>',

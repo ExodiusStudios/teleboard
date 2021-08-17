@@ -8,6 +8,7 @@ import ProjectPage from '../views/project/ProjectPage.vue';
 import ProjectSettingsPage from '../views/project/settings/ProjectSettings.vue';
 import SettingsPage from '../views/settings/Settings.vue';
 import TasksPage from '../views/project/tasks/TasksOverview.vue';
+import Authenticate from '../views/authenticate/Authenticate.vue';
 import { routing } from "..";
 
 /**
@@ -21,6 +22,15 @@ export function registerRoutes() {
 		component: HomePage,
 		meta: {
 			title: ''
+		}
+	});
+
+	routing.defineRoute({
+		path: '/authenticate',
+		name: 'Authenticate',
+		component: Authenticate,
+		meta: {
+			title: 'Authenticate'
 		}
 	});
 

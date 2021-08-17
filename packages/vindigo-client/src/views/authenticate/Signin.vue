@@ -34,7 +34,9 @@
 					{{ $t("SIGNIN_REMEMBER_ME") }}
 				</w-checkbox>
 				<spacer />
-				<a href="">{{ $t("SIGNIN_FORGOT_PASSWORD") }}</a>
+				<a class="text-white" href="">
+					{{ $t("SIGNIN_FORGOT_PASSWORD") }}
+				</a>
 			</div>
 			<spacer />
 			<w-button
@@ -93,6 +95,8 @@ export default Vue.extend({
 
 			if (!profile) {
 				this.$waveui.notify(this.$t("NOTIFICATION_INVALID_DETAILS"), "error");
+			} else {
+				this.$router.push('/');
 			}
 
 			this.loading = false;
@@ -102,7 +106,6 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss">
-
 .sign-in {
 
 	.auth-box__input input {
@@ -110,5 +113,4 @@ export default Vue.extend({
 	}
 
 }
-
 </style>

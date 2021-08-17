@@ -102,180 +102,197 @@
 			</template>
 		</w-menu>
 
-		<!-- ANCHOR Create new button -->
-		<w-menu
-			hide-on-menu-click
-			align-center
-			custom
-		>
-			<template #activator="{ on }">
-				<w-button
-					v-wave
-					class="mr-0 text-accent-2 dark:text-accent-1"
-					icon="mdi mdi-plus-circle"
-					to="#"
-					xl
-					v-on="on"
-				/>
-			</template>
-			<div class="list-menu">
-				<p class="list-menu__title">
-					{{ $t("TOOLBAR_CREATE") }}
-				</p>
-				<w-divider />
-				<div class="list-menu__list">
-					<template v-for="(item, i) in creationItems">
-						<w-divider
-							v-if="item == MENU_DIVIDER"
-							:key="i"
-						/>
-						<div
-							v-else
-							:key="i"
-							class="list-menu__item"
-							@click="item.handler"
-						>
-							<w-icon size="1.1rem">
-								{{ item.icon }}
-							</w-icon>
-							{{ $t(item.title) }}
-							<p class="text-gray-400">
-								{{ $t(item.description) }}
-							</p>
-						</div>
-					</template>
-				</div>
-			</div>
-		</w-menu>
-
-		<!-- Notification button -->
-		<w-button
-			v-wave
-			class="mr-3 text-gray-600 dark:text-gray-100"
-			icon="mdi mdi-bell"
-			to="#"
-			xl
-		/>
-
-		<div class="toolbar__divider mr-4" />
-
-		<!-- ANCHOR Account menu -->
-		<w-menu
-			align-right
-			custom
-		>
-			<template #activator="{ on }">
-				<div
-					class="flex items-center text-gray-800 cursor-pointer"
-					v-on="on"
-				>
-					<h1 class="mb-0 font-semibold dark:text-gray-100">
-						{{ userName }}
-					</h1>
-					<avatar
-						class="ml-2"
-						:profile="$vuex.state.profile"
-						:open-profile="false"
+		<template v-if="$vuex.state.profile">
+			<!-- ANCHOR Create new button -->
+			<w-menu
+				hide-on-menu-click
+				align-center
+				custom
+			>
+				<template #activator="{ on }">
+					<w-button
+						v-wave
+						class="mr-0 text-accent-2 dark:text-accent-1"
+						icon="mdi mdi-plus-circle"
+						to="#"
+						xl
+						v-on="on"
 					/>
-				</div>
-			</template>
-			<div class="list-menu">
-				<p class="list-menu__title">
-					{{ $t("YOUR_ACCOUNT") }}
-				</p>
-				<w-divider />
-				<div class="list-menu__list">
-					<router-link
-						:to="`/profile/${userID}`"
-						class="list-menu__item"
-						tag="div"
-					>
-						<w-icon size="1.1rem">
-							mdi mdi-account
-						</w-icon>
-						{{ $t("YOUR_ACCOUNT_PROFILE") }}
-					</router-link>
-					<router-link
-						to=""
-						class="list-menu__item"
-						tag="div"
-					>
-						<w-icon size="1.1rem">
-							mdi mdi-animation
-						</w-icon>
-						{{ $t("YOUR_ACCOUNT_PROJECTS") }}
-					</router-link>
-					<router-link
-						to=""
-						class="list-menu__item"
-						tag="div"
-					>
-						<w-icon size="1.1rem">
-							mdi mdi-briefcase
-						</w-icon>
-						{{ $t("YOUR_ACCOUNT_TEAMS") }}
-					</router-link>
-					<router-link
-						to=""
-						class="list-menu__item"
-						tag="div"
-					>
-						<w-icon size="1.1rem">
-							mdi mdi-google-analytics
-						</w-icon>
-						{{ $t("YOUR_ACCOUNT_ACTIVITY") }}
-					</router-link>
+				</template>
+				<div class="list-menu">
+					<p class="list-menu__title">
+						{{ $t("TOOLBAR_CREATE") }}
+					</p>
 					<w-divider />
-					<router-link
-						v-show="admin"
-						to="/admin"
-						class="list-menu__item"
-						tag="div"
-					>
-						<w-icon size="1.1rem">
-							mdi mdi-gavel
-						</w-icon>
-						{{ $t("YOUR_ACCOUNT_ADMIN") }}
-					</router-link>
-					<router-link
-						to="/settings"
-						class="list-menu__item"
-						tag="div"
-					>
-						<w-icon size="1.1rem">
-							mdi mdi-cog-outline
-						</w-icon>
-						{{ $t("YOUR_ACCOUNT_SETTINGS") }}
-					</router-link>
-					<a
-						href="https://github.com/ExodiusStudios/vindigo"
-						class="list-menu__item block"
-						target="_blank"
-					>
-						<w-icon size="1.1rem">
-							mdi mdi-help-circle-outline
-						</w-icon>
-						{{ $t("YOUR_ACCOUNT_HELP") }}
-						<w-icon
-							size="0.8rem"
-							class="translate-y-0.5"
-						>
-							mdi mdi-open-in-new
-						</w-icon>
-					</a>
-					<w-divider />
-					<div
-						class="list-menu__item text-red-400"
-						@click="$store.dispatch('signOut')"
-					>
-						<w-icon size="1.1rem">
-							mdi mdi-logout
-						</w-icon>
-						{{ $t("YOUR_ACCOUNT_SIGN_OUT") }}
+					<div class="list-menu__list">
+						<template v-for="(item, i) in creationItems">
+							<w-divider
+								v-if="item == MENU_DIVIDER"
+								:key="i"
+							/>
+							<div
+								v-else
+								:key="i"
+								class="list-menu__item"
+								@click="item.handler"
+							>
+								<w-icon size="1.1rem">
+									{{ item.icon }}
+								</w-icon>
+								{{ $t(item.title) }}
+								<p class="text-gray-400">
+									{{ $t(item.description) }}
+								</p>
+							</div>
+						</template>
 					</div>
 				</div>
-			</div>
-		</w-menu>
+			</w-menu>
+
+			<!-- Notification button -->
+			<w-button
+				v-wave
+				class="mr-3 text-gray-600 dark:text-gray-100"
+				icon="mdi mdi-bell"
+				to="#"
+				xl
+			/>
+
+			<div class="toolbar__divider mr-4" />
+
+			<!-- ANCHOR Account menu -->
+			<w-menu
+				v-if="$vuex.state.profile"
+				align-right
+				custom
+			>
+				<template #activator="{ on }">
+					<div
+						class="flex items-center text-gray-800 cursor-pointer"
+						v-on="on"
+					>
+						<h1 class="mb-0 font-semibold dark:text-gray-100">
+							{{ userName }}
+						</h1>
+						<avatar
+							class="ml-2"
+							:profile="$vuex.state.profile"
+							:open-profile="false"
+						/>
+					</div>
+				</template>
+				<div class="list-menu">
+					<p class="list-menu__title">
+						{{ $t("YOUR_ACCOUNT") }}
+					</p>
+					<w-divider />
+					<div class="list-menu__list">
+						<router-link
+							:to="`/profile/${userID}`"
+							class="list-menu__item"
+							tag="div"
+						>
+							<w-icon size="1.1rem">
+								mdi mdi-account
+							</w-icon>
+							{{ $t("YOUR_ACCOUNT_PROFILE") }}
+						</router-link>
+						<router-link
+							to=""
+							class="list-menu__item"
+							tag="div"
+						>
+							<w-icon size="1.1rem">
+								mdi mdi-animation
+							</w-icon>
+							{{ $t("YOUR_ACCOUNT_PROJECTS") }}
+						</router-link>
+						<router-link
+							to=""
+							class="list-menu__item"
+							tag="div"
+						>
+							<w-icon size="1.1rem">
+								mdi mdi-briefcase
+							</w-icon>
+							{{ $t("YOUR_ACCOUNT_TEAMS") }}
+						</router-link>
+						<router-link
+							to=""
+							class="list-menu__item"
+							tag="div"
+						>
+							<w-icon size="1.1rem">
+								mdi mdi-google-analytics
+							</w-icon>
+							{{ $t("YOUR_ACCOUNT_ACTIVITY") }}
+						</router-link>
+						<w-divider />
+						<router-link
+							v-show="admin"
+							to="/admin"
+							class="list-menu__item"
+							tag="div"
+						>
+							<w-icon size="1.1rem">
+								mdi mdi-gavel
+							</w-icon>
+							{{ $t("YOUR_ACCOUNT_ADMIN") }}
+						</router-link>
+						<router-link
+							to="/settings"
+							class="list-menu__item"
+							tag="div"
+						>
+							<w-icon size="1.1rem">
+								mdi mdi-cog-outline
+							</w-icon>
+							{{ $t("YOUR_ACCOUNT_SETTINGS") }}
+						</router-link>
+						<a
+							href="https://github.com/ExodiusStudios/vindigo"
+							class="list-menu__item block"
+							target="_blank"
+						>
+							<w-icon size="1.1rem">
+								mdi mdi-help-circle-outline
+							</w-icon>
+							{{ $t("YOUR_ACCOUNT_HELP") }}
+							<w-icon
+								size="0.8rem"
+								class="translate-y-0.5"
+							>
+								mdi mdi-open-in-new
+							</w-icon>
+						</a>
+						<w-divider />
+						<div
+							class="list-menu__item text-red-400"
+							@click="$store.dispatch('signOut')"
+						>
+							<w-icon size="1.1rem">
+								mdi mdi-logout
+							</w-icon>
+							{{ $t("YOUR_ACCOUNT_SIGN_OUT") }}
+						</div>
+					</div>
+				</div>
+			</w-menu>
+		</template>
+		<div v-else>
+			<w-button
+				bg-color="accent-1"
+				color="white"
+				route="/authenticate"
+			>
+				<w-icon class="mr-1 pr-2">
+					mdi mdi-key-variant
+				</w-icon>
+				Sign in
+				<span class="text-white text-opacity-50 px-1">/</span>
+				Sign up
+			</w-button>
+		</div>
 
 		<!-- ANCHOR Project creation dialog -->
 		<w-dialog

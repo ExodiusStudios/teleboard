@@ -7,7 +7,7 @@ import { logger } from "./util";
  * The service in charge of managing application
  * wide state.
  */
-export class StoreService implements StoreNamespace<RootState> {
+export class StoreService {
 
 	public instance!: Store<RootState>;
 	
@@ -79,27 +79,6 @@ export class StoreService implements StoreNamespace<RootState> {
 		return namespace;
 	}
 
-	// Delegate to the core state
-
-	public readonly id = 'core';
-
-	// TODO This doesnt work at all?
-
-	private get core() {
-		return this.modules['core']!;
-	}
-
-	public get state(): RootState {
-		return this.core.state!;
-	}
-
-	public get mutations(): MutationTree<RootState> {
-		return this.core.mutations!;
-	}
-
-	public get actions(): ActionTree<RootState, RootState> {
-		return this.core.actions!;
-	}
 }
 
 /**

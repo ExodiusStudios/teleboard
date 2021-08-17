@@ -11,7 +11,9 @@ if(!existsSync(entrypoint)) {
 	consola.info('Missing CLI distribution files, building...');
 
 	try {
-		execSync('yarn build');
+		execSync('yarn install');
+		execSync('yarn workspace vindigo-config build');
+		execSync('yarn workspace vindigo-cli build');
 	} catch(err) {
 		console.error('Failed to build distribution files');
 		throw err;

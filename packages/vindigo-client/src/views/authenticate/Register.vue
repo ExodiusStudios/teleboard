@@ -84,12 +84,18 @@ export default Vue.extend({
 		async register() {
 			this.loading = true;
 
-			await this.$vuex.dispatch("signUp", {
+			const profile = await this.$vuex.dispatch("signUp", {
 				fullname: this.fullname,
 				email: this.email,
 				password: this.password,
 				remember: this.remember,
 			});
+
+			if (!profile) {
+				this.$waveui.notify(this.$t("NOTIFICATION_INVALID_DETAILS"), "error");
+			} else {
+				this.$router.push('/');
+			}
 
 			this.loading = false;
 		},
@@ -98,7 +104,6 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss">
-
 .sign-up {
 
 	.auth-box__input input {
@@ -106,5 +111,4 @@ export default Vue.extend({
 	}
 
 }
-
 </style>

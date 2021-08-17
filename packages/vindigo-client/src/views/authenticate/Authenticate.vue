@@ -56,10 +56,19 @@
 import Vue from "vue";
 import SignIn from "./Signin.vue";
 import SignUp from "./Register.vue";
-import { RootState } from "../../registry/store/state";
+import { RootState } from "../../store/state";
+import { store } from "../..";
 
 export default Vue.extend({
 	name: "Authenticate",
+
+	beforeRouteEnter(_to, _from, next) {
+		if(store.instance.state.profile) {
+			next('/');
+		} else {
+			next();
+		}
+	},
 
 	data: () => ({
 		isSigningUp: false,
@@ -75,7 +84,7 @@ export default Vue.extend({
 			return (this.$store.state as RootState).config.instanceName;
 		},
 		renderBoardName(): boolean {
-			return this.boardName.toLowerCase() != "vindigo";
+			return this.boardName.toLowerCase() != 'vindigo';
 		},
 		authView() {
 			return this.isSigningUp ? SignUp : SignIn;

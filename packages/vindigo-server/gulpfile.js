@@ -1,13 +1,17 @@
 const {series, parallel, src, dest} = require('gulp');
 const ts = require('gulp-typescript');
 const sm = require('gulp-sourcemaps');
+const rimraf = require('rimraf');
 const path = require('path');
-const fs = require('fs');
 
 // Declare constants
 const tsProject = ts.createProject('tsconfig.json');
 const distDir = path.join(__dirname, 'dist');
-const distTempDir = path.join(__dirname, 'dist-temp');
+
+// Cleaning the distribution files
+function clean(cb) {
+	rimraf(distDir, cb);
+}
 
 // Typescript source files
 function typescript() {
@@ -15,35 +19,13 @@ function typescript() {
 		.pipe(sm.init())
 		.pipe(tsProject())
 		.pipe(sm.write())
-		.pipe(dest(distTempDir))
+		.pipe(dest(distDir));
 }
 
 // Copy graphql schemas
 function graphql() {
-	return src("src/**/*.graphql").pipe(dest(distTempDir));
+	return src("src/**/*.graphql").pipe(dest(distDir));
 }
 
-// Clean the distribution files
-function cleanDist(cb) {
-	if(fs.existsSync(distDir)) {
-		fs.rmdir(distDir, { recursive: true }, cb);
-	} else {
-		cb();
-	}
-}
-
-// Save the distribution files
-function moveCache() {
-	return src(distTempDir + '/**/*').pipe(dest(distDir));
-}
-
-// Finish the compilation process
-function clearCache(cb) {
-	if(fs.existsSync(distTempDir)) {
-		fs.rmdir(distTempDir, { recursive: true }, cb);
-	} else {
-		cb();
-	}
-}
-
-exports.default = series(clearCache, parallel(typescript, graphql), cleanDist, moveCache, clearCache);
+exports.clean = clean;
+exports.default = series(clean, parallel(typescript, graphql));

@@ -44,10 +44,9 @@ First, obtain a copy of Vindigo by cloning it from this repo
 git clone https://github.com/ExodiusStudios/vindigo.git
 ```
 
-Once you have obtained a local copy from github, run the following commands to prepare your instance.
+Once you have obtained a local copy from github, run the following command to prepare your instance.
 ```bash
 npm install -g yarn  # Install the yarn package manager
-yarn install         # Install required dependencies
 ```
 
 You can now use the CLI to further proceed with the installation of Vindigo.
@@ -59,7 +58,7 @@ You can now use the CLI to further proceed with the installation of Vindigo.
 
 **Unix based systems (Bash)**
 ```bash
-chmod +x ./vindigo  # Grant execute permission to the CLI
+chmod +x ./vindigo  # Grant execution permission to the CLI
 ./vindigo init
 ```
 
@@ -79,20 +78,54 @@ The CLI provides many more commands used to manage your Vindigo setup. The follo
 ./vindigo <cmd> [options]
 
 Commands:
-  vindigo start                     Launch the Vindigo server
-  vindigo stop                      Terminate the Vindigo server
-  vindigo status                    Show the current daemon status
-  vindigo init                      Configure your vindigo installation
-  vindigo run                       Start the Vindigo server in the foreground
-  vindigo migrate:apply [--all]     Apply pending database migrations
-  vindigo migrate:rollback [--all]   Rollback a database migration
-  vindigo migrate:status            View the current database migration status
+  vindigo start                Launch the Vindigo server
+  vindigo stop                 Terminate the Vindigo server
+  vindigo restart              Restart the Vindigo server
+  vindigo status               Show the current daemon status
+  vindigo run                  Start the Vindigo server in the foreground
+  vindigo init                 Configure your Vindigo installation
+  vindigo update               Perform update scripts
+  vindigo check-version        Query the latest version of Vindigo
+  vindigo migrate:make <name>  Create a new migration
+  vindigo migrate:apply        Apply all pending migration
+  vindigo migrate:rollback     Rollback the previous migration
+  vindigo migrate:status       Display migration information
+  vindigo migrate:generate     Generate required code files
 
 Options:
   --version  Show version number
   --json     Print out all messages in JSON form
   --help     Show help
 ```
+
+## Updating Vindigo
+
+Updating Vindigo is simple using the built-in updater script. The process of applying updates differs slightly
+depending on how you downloaded Vindigo.
+
+### Local Git repository
+
+If you installed Vindigo by cloning the GitHub repository, the first step is to pull the latest changes.
+
+```
+git pull
+```
+
+Once you're on the latest version, proceed by running the updater script.
+
+```
+./vindigo update
+```
+
+### Direct download
+
+If you downloaded Vindigo directly, the steps to update vindigo are as follows.
+
+1) Download the latest version of Vindigo
+2) Copy the `data` directory into the new Vindigo installation
+3) Run `./vindigo update` in the new installation
+
+You can now remove the old Vindigo installation directory, however it is recommended to always back-up the `data` directory in case of accidental loss.
 
 ## Development setup
 Before you can start contributing to Vindigo, make sure to follow the installation tutorial.
@@ -114,13 +147,6 @@ Any changes made to the code will result in your changes being compiled live. Ke
 When your editor of choice is Visual Studio Code, you will be able to find pre defined tasks you can use during development.
 
 Simply navigate to `Terminal > Run Task...` and select which operation you want to execute.
-
-### Building distribution files
-Distributes files are built separately for all packages, however all can be built with a single command.
-
-```
-yarn build
-```
 
 ### Publishing contributions
 

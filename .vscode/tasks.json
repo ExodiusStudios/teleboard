@@ -4,14 +4,6 @@
 		{
 			"type": "npm",
 			"script": "build",
-			"group": "build",
-			"problemMatcher": [],
-			"label": "Build",
-			"detail": "Build all packages"
-		},
-		{
-			"type": "npm",
-			"script": "build",
 			"path": "packages/vindigo-cli/",
 			"group": "build",
 			"problemMatcher": [],

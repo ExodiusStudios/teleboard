@@ -18,6 +18,7 @@ import { registerComponents } from './registry/components';
 import { registerPlugins } from './registry/plugins';
 import { registerRoutes } from './registry/routes';
 import { registerState } from './store/state';
+import { patchRouterPush } from './helpers';
 
 dayjs.extend(RelativeTime);
 
@@ -33,6 +34,9 @@ export {
 	i18n,
 	api
 };
+
+// Apply patches
+patchRouterPush();
 
 // Register all core registries with
 // their initial data and state

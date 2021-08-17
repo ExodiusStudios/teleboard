@@ -1,8 +1,8 @@
-import { ApiError, InvalidArgumentError, MissingSessionError } from '../../../util/errors';
+import { ApiError, InvalidArgumentError, MissingSessionError, NoPermissionError } from '../../../util/errors';
 import { GraphQLResolvers, ResolverContext } from '../../../http';
 import { Prisma, User } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
-import { database, logger } from '../../..';
+import { config, database, logger } from '../../..';
 import { fetchProfileByEmail, fetchProfileByIdentity, fetchProfileByUsername, generateUsername } from '../fetchers/profile';
 
 /**
@@ -22,6 +22,12 @@ function sessionSignIn(ctx: ResolverContext, remember: boolean, user: User) {
 
 export default {
 	register: async (_, { details }, ctx) => {
+		const allowSignUp = config.authentication.registrations;
+
+		if(!allowSignUp) {
+			throw new NoPermissionError('Registrations are not permitted');
+		}
+		
 		const existing = await fetchProfileByEmail(details.email);
 
 		if(existing) {

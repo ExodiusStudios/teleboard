@@ -2,7 +2,7 @@
 	<w-app class="min-h-screen bg-light-1 dark:bg-dark-1 dark:text-gray-100">
 		<template v-if="isReady">
 			<maintenance v-if="hasMaintenance" />
-			<authenticate v-else-if="shouldAuth" />
+			<authenticate v-else-if="requiresAuth" />
 			<router-view v-else />
 		</template>
 
@@ -37,8 +37,8 @@ export default Vue.extend({
 		hasMaintenance(): boolean {
 			return this.$config.maintenance && this.$vuex.state.profile?.role != 'admin';
 		},
-		shouldAuth(): boolean {
-			return !this.$vuex.state.isAuthed;
+		requiresAuth(): boolean {
+			return !this.$vuex.state.isAuthed && !this.$config.allowAnonymous;
 		},
 		showSpinner(): boolean {
 			return !this.isReady || !this.isRendered;

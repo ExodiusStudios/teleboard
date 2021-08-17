@@ -75,10 +75,21 @@ export class RoutingService {
 		
 		const router = new VueRouter(this.options);
 		
-		router.beforeEach(async (_to, _from, next) => {
-			store.instance.commit('setWaiting', true);
+		router.beforeEach(async (to, _from, next) => {
+			const vuex = store.instance;
+			
+			vuex.commit('setWaiting', true);
 			await clientReadyTask;
-			next();
+
+			const rejectAnonymous = !vuex.state.config.allowAnonymous;
+			const isUnAuthed = !vuex.state.profile;
+			const isOutOfBounds = !to.path.startsWith('/authenticate');
+
+			if(rejectAnonymous && isUnAuthed && isOutOfBounds) {
+				next('/authenticate');
+			} else {
+				next();
+			}
 		});
 
 		router.beforeResolve((to, from, next) => {

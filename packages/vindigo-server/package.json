@@ -28,7 +28,6 @@
         "typescript": "^4.2.4"
     },
     "dependencies": {
-        "vindigo-config": "1.0.0",
         "@quixo3/prisma-session-store": "^3.0.1",
         "@types/express-fileupload": "^1.1.7",
         "bcrypt": "^5.0.1",
@@ -52,7 +51,7 @@
         "nodemailer": "^6.6.3",
         "nodemailer-direct-transport": "^3.3.2",
         "toml": "^3.0.0",
-        "wait-on": "^6.0.0",
+        "vindigo-config": "1.0.0",
         "ws": "^7.4.6"
     }
 }
