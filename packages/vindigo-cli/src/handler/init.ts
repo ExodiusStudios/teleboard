@@ -14,6 +14,7 @@ const ACTUAL_CONFIG = './data/config.toml';
 
 export async function handleInit(args: any) {
 	const shouldReset = !!args.force;
+	let configPath: string|undefined;
 
 	if(!args['skip-config']) {
 		if(!existsSync(DEFAULT_CONFIG)) {
@@ -141,6 +142,8 @@ export async function handleInit(args: any) {
 
 		mkdirSync(parentDir, { recursive: true });
 		writeFileSync(ACTUAL_CONFIG, finalConfig);
+
+		configPath = parentDir + '/config.toml';
 	}
 
 	if(!args['skip-migrate']) {
@@ -153,6 +156,8 @@ export async function handleInit(args: any) {
 		await buildClientAndServer();
 	}
 
-	consola.success(chalk`Successfully generated the configuration file ({yellow ${parentDir}/config.toml})`);
-	consola.success(chalk`Use {cyanBright vindigo start} to start the Vindigo server`);
+	if(configPath) {
+		consola.success(chalk`Successfully generated the configuration file ({yellow ${configPath}})`);
+		consola.success(chalk`Use {cyanBright vindigo start} to start the Vindigo server`);
+	}
 }
