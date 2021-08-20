@@ -21,6 +21,7 @@ export const storeActions: ActionTree<RootState, RootState> = {
 					maintenance
 					allowRegister
 					allowAnonymous
+					colorPalette
 				}
 			}
 		`);

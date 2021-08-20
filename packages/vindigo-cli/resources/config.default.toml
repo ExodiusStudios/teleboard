@@ -37,3 +37,10 @@ port = 25
 email = "no-reply@example.com"
 password = ""
 sender_name = "%NAME%"
+
+[client]
+palette = [
+	"#14A7F4", "#6c5ce7", "#10ac84",
+	"#ee5253", "#ffc312", "#f28524",
+	"#f2416b", "#525af7", "#A3CB38",
+]

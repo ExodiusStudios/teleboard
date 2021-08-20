@@ -86,6 +86,9 @@ type ClientConfig {
 
 	"Whether anonymous users are allowed"
 	allowAnonymous: Boolean!
+
+    "The color palette for use in color pickers"
+    colorPalette: [String!]!
 }
 
 """

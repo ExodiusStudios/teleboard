@@ -42,6 +42,9 @@ export interface IServerConfig {
 		database: string,
 		port: number,
 		path: string
+	},
+	client: {
+		palette: string[]
 	}
 }
 
@@ -79,6 +82,9 @@ const defaultConfig: IServerConfig = {
 		database: 'vindigo',
 		port: 3306,
 		path: 'data/database.sqlite'
+	},
+	client: {
+		palette: []
 	}
 };
 
@@ -95,6 +101,16 @@ function validateConfig(config: IServerConfig): IServerConfig {
 
 	if(!config.authentication.secret) {
 		throw new Error('Auth secret must be specified');
+	}
+
+	// Since merging the default palette would cause
+	// issues we instead manually set the defaults
+	if(config.client.palette.length == 0) {
+		config.client.palette = [
+			"#14A7F4", "#6c5ce7", "#10ac84",
+			"#ee5253", "#ffc312", "#f28524",
+			"#f2416b", "#525af7", "#A3CB38",
+		];
 	}
 
 	return config;
@@ -135,11 +151,8 @@ export function isProduction(): boolean {
  * @param config The config
  */
 export async function pollDatabase(logger: Consola, config: IServerConfig) {
+	const awaitable = [ 'mysql', 'postgres' ];
 	const options = config.database;
-	const awaitable = [
-		'mysql',
-		'postgres'
-	];
 
 	if(awaitable.includes(options.driver)) {
 		const connection = `${options.hostname}:${options.port}`;

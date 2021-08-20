@@ -3,18 +3,18 @@
 		<label v-html="$t('CREATE_NEW_PROJECT_NAME')" />
 		<w-input
 			v-model="projectName"
-			class="mb-5"
+			class="mb-6"
 		/>
 
 		<label v-html="$t('CREATE_NEW_DESC')" />
 		<w-textarea
 			v-model="projectDesc"
-			class="mb-5"
+			class="mb-6"
 			rows="3"
 		/>
 
 		<label>Cover image</label>
-		<div class="mb-5 w-52 relative">
+		<div class="mb-6 w-52 relative">
 			<img
 				:src="projectCoverPreview || require('/assets/avatar-placeholder.svg')"
 				class="cover-preview"
@@ -58,8 +58,19 @@
 		<label>Accent color</label>
 		<w-input
 			v-model="projectColor"
-			class="mb-5"
+			class="mb-2"
 		/>
+
+		<div class="flex mb-6 gap-2">
+			<div
+				v-for="color in $config.colorPalette"
+				:key="color"
+				v-wave
+				class="w-9 h-9 rounded-xl cursor-pointer transition-transform hover:transform hover:scale-105"
+				:style="{backgroundColor: color}"
+				@click="projectColor = color"
+			/>
+		</div>
 
 		<label>Public access</label>
 		<small>
@@ -68,7 +79,7 @@
 		<w-switch
 			v-model="projectPublic"
 			color="success"
-			class="mb-4"
+			class="mb-6"
 		/>
 
 		<div class="block">

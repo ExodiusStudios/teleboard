@@ -14,7 +14,8 @@ export default {
 			instanceName: config.general.name,
 			maintenance: config.general.maintenance,
 			allowRegister: config.authentication.registrations,
-			allowAnonymous: config.authentication.anonymous_users
+			allowAnonymous: config.authentication.anonymous_users,
+			colorPalette: config.client.palette
 		};
 	},
 	profile: async (_, _args, ctx) => {
