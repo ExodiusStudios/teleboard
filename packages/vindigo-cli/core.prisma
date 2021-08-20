@@ -22,6 +22,7 @@ model User {
     lastSeenAt DateTime
     isEnabled  Boolean
     isVerified Boolean
+    verifyCode String?
     projects   ProjectMember[]
     teams      TeamMember[]
     created    Project[]

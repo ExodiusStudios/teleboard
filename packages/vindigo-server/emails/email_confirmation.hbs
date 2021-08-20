@@ -1,18 +1,38 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 	{{> header}}
 
-	<!-- CARD -->
-	<tr>
-		<td align="center" valign="top"
-			style="font-family: Roboto, sans-serif; font-size: 14px; color: #535353; padding: 24px; border-radius: 0 0 4px 4px;"
-			bgcolor="#ffffff">
-			<p style="font-family: Roboto, sans-serif; font-size: 14px; color: #535353; text-align: left; margin: 0;">
-				This is email content for {{name}}!
-			</p>
-		</td>
-	</tr>
-	<!-- END CARD -->
+	<table>
+		<tr>
+			<td class="content">
+
+				<h2>Verify your email address</h2>
+
+				<p>
+					Welcome {{name}}!
+				</p>
+
+				<p>
+					Thank you for signing up for Vindigo! Please verify your email address by clicking the button below.
+				</p>
+
+				<table style="margin: 40px 0;">
+					<tr>
+						<td align="center">
+							<a href="{{website.url}}/authenticate/verify/{{code}}" class="button">Verify email address</a>
+						</td>
+					</tr>
+				</table>
+
+				<p style="color: #929292; font-size: 13px; margin-bottom: 0;">
+					If you did not sign up for Vindigo you can ignore this email as it has likely been sent in error.
+				</p>
+
+			</td>
+		</tr>
+	</table>
 
 	{{> footer}}
+
 </html>

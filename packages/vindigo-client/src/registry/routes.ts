@@ -28,7 +28,7 @@ export function registerRoutes() {
 	});
 
 	routing.defineRoute({
-		path: '/authenticate/verify',
+		path: '/authenticate/verify/:code',
 		name: 'Verify Account',
 		component: Verification,
 		meta: {

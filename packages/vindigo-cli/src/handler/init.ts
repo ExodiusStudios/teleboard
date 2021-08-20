@@ -31,7 +31,7 @@ export async function handleInit(args: any) {
 			name: 'URL',
 			message: 'How will users access Vindigo?',
 			type: 'input',
-			default: 'https://example.com/'
+			default: 'http://localhost/'
 		},
 		{
 			name: 'PORT',

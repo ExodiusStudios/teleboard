@@ -24,7 +24,10 @@ type Mutation {
     "Sign in with the given account details"
     authenticate(details: UserAuthentication): Profile
 
-    "Updates a user"
+    "Verify the account with the given verification code"
+    verifyAccount(code: String!): Boolean!
+
+    "Updates various user profile fields"
     updateProfile(details: ProfileUpdate): Profile!
 
     "Sign out and return if this was successful"

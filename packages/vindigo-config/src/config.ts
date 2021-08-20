@@ -49,7 +49,7 @@ export interface IServerConfig {
 // the user config is missing fields.
 const defaultConfig: IServerConfig = {
 	general: {
-		url: '',
+		url: 'http://localhost/',
 		hostname: '127.0.0.1',
 		port: 8085,
 		secure: true,
@@ -89,6 +89,10 @@ const defaultConfig: IServerConfig = {
  * @returns The fixed config
  */
 function validateConfig(config: IServerConfig): IServerConfig {
+	if(!config.general.url) {
+		throw new Error('URL must be specified');
+	}
+
 	if(!config.authentication.secret) {
 		throw new Error('Auth secret must be specified');
 	}

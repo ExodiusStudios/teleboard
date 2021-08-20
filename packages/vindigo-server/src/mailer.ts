@@ -1,14 +1,15 @@
-import { logger } from '.';
+import { config, logger } from '.';
 import nodemailer, { Transporter } from 'nodemailer';
 
 import { IServerConfig } from 'vindigo-config';
 import directTransport from 'nodemailer-direct-transport';
 import { registerPartial, compile } from 'handlebars';
-import { Dictionary } from 'lodash';
+import { Dictionary, trimEnd } from 'lodash';
 import { resolveData } from './util/helpers';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { User } from '@prisma/client';
+import juice from 'juice';
 
 /**
  * The service used to send emails optionally over SMTP
@@ -141,19 +142,42 @@ export class MailingService {
 		}
 
 		const target = this.parseTarget(options);
+		const content = juice(cached({
+			...this.buildContext(options.subject, target),
+			...options.context
+		}));
 
 		await this.transporter.sendMail({
 			from: this.fromLine,
 			to: target,
 			subject: options.subject,
-			html: cached({
-				subject: options.subject,
-				target: target,
-				...options.context
-			})
+			html: content
 		});
 	
 		logger.debug(`Sending template email to ${target} (${options.template})`);
+	}
+
+	/**
+	 * Build the default context available to all email templates
+	 * 
+	 * @param subject The email subject
+	 * @param target The target address
+	 */
+	private buildContext(subject: string, target: string): any {
+		const website = trimEnd(config.general.url, '/');
+
+		// TODO Name should default to empty string
+		const hasName = config.general.name.toLocaleLowerCase() != 'vindigo';
+		const display = hasName ? config.general.name : website.replace(/https?:\/\//, '');
+
+		return {
+			subject: subject,
+			target: target,
+			website: {
+				url: website,
+				display: display
+			}
+		};
 	}
 
 	/**

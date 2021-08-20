@@ -16,9 +16,9 @@ exports.up = async ({ schema }: Knex) => {
 		table.timestamp('lastSeenAt');
 		table.boolean('isEnabled').defaultTo(true);
 		table.boolean('isVerified').defaultTo(false);
+		table.string('verifyCode', 16);
 	});
 };
-
 exports.down = async ({ schema }: Knex) => {
 	return schema.dropTable('users');
 };

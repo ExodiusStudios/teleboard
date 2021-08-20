@@ -1,7 +1,9 @@
 <template>
 	<auth-layout>
+		<!-- NOTE No need for translating this! -->
+
 		<div class="auth-box__flat auth-box__flat--round h-64 text-center flex flex-col">
-			<div class="font-bold text-2xl py-6">
+			<div class="font-bold text-2xl py-4">
 				Congratulations!
 			</div>
 			<div class="text-base">
@@ -15,7 +17,7 @@
 				class="mb-2"
 				route="/"
 			>
-				Conitnue to homepage
+				Continue to homepage
 			</w-button>
 		</div>
 	</auth-layout>

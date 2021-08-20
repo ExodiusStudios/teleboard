@@ -1,118 +1,67 @@
 <head>
-    <title></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width"/>
+    
     <style type="text/css">
-		/* CLIENT STYLES */
-        body, table, td, a {
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-        }
+        * { margin: 0; padding: 0; font-size: 100%; font-family: 'Open Sans', 'Roboto', 'Avenir Next', "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif; line-height: 1.65; }
 
-        table, td {
-            mso-table-lspace: 0pt;
-            mso-table-rspace: 0pt;
-        }
+        img { max-width: 100%; margin: 0 auto; display: block; }
 
-        img {
-            -ms-interpolation-mode: bicubic;
-        }
+        body, .body-wrap { width: 100% !important; height: 100%; background: #faf8fe; }
 
-        /* RESET STYLES */
-        img {
-            border: 0;
-            height: auto;
-            line-height: 100%;
-            outline: none;
-            text-decoration: none;
-        }
+        a { color: #8b5cf6; text-decoration: none; }
 
-        table {
-            border-collapse: collapse !important;
-        }
+        a:hover { text-decoration: underline; }
 
-        body {
-            height: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-            background: #faf8fe;
-        }
+        .text-center { text-align: center; }
 
-        /* iOS BLUE LINKS */
-        a[x-apple-data-detectors] {
-            color: inherit !important;
-            text-decoration: none !important;
-            font-size: inherit !important;
-            font-family: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-        }
+        .text-right { text-align: right; }
 
-        /* MOBILE STYLES */
-        @media screen and (max-width: 600px) {
-            .img-max {
-                width: 100% !important;
-                max-width: 100% !important;
-                height: auto !important;
-            }
+        .text-left { text-align: left; }
 
-            .max-width {
-                max-width: 100% !important;
-            }
+        .button { display: inline-block; color: white; background: #8b5cf6; border: solid #8b5cf6; border-width: 10px 20px 8px; font-weight: bold; border-radius: 4px; }
 
-            .mobile-wrapper {
-                width: 85% !important;
-                max-width: 85% !important;
-            }
+        .button:hover { text-decoration: none; }
 
-            .mobile-padding {
-                padding-left: 5% !important;
-                padding-right: 5% !important;
-            }
-        }
+        h1, h2, h3, h4, h5, h6 { margin-bottom: 20px; line-height: 1.25; }
 
-        /* ANDROID CENTER FIX */
-        div[style*="margin: 16px 0;"] {
-            margin: 0 !important;
-        }
+        h1 { font-size: 32px; }
 
+        h2 { font-size: 28px; }
+
+        h3 { font-size: 24px; }
+
+        h4 { font-size: 20px; }
+
+        h5 { font-size: 16px; }
+
+        p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
+
+        .header { padding: 24px 0; }
+
+        .container { display: block !important; clear: both !important; margin: 0 auto !important; max-width: 520px !important; }
+
+        .container table { width: 100% !important; border-collapse: separate; }
+
+        .container .content { background: #ffffff; padding: 30px 35px; border: 1px solid #e4e4e4; border-radius: 14px }
+
+        .container .content.footer { background: none; border: none; }
+
+        .container .content.footer p { margin-bottom: 0; color: #888; font-size: 14px; }
+
+        .container .content.footer a { color: #888; text-decoration: none; font-weight: bold; }
+
+        .container .content.footer a:hover { text-decoration: underline; }
     </style>
-
 </head>
-
-<body style="margin: 0 !important; padding: 0 !important; background-color: #faf8fe;" bgcolor="#faf8fe">
-
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+<body>
+<table class="body-wrap">
     <tr>
-        <td align="center" valign="top" width="100%" style="padding: 46px 16px 0 16px;" class="mobile-padding">
-            <!--[if (gte mso 9)|(IE)]>
-            <table role="presentation" align="center" border="0" cellspacing="0" cellpadding="0" width="600">
-                <tr>
-                    <td align="center" valign="top" width="600">
-            <![endif]-->
-            <table role="presentation" align="center" border="0" cellpadding="0" cellspacing="0" width="100%"
-                   style="max-width:600px;">
-                <!-- HEADER -->
-                <tr>
-                    <td style="padding: 24px; background: #fff; border-radius: 4px 4px 0 0; min-height: 54px;">
-                        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;" width="100%">
-                            <tr>
-                                <td style="font-family: Roboto, sans-serif; font-size: 14px; vertical-align: top; width: 100%; color: #8b5cf6;"
-                                    width="100%" valign="top">
-                                    <h4 style="line-height: 1.4; margin: 0; font-size: 22px; margin-bottom: 8px; font-family: Roboto, sans-serif; text-align: left; font-weight: 600; margin-right: 16px;">
-                                        {{ subject }}
-                                    </h4>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-family: Roboto, sans-serif; font-size: 14px; vertical-align: top; width: 100%; color: #464646;"
-                                    width="100%" valign="top">
-                                    Something
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <!-- END HEADER -->
+        <td align="center" class="header">
+
+            <img src="https://raw.githubusercontent.com/ExodiusStudios/vindigo/master/.github/vindigo-black.png" height="68px" alt="Vindigo">
+
+        </td>
+    </tr>
+    <tr>
+        <td class="container">
