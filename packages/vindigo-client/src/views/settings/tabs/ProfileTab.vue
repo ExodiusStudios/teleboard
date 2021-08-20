@@ -8,19 +8,26 @@
 						class="block picture-upload__image"
 						:profile="$vuex.state.profile"
 					/>
-					<img
-						v-if="preview != ''"
-						class="block picture-upload__image" 
-						:src="preview || require('/assets/avatar-placeholder.svg')"
-					>
 					<file-upload
 						v-model="avatar"
-						class="mt-5 w-full" 
+						class="relative mt-5 w-full" 
 						@preview="showPreview"
 					>
-						<w-button class="w-full h-9 ml-0">
-							Change
-						</w-button>
+						<template #activator="{ on }">
+							<img
+								v-if="preview != ''"
+								class="block picture-upload__image object-cover" 
+								:src="preview || require('/assets/avatar-placeholder.svg')"
+							>
+							<w-button
+								class="bg rounded-full shadow-lg w-11 h-11 absolute right-0 bottom-0"
+								icon="mdi mdi-pencil"
+								bg-color="accent-1"
+								color="white"
+								lg
+								v-on="on"
+							/>
+						</template>
 					</file-upload>
 				</div>
 				<w-form class="sm12 md10 laptop:pl-5 mobile:pl-0">
