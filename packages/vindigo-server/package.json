@@ -43,6 +43,7 @@
         "graphql-list-fields": "^2.0.2",
         "graphql-tools": "^7.0.5",
         "graphql-ws": "^4.6.0",
+        "handlebars": "^4.7.7",
         "helmet": "^4.6.0",
         "http-status-codes": "^2.1.4",
         "lodash": "^4.17.21",

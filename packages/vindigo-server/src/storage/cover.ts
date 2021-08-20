@@ -3,9 +3,10 @@ import path, { join } from "path";
 import BucketStorage from "../util/bucket";
 import { Project } from "@prisma/client";
 import { database } from "..";
+import { resolveData } from "../util/helpers";
 
-const COVER_SYSTEM_PATH = join("./data/public/cover/");
-const COVER_PUBLIC_PATH = join("/data/cover/");
+const COVER_SYSTEM_PATH = resolveData("public/cover/");
+const COVER_PUBLIC_PATH = '/data/cover/';
 
 export default class CoverStorage extends BucketStorage {
 

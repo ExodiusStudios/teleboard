@@ -1,8 +1,19 @@
 import { GraphQLResolveInfo } from "graphql";
 import getFieldNames from 'graphql-list-fields';
+import { join } from "path";
 
 export function elseThrow(err: Error): never {
 	throw err;
+}
+
+/**
+ * Resolve a path within the data directory
+ * 
+ * @param path The path to resolve
+ * @returns The full path
+ */
+export function resolveData(...path: string[]) {
+	return join('data', ...path);
 }
 
 /**

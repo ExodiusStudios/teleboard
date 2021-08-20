@@ -3,9 +3,10 @@ import path, { join } from "path";
 import BucketStorage from "../util/bucket";
 import { User } from "@prisma/client";
 import { database } from "..";
+import { resolveData } from "../util/helpers";
 
-const AVATAR_SYSTEM_PATH = join("./data/public/avatar/");
-const AVATAR_PUBLIC_PATH = join("/data/avatar/");
+const AVATAR_SYSTEM_PATH = resolveData("public/avatar/");
+const AVATAR_PUBLIC_PATH = '/data/avatar/';
 
 export default class AvatarStorage extends BucketStorage {
 

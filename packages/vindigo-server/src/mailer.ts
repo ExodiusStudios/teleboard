@@ -1,8 +1,13 @@
-import { config, logger } from '.';
+import { logger } from '.';
 import nodemailer, { Transporter } from 'nodemailer';
 
 import { IServerConfig } from 'vindigo-config';
 import directTransport from 'nodemailer-direct-transport';
+import { registerPartial, compile } from 'handlebars';
+import { Dictionary } from 'lodash';
+import { resolveData } from './util/helpers';
+import { existsSync, readFileSync } from 'fs';
+import { join } from 'path';
 
 /**
  * The service used to send emails optionally over SMTP
@@ -10,6 +15,18 @@ import directTransport from 'nodemailer-direct-transport';
 export class MailingService {
 	
 	private transporter: Transporter;
+	private fromLine!: string;
+
+	private partials = [
+		'header',
+		'footer'
+	]
+
+	private templates = [
+		'email_confirmation'
+	]
+
+	private templateCache: Dictionary<HandlebarsTemplateDelegate<any>> = {}
 
 	public constructor(config: IServerConfig) {
 		const smtp = config.smtp;
@@ -30,29 +47,129 @@ export class MailingService {
 
 			this.transporter = nodemailer.createTransport(directTransport({}));
 		}
+
+		// Build the "From" header
+		this.fromLine = `"${config.smtp.sender_name}" <${config.smtp.email}>`;
+
+		// Read and register partials
+		for(const partial of this.partials) {
+			const name = '_' + partial + '.hbs';
+			const content = this.readTemplate(name);
+
+			logger.debug('Registered partial ' + partial);
+
+			registerPartial(partial, content);
+		}
+
+		// Read and cache email templates
+		for(const template of this.templates) {
+			const name = template + '.hbs';
+			const content = this.readTemplate(name);
+
+			logger.debug('Cached template ' + template);
+
+			this.templateCache[template] = compile(content);
+		}
 	}
 
-	public async sendPlainTextEmail(target: string, subject: string, body: string) {
+	/**
+	 * Read a handlebars template from a file, while respecting
+	 * user overridden templates.
+	 * 
+	 * @param file The template file name
+	 * @returns The template content
+	 */
+	private readTemplate(file: string): string {
+		const overridePath = resolveData('emails', file);
+		
+		// Look for the presence of an overriden template
+		if(existsSync(overridePath)) {
+			return readFileSync(overridePath, 'utf-8');
+		}
+
+		// Load the email from emails directory
+		const emailPath = join(__dirname, '../emails', file);
+		return readFileSync(emailPath, 'utf-8');
+	}
+
+	/**
+	 * Send an email to the specified email options. The email
+	 * will be sent with plaintext content.
+	 * 
+	 * @param options The emailing options
+	 */
+	public async sendPlainTextEmail(options: InlineEmailOptions) {
 		await this.transporter.sendMail({
-			from: `"${config.smtp.sender_name}" <${config.smtp.email}>`,
-			to: target,
-			subject: subject,
-			text: body
+			from: this.fromLine,
+			to: options.target,
+			subject: options.subject,
+			text: options.content
 		});
 	
-		logger.info(`Dispatching a plain text email with the subject of "${subject}" to ${target}`);
+		logger.debug(`Sending plaintext email to ${options.target}`);
 	}
 	
-	public async sendHTMLEmail(target: string, subject: string, html: string) {
+	/**
+	 * Send an email to the specified email options. The email
+	 * will be sent with HTML content.
+	 * 
+	 * @param options The emailing options
+	 */
+	public async sendHTMLEmail(options: InlineEmailOptions) {
 		await this.transporter.sendMail({
-			from: `"${config.smtp.sender_name}" <${config.smtp.email}>`,
-			to: target,
-			subject: subject,
-			html: html
+			from: this.fromLine,
+			to: options.target,
+			subject: options.subject,
+			html: options.content
 		});
 	
-		logger.info(`Dispatching an HTML email with the subject of "${subject}" to ${target}`);
+		logger.debug(`Sending HTML email to ${options.target}`);
+	}
+
+	/**
+	 * Send an email to the specified email options. The email
+	 * will contain HTML as sourced from a handlebars template.
+	 * 
+	 * @param options The emailing options
+	 */
+	public async sendTemplateEmail(options: TemplateEmailOptions) {
+		const cached = this.templateCache[options.template];
+
+		if(!cached) {
+			throw new Error(`Unknown email template "${options.template}"`);
+		}
+
+		await this.transporter.sendMail({
+			from: this.fromLine,
+			to: options.target,
+			subject: options.subject,
+			html: cached(options.context)
+		});
+	
+		logger.debug(`Sending template email to ${options.target} (${options.template})`);
 	}
 
 }
 
+/**
+ * Required options for sending out an email
+ */
+export interface EmailOptions {
+	target: string;
+	subject: string;
+}
+
+/**
+ * Template email specific options
+ */
+export interface TemplateEmailOptions extends EmailOptions {
+	template: string;
+	context: Dictionary<string>;
+}
+
+/**
+ * Inline email specific options
+ */
+export interface InlineEmailOptions extends EmailOptions {
+	content: string;
+}
