@@ -8,6 +8,7 @@ import { Dictionary } from 'lodash';
 import { resolveData } from './util/helpers';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
+import { User } from '@prisma/client';
 
 /**
  * The service used to send emails optionally over SMTP
@@ -101,7 +102,7 @@ export class MailingService {
 	public async sendPlainTextEmail(options: InlineEmailOptions) {
 		await this.transporter.sendMail({
 			from: this.fromLine,
-			to: options.target,
+			to: this.parseTarget(options),
 			subject: options.subject,
 			text: options.content
 		});
@@ -118,7 +119,7 @@ export class MailingService {
 	public async sendHTMLEmail(options: InlineEmailOptions) {
 		await this.transporter.sendMail({
 			from: this.fromLine,
-			to: options.target,
+			to: this.parseTarget(options),
 			subject: options.subject,
 			html: options.content
 		});
@@ -139,14 +140,42 @@ export class MailingService {
 			throw new Error(`Unknown email template "${options.template}"`);
 		}
 
+		const target = this.parseTarget(options);
+
 		await this.transporter.sendMail({
 			from: this.fromLine,
-			to: options.target,
+			to: target,
 			subject: options.subject,
-			html: cached(options.context)
+			html: cached({
+				subject: options.subject,
+				target: target,
+				...options.context
+			})
 		});
 	
-		logger.debug(`Sending template email to ${options.target} (${options.template})`);
+		logger.debug(`Sending template email to ${target} (${options.template})`);
+	}
+
+	/**
+	 * Parse the target email from given email options
+	 * 
+	 * @param options The email options
+	 * @returns The target email
+	 */
+	private parseTarget(options: EmailOptions): string {
+		const target = options.target as any;
+
+		// Send based on user profile email
+		if(target.email && typeof target.email == 'string') {
+			return target.email;
+		}
+
+		// Send to direct email
+		if(typeof target == 'string') {
+			return target;
+		}
+
+		throw new Error('Invalid email target');
 	}
 
 }
@@ -155,7 +184,7 @@ export class MailingService {
  * Required options for sending out an email
  */
 export interface EmailOptions {
-	target: string;
+	target: string|User;
 	subject: string;
 }
 
