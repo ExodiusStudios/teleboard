@@ -17,7 +17,9 @@ if(process.env.VINDIGO_CLI !== 'true') {
 const production = isProduction();
 const config = readConfig();
 const logger = consola.create({
-	level: production ? LogLevel.Info : LogLevel.Debug
+	level: !production || config.general.debug
+		? LogLevel.Debug
+		: LogLevel.Info
 });
 
 // Nodemon does not send a kill signal causing
