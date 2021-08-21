@@ -54,13 +54,3 @@ export function fetchProfileByUsername(username: string): Promise<Nullable<User>
 		where: { username }
 	});
 }
-
-/**
- * Generate a username from a given email address
- * 
- * @param email The email address
- * @returns The username
- */
-export function generateUsername(email: string): string {
-	return email.replace(/([^@]*).*/, '$1').replace(/\./g, '_');
-}

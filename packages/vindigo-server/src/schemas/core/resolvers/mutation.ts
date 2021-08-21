@@ -1,10 +1,10 @@
-import { ApiError, InvalidArgumentError, MissingSessionError, NoPermissionError } from '../../../util/errors';
+import { ApiError, MissingSessionError, NoPermissionError } from '../../../util/errors';
 import { GraphQLResolvers, ResolverContext } from '../../../http';
-import { Prisma, User } from '@prisma/client';
-import { compare, hash } from 'bcrypt';
-import { config, database, logger, mailer } from '../../..';
-import { fetchProfileByEmail, fetchProfileByIdentity, fetchProfileByUsername, generateUsername } from '../fetchers/profile';
-import { generateCode } from '../../../util/helpers';
+import { User } from '@prisma/client';
+import { compare } from 'bcrypt';
+import { config, database, logger } from '../../..';
+import { fetchProfileByEmail, fetchProfileByIdentity } from '../fetchers/profile';
+import { buildProfileUpdate, registerNewProfile } from '../../../util/profile';
 
 /**
  * Sign in the session 
@@ -35,56 +35,14 @@ export default {
 			throw new ApiError('email-exists');
 		}
 
-		// Generate a unique username
-		let username = '';
-		let counter = 0;
-
-		do {
-			username = generateUsername(details.email) + (counter || '');
-			counter++;
-		} while(await fetchProfileByUsername(username));
-
-		// Hash the provided password
-		const password = await hash(details.password, 7);
-
-		// Handle email verification
-		const shouldVerify = config.authentication.verify_emails;
-		const verifyCode = shouldVerify ? generateCode(12) : undefined;
-
-		// Save the profile to the database
-		const profile = await database.user.create({
-			data: {
-				username: username,
-				name: details.fullname,
-				email: details.email,
-				password: password,
-				role: 'guest',
-				language: 'en-US',
-				createdAt: new Date(),
-				lastSeenAt: new Date(),
-				isEnabled: true,
-				isVerified: false,
-				verifyCode: verifyCode
-			}
-		});
+		const profile = await registerNewProfile(
+			details.email,
+			details.fullname,
+			details.password,
+			false
+		);
 
 		sessionSignIn(ctx, details.remember, profile);
-
-		logger.info(`Registered new user ${username}`);
-
-		if(shouldVerify) {
-			mailer.sendTemplateEmail({
-				template: 'email_confirmation',
-				subject: 'Please verify your account',
-				target: profile,
-				context: {
-					name: details.fullname,
-					code: verifyCode!
-				}
-			}).catch(err => {
-				logger.error('Failed to send verification email', err);
-			});
-		}
 
 		return profile;
 	},
@@ -137,43 +95,9 @@ export default {
 			throw new MissingSessionError();
 		}
 
-		const update: Prisma.UserUpdateInput = {};
-		
-		if(details.fullname !== undefined) {
-			if(!details.fullname.length) {
-				throw new InvalidArgumentError('name cannot be empty');
-			}
-			
-			update.name = details.fullname;
-		}
+		const update = buildProfileUpdate(details);
 
-		if(details.email !== undefined) {
-			if(!details.email.length) {
-				throw new InvalidArgumentError('email cannot be empty');
-			}
-
-			update.email = details.email;
-		}
-
-		if(details.username !== undefined) {
-			if(!details.username.length) {
-				throw new InvalidArgumentError('username cannot be empty');
-			}
-			
-			// TODO Check for username existence
-
-			update.username = details.username;
-		}
-
-		if(details.bio !== undefined) {
-			update.bio = details.bio || null;
-		}
-
-		if(details.website !== undefined) {
-			update.website = details.website || null;
-		}
-
-		return await database.user.update({
+		return database.user.update({
 			where: {
 				id: ctx.user.id
 			},

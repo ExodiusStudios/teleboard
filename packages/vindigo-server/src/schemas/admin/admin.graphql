@@ -1,0 +1,20 @@
+extend type Mutation {
+
+	"Set the maintenance mode state"
+	setMaintenance(enabled: Boolean!): Boolean
+	
+	"Manually create a new user account"
+	createUser(details: UserRegistration!, verify: Boolean): Profile
+
+	"Update various aspects of a user profile"
+    updateUserById(id: Int!, details: UserUpdate!): Profile
+}
+
+"""
+The details required to update a existing user
+"""
+input UserUpdate {
+	profile: ProfileUpdate
+	verified: Boolean
+	enabled: Boolean
+}

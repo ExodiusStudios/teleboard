@@ -7,10 +7,10 @@ type Query {
 	profile: Profile
 
 	"Fetch a user by their id"
-    profileById(id: Int): Profile
+    profileById(id: Int!): Profile
 
     "Fetch a user by their username"
-    profileByName(username: String): Profile
+    profileByName(username: String!): Profile
 
     "Perform a search query"
     search(query: String!): SearchResult!
@@ -19,16 +19,16 @@ type Query {
 type Mutation {
 
 	"Create a new user account"
-    register(details: UserRegistration): Profile
+    register(details: UserRegistration!): Profile
 
     "Sign in with the given account details"
-    authenticate(details: UserAuthentication): Profile
+    authenticate(details: UserAuthentication!): Profile
 
     "Verify the account with the given verification code"
     verifyAccount(code: String!): Boolean!
 
     "Updates various user profile fields"
-    updateProfile(details: ProfileUpdate): Profile!
+    updateProfile(details: ProfileUpdate!): Profile!
 
     "Sign out and return if this was successful"
     signOut: Boolean
@@ -62,10 +62,10 @@ The details required to update a existing user
 """
 input ProfileUpdate {
     fullname: String
-    email: String
     username: String
-    bio: String
     website: String
+    email: String
+    bio: String
 }
 
 """

@@ -25,6 +25,7 @@ import session from 'express-session';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import ws from "ws";
 import { UploadCoverController } from "./routes/upload/cover";
+import { AdminSchema } from "./schemas/admin/schema";
 
 /**
  * Used to enable type checking for resolver
@@ -156,16 +157,20 @@ export class HTTPService {
 	 */
 	private registerApi() {
 		const graphqlWs = new ws.Server({ server: this.server, path: '/subscriptions' });
-		const schema = buildSchema(this.providers);
+		const adminSchema = buildSchema([ ...this.providers, new AdminSchema() ]);
+		const publicSchema = buildSchema(this.providers);
 
-		// Configure a plain HTTP endpoint for handling
-		// simple non-subscription GraphQL requests.
+		// Handle incoming GraphQL schema requests
 		this.express.use('/graphql', async (req, res) => {
 			const context: ResolverContext = { req, res, user: null };
 
 			if(req.session.userId) {
 				context.user = await this.fetchProfile(req.session.userId);
 			}
+
+			const schema = context.user?.role == 'admin'
+				? adminSchema
+				: publicSchema;
 
 			graphqlHTTP({
 				schema: schema,
@@ -187,7 +192,7 @@ export class HTTPService {
 		// GraphQL requests over web sockets, allowing subscription
 		// streaming to work.
 		useServer<ResolverContext>({
-			schema,
+			schema: publicSchema,
 			onConnect: async (context) => {
 				const request = context.extra.request as Request;
 				const socket = context.extra.socket;
