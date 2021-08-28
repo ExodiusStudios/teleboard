@@ -3,7 +3,7 @@
     "DATE_FORMAT": "dddd, D MMMM",
     "TOOLBAR_CREATE": "Nieuwe aanmaken...",
     "TOOLBAR_CREATE_PROJECT": "Project aanmaken",
-    "TOOLBAR_CREATE_PROJECT_DESC": "Alle taken zijn onderdeel van een project.",
+    "TOOLBAR_CREATE_PROJECT_DESC": "Alle taken zijn onderdeel van een project",
     "TOOLBAR_CREATE_TEAM": "Team aanmaken",
     "TOOLBAR_CREATE_TEAM_DESC": "Teams bevatten een groep gebruikers met toegang tot dezelfde selectie projecten.",
     "TOOLBAR_CREATE_TASK": "Taak aanmaken",
